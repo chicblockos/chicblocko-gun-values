@@ -7,11 +7,13 @@ Production-ready static website containing 208 Chicblocko customs.
 - Search and category filters
 - Collection-order and alphabetical sorting
 - Responsive card grid with hover animation
-- Keyboard-accessible custom detail dialog
+- Keyboard-accessible custom detail dialog with synchronized flip controls
 - Optimized WebP assets
 - Simple local custom editor with automatic browser saving
-- Image upload, value, demand, gun name, model, and type editing
+- Image upload, value, demand, quantity, gun name, model, and type editing
 - JSON backup import and export
+- Animated custom-purchase guide with Discord and ticket links
+- Lightweight GPU-friendly guide motion with reduced-motion support
 
 ## Deploy
 

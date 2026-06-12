@@ -12,7 +12,8 @@ const MODEL_DEFAULTS = {
 };
 const PLACEHOLDER_VALUE = "$BLUDARIEL";
 const DEFAULT_DEMAND = "TBD";
-const INDEX_UPDATED = "2026-06-10";
+const DEFAULT_QUANTITY = "TBD";
+const INDEX_UPDATED = "2026-06-12";
 const DATABASE_NAME = "chicblocko-custom-editor";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "site-data";
@@ -22,6 +23,7 @@ const $ = (selector) => document.querySelector(selector);
 const cardGrid = $("#cardGrid");
 const detailDialog = $("#detailDialog");
 const editorDialog = $("#editorDialog");
+const customGuideDialog = $("#customGuideDialog");
 const searchInput = $("#searchInput");
 const sortSelect = $("#sortSelect");
 const backToTop = $("#backToTop");
@@ -34,6 +36,9 @@ let searchTimer = 0;
 let saveTimer = 0;
 let editorRenderTimer = 0;
 let publicRenderTimer = 0;
+let customGuideCloseTimer = 0;
+let customGuideSettleTimer = 0;
+let detailCloseTimer = 0;
 let databasePromise;
 
 function normalizeCategory(item) {
@@ -54,6 +59,7 @@ function normalizeListing(item, index) {
     image: String(item.image || ""),
     value: String(item.value || PLACEHOLDER_VALUE),
     demand: String(item.demand || DEFAULT_DEMAND).toUpperCase(),
+    quantity: String(item.quantity || DEFAULT_QUANTITY).toUpperCase(),
     imageX: Number.isFinite(Number(item.imageX)) ? Number(item.imageX) : 50,
     imageY: Number.isFinite(Number(item.imageY)) ? Number(item.imageY) : 50,
     imageZoom: Number.isFinite(Number(item.imageZoom)) ? Number(item.imageZoom) : 1,
@@ -224,6 +230,7 @@ function renderCards() {
     cardFragment.querySelector(".card-value").textContent = item.value;
     cardFragment.querySelector(".card-demand").textContent = item.demand;
     cardFragment.querySelector(".demand-badge").dataset.demand = item.demand.toLowerCase();
+    cardFragment.querySelector(".card-quantity").textContent = item.quantity;
     fragment.append(cardFragment);
   });
 
@@ -258,6 +265,8 @@ function schedulePublicRefresh() {
 }
 
 function showDetails(item) {
+  window.clearTimeout(detailCloseTimer);
+  if (detailDialog.open) return;
   const detailImage = $("#detailImage");
   detailImage.src = item.image;
   detailImage.alt = `${item.name} for ${item.model}`;
@@ -268,9 +277,13 @@ function showDetails(item) {
   $("#detailName").classList.toggle("long-name", item.name.length > 22);
   $("#detailName").classList.toggle("very-long-name", item.name.length > 34);
   $("#detailModel").textContent = item.model;
-  $("#detailValue").textContent = item.value;
+  const detailValue = $("#detailValue");
+  detailValue.textContent = item.value;
+  detailValue.classList.toggle("compact-value", item.value.length > 7);
+  detailValue.classList.toggle("extra-compact-value", item.value.length > 10);
   $("#detailDemand").querySelector("b").textContent = item.demand;
   $("#detailDemand").dataset.demand = item.demand.toLowerCase();
+  $("#detailQuantity").textContent = item.quantity;
   $("#detailFlip").classList.remove("is-visible");
 
   detailDialog.showModal();
@@ -278,8 +291,10 @@ function showDetails(item) {
 }
 
 function closeDetails() {
+  if (!detailDialog.open) return;
+  window.clearTimeout(detailCloseTimer);
   $("#detailFlip").classList.remove("is-visible");
-  window.setTimeout(() => {
+  detailCloseTimer = window.setTimeout(() => {
     if (detailDialog.open) detailDialog.close();
   }, 220);
 }
@@ -379,6 +394,7 @@ function showEditorForm(item, isNew = false) {
   $("#customName").value = item.name;
   $("#customValue").value = item.value;
   $("#customDemand").value = item.demand;
+  $("#customQuantity").value = item.quantity;
   $("#imagePreview").src = item.image;
   $("#imagePreview").alt = item.image ? `${item.name} preview` : "";
   $("#deleteCustom").hidden = isNew && !item.image;
@@ -395,6 +411,7 @@ function createCustom() {
     image: "",
     value: PLACEHOLDER_VALUE,
     demand: DEFAULT_DEMAND,
+    quantity: DEFAULT_QUANTITY,
     order: listings.length
   }, listings.length);
 
@@ -506,6 +523,30 @@ function closeEditor() {
   editorDialog.close();
 }
 
+function openCustomGuide() {
+  window.clearTimeout(customGuideCloseTimer);
+  window.clearTimeout(customGuideSettleTimer);
+  if (customGuideDialog.open) return;
+  const panel = $("#customGuidePanel");
+  panel.classList.remove("is-visible", "is-settled");
+  customGuideDialog.showModal();
+  panel.scrollTop = 0;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    panel.classList.add("is-visible");
+    customGuideSettleTimer = window.setTimeout(() => panel.classList.add("is-settled"), 620);
+  }));
+}
+
+function closeCustomGuide() {
+  if (!customGuideDialog.open) return;
+  window.clearTimeout(customGuideCloseTimer);
+  window.clearTimeout(customGuideSettleTimer);
+  $("#customGuidePanel").classList.remove("is-visible", "is-settled");
+  customGuideCloseTimer = window.setTimeout(() => {
+    if (customGuideDialog.open) customGuideDialog.close();
+  }, 220);
+}
+
 $("#categoryFilters").addEventListener("click", (event) => {
   const button = event.target.closest(".filter-button");
   if (!button) return;
@@ -544,6 +585,16 @@ backToTop.addEventListener("click", () => {
   });
 });
 window.addEventListener("scroll", updateBackToTop, { passive: true });
+
+$("#openCustomGuide").addEventListener("click", openCustomGuide);
+$("#closeCustomGuide").addEventListener("click", closeCustomGuide);
+customGuideDialog.addEventListener("click", (event) => {
+  if (event.target === customGuideDialog) closeCustomGuide();
+});
+customGuideDialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeCustomGuide();
+});
 
 $("#closeDetail").addEventListener("click", closeDetails);
 $("#detailBack").addEventListener("click", closeDetails);
@@ -597,6 +648,7 @@ $("#customModel").addEventListener("input", (event) => updateSelectedListing("mo
 $("#customName").addEventListener("input", (event) => updateSelectedListing("name", event.target.value));
 $("#customValue").addEventListener("input", (event) => updateSelectedListing("value", event.target.value || PLACEHOLDER_VALUE));
 $("#customDemand").addEventListener("change", (event) => updateSelectedListing("demand", event.target.value));
+$("#customQuantity").addEventListener("input", (event) => updateSelectedListing("quantity", event.target.value || DEFAULT_QUANTITY));
 $("#customImage").addEventListener("change", (event) => applyImageFile(event.target.files[0]));
 
 ["dragenter", "dragover"].forEach((type) => {

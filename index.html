@@ -12,7 +12,7 @@
   <title>Chicblocko Gun Values</title>
   <link rel="icon" type="image/webp" href="assets/chicblocko-logo.webp">
   <link rel="apple-touch-icon" href="assets/chicblocko-logo.webp">
-  <link rel="stylesheet" href="styles.css?v=20260610-8">
+  <link rel="stylesheet" href="styles.css?v=20260612-4">
 </head>
 <body>
   <a class="skip-link" href="#catalog">Skip to gun values</a>
@@ -70,7 +70,7 @@
           <span class="section-kicker">FULL COLLECTION</span>
           <h2>Chicblocko Gun Values</h2>
         </div>
-        <time class="updated" id="lastUpdated" datetime="2026-06-10"><i></i><span>INDEX UPDATED</span><b>JUN 10</b></time>
+        <time class="updated" id="lastUpdated" datetime="2026-06-12"><i></i><span>INDEX UPDATED</span><b>JUN 12</b></time>
       </div>
 
       <div class="toolbar">
@@ -116,13 +116,81 @@
     <span>GO TO THE TOP</span>
   </button>
 
+  <button class="custom-buy-callout" id="openCustomGuide" type="button" aria-haspopup="dialog">
+    <img src="assets/chicblocko-logo.webp" width="40" height="40" alt="">
+    <span><small>WANT TO BUY</small><b>YOUR OWN CUSTOM?</b></span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </button>
+
+  <dialog class="custom-guide-dialog" id="customGuideDialog" aria-labelledby="customGuideHeading">
+    <div class="custom-guide-panel" id="customGuidePanel">
+      <button class="custom-guide-close" id="closeCustomGuide" type="button" aria-label="Close custom purchase guide">&times;</button>
+
+      <header class="custom-guide-header">
+        <img src="assets/chicblocko-logo.webp" width="88" height="88" alt="Chicblocko logo">
+        <div>
+          <span>CHICBLOCKO CUSTOMS</span>
+          <h2 id="customGuideHeading">How To Buy Your Own Custom</h2>
+          <p>Follow these steps to start your custom order.</p>
+        </div>
+      </header>
+
+      <ol class="custom-guide-steps">
+        <li>
+          <span class="guide-number">01</span>
+          <div>
+            <h3>Join the Discord server</h3>
+            <p>Join the official Chicblocko Discord server.</p>
+          </div>
+          <a class="guide-action discord-action" href="https://discord.gg/chicblocko" target="_blank" rel="noopener noreferrer" aria-label="Join the Chicblocko Discord in a new tab">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.3A17.4 17.4 0 0 0 15.4 4l-.5 1a15.6 15.6 0 0 0-5.8 0l-.5-1a17.2 17.2 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.7a16.6 16.6 0 0 0 5 2.5l1.2-1.7-1.8-.9.4-.3c3.5 1.6 7.7 1.6 11.2 0l.4.3-1.8.9 1.2 1.7a16.5 16.5 0 0 0 5-2.5c.5-4.3-.8-8-2.9-11.4ZM8.5 14.5c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm7 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+            JOIN DISCORD
+          </a>
+        </li>
+        <li>
+          <span class="guide-number">02</span>
+          <div>
+            <h3>Open a Purchasing ticket</h3>
+            <p>Create a ticket in the Purchasing channel.</p>
+          </div>
+          <a class="guide-action ticket-action" href="https://discord.com/channels/898974252416532480/898974752620834909" target="_blank" rel="noopener noreferrer" aria-label="Create a Purchasing ticket in a new tab">CREATE TICKET</a>
+        </li>
+        <li>
+          <span class="guide-number">03</span>
+          <div>
+            <h3>Ask for custom pricing</h3>
+            <p>Custom prices range from <strong>$150 to $400</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="guide-number">04</span>
+          <div>
+            <h3>Discuss your custom</h3>
+            <p>You will then be added to a group chat with the owners to discuss your custom or submit your finished model file.</p>
+          </div>
+        </li>
+        <li>
+          <span class="guide-number">05</span>
+          <div>
+            <h3>Wait for the owner</h3>
+            <p>Wait for the owner to confirm that your custom is finished. You will receive it after the server resets.</p>
+          </div>
+        </li>
+      </ol>
+
+      <footer class="custom-guide-footer">
+        <span>Custom pricing depends on the requested design and complexity.</span>
+      </footer>
+    </div>
+  </dialog>
+
   <dialog class="editor-dialog" id="editorDialog" aria-labelledby="editorHeading">
     <div class="editor-shell">
       <header class="editor-header">
         <div>
           <span>LOCAL CUSTOM EDITOR</span>
           <h2 id="editorHeading">Manage customs</h2>
-          <p>Changes save automatically in this browser.</p>
+          <p>Local autosave only. Export a backup before replacing or uploading website files.</p>
         </div>
         <button class="editor-close" id="closeEditor" type="button" aria-label="Close editor">&times;</button>
       </header>
@@ -190,6 +258,10 @@
                   <option value="HIGH">High</option>
                 </select>
               </label>
+              <label class="field-wide">
+                <span>Quantity</span>
+                <input id="customQuantity" type="text" maxlength="30" placeholder="Example: 1 OF 25">
+              </label>
             </div>
 
             <div class="form-actions">
@@ -201,10 +273,10 @@
       </div>
 
       <footer class="editor-footer">
-        <span><i></i>Autosave is on</span>
+        <span><i></i>Saved in this browser only</span>
         <div>
           <button id="importData" type="button">Import backup</button>
-          <button id="exportData" type="button">Export backup</button>
+          <button class="export-data" id="exportData" type="button">Export backup</button>
           <button id="resetData" type="button">Reset edits</button>
           <input id="importFile" type="file" accept="application/json" hidden>
         </div>
@@ -213,8 +285,8 @@
   </dialog>
 
   <dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailName">
-    <button class="detail-close" id="closeDetail" type="button" aria-label="Close custom details">&times;</button>
     <div class="detail-flip" id="detailFlip">
+      <button class="detail-close" id="closeDetail" type="button" aria-label="Close custom details">&times;</button>
       <div class="detail-image">
         <img id="detailImage" width="735" height="287" alt="">
       </div>
@@ -230,6 +302,10 @@
           <div class="detail-market-item demand-item">
             <small>DEMAND</small>
             <span class="demand-badge" id="detailDemand"><i></i><i></i><i></i><b>TBD</b></span>
+          </div>
+          <div class="detail-market-item">
+            <small>QUANTITY</small>
+            <strong id="detailQuantity"></strong>
           </div>
         </div>
         <button id="detailBack" type="button">Back to all customs</button>
@@ -255,12 +331,16 @@
             <span>DEMAND</span>
             <div class="demand-badge"><i></i><i></i><i></i><b class="card-demand"></b></div>
           </div>
+          <div class="market-stat">
+            <span>QUANTITY</span>
+            <strong class="card-quantity"></strong>
+          </div>
         </div>
       </div>
     </article>
   </template>
 
   <script src="assets-data.js?v=20260610-2"></script>
-  <script src="app.js?v=20260610-7"></script>
+  <script src="app.js?v=20260612-3"></script>
 </body>
 </html>

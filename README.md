@@ -27,3 +27,6 @@ Select **Edit Customs** in the header to manage the collection. Edits save in
 the current browser only; export a JSON backup to protect or move them. Because
 this is a static website, browser edits are not automatically published to
 every visitor.
+
+Last published: 2026-06-15 18:28:21 -04:00
+

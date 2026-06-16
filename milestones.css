@@ -630,10 +630,9 @@
   width: max-content;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
   min-height: 36px;
   margin-top: 10px;
-  padding: 0 14px 0 8px;
+  padding: 0 14px;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
@@ -654,6 +653,10 @@
 
 .rank-label strong {
   font-size: 0.66rem;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 .patrol-dialog {
@@ -866,7 +869,8 @@
 
 .owned-flip {
   position: relative;
-  overflow: hidden;
+  max-height: 88vh;
+  overflow: auto;
   padding: 34px;
   border: 1px solid #59657e;
   border-radius: 26px;
@@ -944,7 +948,7 @@
   justify-content: center;
   gap: 14px;
   margin-top: 28px;
-  max-height: 56vh;
+  max-height: min(56vh, 560px);
   padding: 2px 4px 8px;
   overflow-y: auto;
 }
@@ -1048,6 +1052,7 @@
 
 .record-detail-dialog {
   width: min(94vw, 900px);
+  max-height: 88vh;
   padding: 0;
   overflow: visible;
   color: #fff;
@@ -1060,11 +1065,12 @@
 }
 
 .record-detail-flip {
-  min-height: 470px;
+  min-height: min(470px, 88vh);
+  max-height: 88vh;
   display: grid;
   grid-template-columns: 1.45fr 1fr;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   border: 2px solid #fff;
   border-radius: 24px;
   background: #101010;
@@ -1092,6 +1098,7 @@
 .record-detail-image {
   display: grid;
   place-items: center;
+  min-height: 320px;
   padding: 24px;
   border-right: 1px solid #3a3a3a;
   background: #191919;
@@ -1192,9 +1199,18 @@
   .collector-card { min-height: 150px; padding: 22px; }
   .collector-profile > img { width: 72px; height: 72px; }
   .collector-profile h3 { font-size: 1.45rem; }
-  .owned-flip { padding: 25px 18px; }
+  .owned-dialog {
+    width: min(96vw, 560px);
+    max-height: 92vh;
+  }
+  .owned-flip {
+    max-height: 92vh;
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
   .owned-dialog-header { align-items: flex-start; gap: 14px; }
   .owned-dialog-header img { width: 62px; height: 62px; }
+  .owned-dialog-header h2 { font-size: clamp(1.7rem, 10vw, 2.6rem); }
   .owned-custom-grid { grid-template-columns: 1fr; max-height: 50vh; }
   .patrol-record-grid { grid-template-columns: 1fr; }
   .patrol-dialog { width: min(94vw, 880px); }
@@ -1228,9 +1244,33 @@
   .vell-custom-grid .owned-gun-card:nth-last-child(2),
   .vell-custom-grid .owned-gun-card:last-child { grid-column: 1; }
   .owned-image { aspect-ratio: 16 / 10; }
-  .record-detail-flip { min-height: 0; grid-template-columns: 1fr; }
-  .record-detail-image { border-right: 0; border-bottom: 1px solid #3a3a3a; }
+  .record-detail-dialog {
+    width: min(96vw, 560px);
+    max-height: 92vh;
+  }
+  .record-detail-flip {
+    min-height: 0;
+    max-height: 92vh;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+  .record-detail-image {
+    min-height: 220px;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid #3a3a3a;
+  }
+  .record-detail-image img { max-height: 240px; }
   .record-detail-content { padding: 28px 22px; }
+  .record-detail-content h2 {
+    font-size: clamp(1.9rem, 11vw, 2.8rem);
+    line-height: 1;
+  }
+  .record-detail-content strong {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

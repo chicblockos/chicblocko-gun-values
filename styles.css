@@ -34,38 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-html::before {
-  content: "";
-  position: fixed;
-  z-index: 99999;
-  inset: 0;
-  pointer-events: none;
-  background: #030303;
-  opacity: 0;
-  transition: opacity 180ms ease;
-}
-
-html.page-exit-forward::before,
-html.page-exit-back::before {
-  opacity: 1;
-}
-
-html.page-ready-forward body {
-  animation: page-slide-in-forward 260ms ease-out both;
-}
-
-html.page-ready-back body {
-  animation: page-slide-in-back 260ms ease-out both;
-}
-
-html.page-exit-forward body {
-  animation: page-slide-out-forward 230ms ease-in both;
-}
-
-html.page-exit-back body {
-  animation: page-slide-out-back 230ms ease-in both;
-}
-
 body:has(dialog[open]) {
   overflow: hidden;
 }
@@ -303,6 +271,10 @@ nav a.active::after {
   color: #fff;
   background: #191919;
   transform: translateY(-2px);
+}
+
+.catalog-edit-button {
+  justify-self: end;
 }
 
 .header-actions svg {
@@ -2435,6 +2407,16 @@ footer.custom-guide-footer {
     flex-direction: column;
   }
 
+  .catalog-edit-button {
+    width: auto;
+    min-height: 40px;
+    padding: 0 12px;
+  }
+
+  .catalog-edit-button span {
+    display: inline;
+  }
+
   .card-grid {
     grid-template-columns: 1fr;
   }
@@ -2600,43 +2582,5 @@ footer.custom-guide-footer {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
-  }
-}
-
-@keyframes page-slide-in-forward {
-  from {
-    opacity: 0;
-    transform: translateX(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes page-slide-in-back {
-  from {
-    opacity: 0;
-    transform: translateX(-24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes page-slide-out-forward {
-  to {
-    opacity: 0;
-    transform: translateX(-22px);
-  }
-}
-
-@keyframes page-slide-out-back {
-  to {
-    opacity: 0;
-    transform: translateX(22px);
   }
 }

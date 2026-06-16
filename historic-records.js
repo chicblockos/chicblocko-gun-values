@@ -76,11 +76,13 @@
     if (dialog.open) return;
     dialog.showModal();
     closeButton.focus();
+    document.body.classList.add("modal-open");
   };
 
   const closeDialog = () => {
     if (!dialog.open) return;
     dialog.close();
+    document.body.classList.remove("modal-open");
     card.focus();
   };
 
@@ -103,11 +105,16 @@
   const openVellDialog = () => {
     if (vellDialog && !vellDialog.open) {
       vellDialog.showModal();
+      document.body.classList.add("modal-open");
       vellClose?.focus();
     }
   };
   const closeVellDialog = () => {
-    if (vellDialog?.open) vellDialog.close();
+    if (vellDialog?.open) {
+      vellDialog.close();
+      document.body.classList.remove("modal-open");
+      vellCard?.focus();
+    }
   };
   vellCard?.addEventListener("click", openVellDialog);
   vellCard?.addEventListener("keydown", (event) => {
@@ -128,6 +135,7 @@
   const openPatrolDialog = () => {
     if (patrolDialog && !patrolDialog.open) {
       patrolDialog.showModal();
+      document.body.classList.add("modal-open");
       patrolDialog.querySelector(".patrol-flip")?.animate(
         [
           { opacity: 0, transform: "translateY(12px) scale(0.985)" },
@@ -139,7 +147,11 @@
     }
   };
   const closePatrolDialog = () => {
-    if (patrolDialog?.open) patrolDialog.close();
+    if (patrolDialog?.open) {
+      patrolDialog.close();
+      document.body.classList.remove("modal-open");
+      patrolCard?.focus();
+    }
   };
   patrolCard?.addEventListener("click", openPatrolDialog);
   patrolCard?.addEventListener("keydown", (event) => {
@@ -158,12 +170,14 @@
   });
   applySavedCustoms();
 
-  const closeDetail = () => {
+  const closeDetail = ({ returnToList = false } = {}) => {
     if (!detailDialog?.open) return;
     detailDialog.close();
-    if (returnDialog && !returnDialog.open) {
+    if (returnToList && returnDialog && !returnDialog.open) {
       returnDialog.showModal();
+      document.body.classList.add("modal-open");
     }
+    if (!returnToList) document.body.classList.remove("modal-open");
     returnDialog = null;
   };
 
@@ -180,7 +194,11 @@
       document.getElementById("recordDetailOwner").textContent = gunCard.querySelector("small")?.textContent || "";
       returnDialog = gunCard.closest("#vellCustomsDialog") || gunCard.closest("#ownedCustomsDialog");
       if (returnDialog?.open) returnDialog.close();
-      if (!detailDialog.open) detailDialog.showModal();
+      if (!detailDialog.open) {
+        detailDialog.showModal();
+        document.body.classList.add("modal-open");
+        detailClose?.focus();
+      }
     };
     gunCard.addEventListener("click", showDetail);
     gunCard.addEventListener("keydown", (event) => {
@@ -191,8 +209,8 @@
     });
   });
 
-  detailClose?.addEventListener("click", closeDetail);
-  detailBack?.addEventListener("click", closeDetail);
+  detailClose?.addEventListener("click", () => closeDetail());
+  detailBack?.addEventListener("click", () => closeDetail({ returnToList: true }));
   detailDialog?.addEventListener("cancel", (event) => {
     event.preventDefault();
     closeDetail();

@@ -252,11 +252,12 @@
 .profile-role {
   display: block;
   margin-top: 7px;
-  color: #fff;
+  color: var(--blue);
   font-family: var(--display);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   line-height: 1.4;
+  text-shadow: 0 0 16px rgba(43, 120, 255, 0.24);
 }
 
 .profile-card > p {

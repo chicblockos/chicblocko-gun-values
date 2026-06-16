@@ -155,6 +155,17 @@
   grid-template-columns: 1fr;
 }
 
+.contributor-grid .profile-card {
+  min-height: 245px;
+  justify-content: center;
+  padding: 28px 30px;
+}
+
+.contributor-grid .profile-card > p {
+  margin-top: 19px;
+  padding-top: 16px;
+}
+
 .profile-card {
   position: relative;
   isolation: isolate;

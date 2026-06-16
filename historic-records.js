@@ -11,6 +11,9 @@
   const vellCard = document.getElementById("vellCard");
   const vellDialog = document.getElementById("vellCustomsDialog");
   const vellClose = document.getElementById("closeVellCustoms");
+  const patrolCard = document.getElementById("scubaPatrolCard");
+  const patrolDialog = document.getElementById("patrolDialog");
+  const patrolClose = document.getElementById("closePatrolDialog");
   if (!card || !dialog || !closeButton) return;
   let returnDialog = null;
 
@@ -120,6 +123,38 @@
   });
   vellDialog?.addEventListener("click", (event) => {
     if (event.target === vellDialog) closeVellDialog();
+  });
+
+  const openPatrolDialog = () => {
+    if (patrolDialog && !patrolDialog.open) {
+      patrolDialog.showModal();
+      patrolDialog.querySelector(".patrol-flip")?.animate(
+        [
+          { opacity: 0, transform: "translateY(12px) scale(0.985)" },
+          { opacity: 1, transform: "translateY(0) scale(1)" }
+        ],
+        { duration: 180, easing: "ease-out" }
+      );
+      patrolClose?.focus();
+    }
+  };
+  const closePatrolDialog = () => {
+    if (patrolDialog?.open) patrolDialog.close();
+  };
+  patrolCard?.addEventListener("click", openPatrolDialog);
+  patrolCard?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openPatrolDialog();
+    }
+  });
+  patrolClose?.addEventListener("click", closePatrolDialog);
+  patrolDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closePatrolDialog();
+  });
+  patrolDialog?.addEventListener("click", (event) => {
+    if (event.target === patrolDialog) closePatrolDialog();
   });
   applySavedCustoms();
 

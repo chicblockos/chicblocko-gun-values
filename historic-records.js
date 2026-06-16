@@ -142,6 +142,7 @@
       document.getElementById("recordDetailCategory").textContent = gunCard.querySelector(":scope > span")?.textContent || "";
       document.getElementById("recordDetailName").textContent = gunCard.querySelector("h3")?.textContent || "";
       document.getElementById("recordDetailModel").textContent = gunCard.querySelector("p")?.textContent || "";
+      document.getElementById("recordDetailOwner").textContent = gunCard.querySelector("small")?.textContent || "";
       returnDialog = gunCard.closest("#vellCustomsDialog") || gunCard.closest("#ownedCustomsDialog");
       if (returnDialog?.open) returnDialog.close();
       if (!detailDialog.open) detailDialog.showModal();

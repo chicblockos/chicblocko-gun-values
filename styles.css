@@ -45,12 +45,25 @@ html::before {
   transition: opacity 180ms ease;
 }
 
-html.page-exit::before {
+html.page-exit-forward::before,
+html.page-exit-back::before {
   opacity: 1;
 }
 
-html.page-ready body {
-  animation: page-soft-enter 220ms ease-out both;
+html.page-ready-forward body {
+  animation: page-slide-in-forward 260ms ease-out both;
+}
+
+html.page-ready-back body {
+  animation: page-slide-in-back 260ms ease-out both;
+}
+
+html.page-exit-forward body {
+  animation: page-slide-out-forward 230ms ease-in both;
+}
+
+html.page-exit-back body {
+  animation: page-slide-out-back 230ms ease-in both;
 }
 
 body:has(dialog[open]) {
@@ -2590,14 +2603,40 @@ footer.custom-guide-footer {
   }
 }
 
-@keyframes page-soft-enter {
+@keyframes page-slide-in-forward {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateX(24px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-slide-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-slide-out-forward {
+  to {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+}
+
+@keyframes page-slide-out-back {
+  to {
+    opacity: 0;
+    transform: translateX(22px);
   }
 }

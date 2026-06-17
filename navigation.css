@@ -76,10 +76,6 @@
   color: #050505 !important;
 }
 
-.site-header > .header-actions {
-  justify-self: end;
-}
-
 body::after {
   content: "";
   position: fixed;

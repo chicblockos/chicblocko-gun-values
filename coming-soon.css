@@ -251,9 +251,14 @@
   box-shadow: 0 32px 78px rgba(0, 0, 0, 0.68);
 }
 
-.contributor-card {
-  width: min(560px, 100%);
+.contributors-section .contributor-grid {
+  max-width: 820px;
   margin: 0 auto;
+}
+
+.contributor-card {
+  width: auto;
+  margin: 0;
 }
 
 .owner-badge {

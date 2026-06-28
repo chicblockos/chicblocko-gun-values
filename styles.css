@@ -21,11 +21,15 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 20px;
 }
 
 body {
+  max-width: 100%;
+  overflow-x: hidden;
   min-width: 320px;
   margin: 0;
   color: var(--text);
@@ -60,7 +64,15 @@ a {
 
 img,
 svg {
+  max-width: 100%;
   display: block;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 .visually-hidden {
@@ -221,26 +233,6 @@ nav a.active::after {
   display: none;
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.header-actions a {
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 17px;
-  border: 2px solid #fff;
-  border-radius: 9px;
-  font: 900 12px var(--display);
-  white-space: nowrap;
-  transition: color .18s, background .18s, transform .18s;
-}
-
 .header-edit-button {
   min-height: 42px;
   display: inline-flex;
@@ -275,36 +267,6 @@ nav a.active::after {
 
 .catalog-edit-button {
   justify-self: end;
-}
-
-.header-actions svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-.header-roblox-button {
-  color: #fff;
-  background: #050505;
-}
-
-.header-discord-button {
-  color: #fff;
-  background: var(--discord);
-}
-
-.header-actions a:hover {
-  transform: translateY(-2px);
-}
-
-.header-roblox-button:hover {
-  color: #000;
-  background: #fff;
-}
-
-.header-discord-button:hover {
-  color: var(--discord);
-  background: #fff;
 }
 
 .hero {
@@ -651,6 +613,7 @@ nav a.active::after {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
+  align-items: stretch;
 }
 
 .gun-card {
@@ -684,6 +647,7 @@ nav a.active::after {
   padding: 6px;
   object-fit: contain;
   transform: scale(var(--image-zoom, 1));
+  backface-visibility: hidden;
 }
 
 .image-error .card-image::after {
@@ -743,9 +707,9 @@ nav a.active::after {
 
 .market-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 17px;
-  background: linear-gradient(145deg, #1b1b1b, #0b0b0b);
+  background: linear-gradient(145deg, #181818, #0b0b0b);
   border: 1px solid #3b3b3b;
   border-radius: 10px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
@@ -754,13 +718,13 @@ nav a.active::after {
 
 .market-stat {
   min-width: 0;
-  min-height: 68px;
+  min-height: 74px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 11px 5px;
+  gap: 8px;
+  padding: 12px 8px;
   text-align: center;
 }
 
@@ -769,10 +733,10 @@ nav a.active::after {
 }
 
 .market-stat > span {
-  color: #8f8f8f;
-  font-size: 8px;
+  color: #a3a3a3;
+  font-size: 9px;
   font-weight: 800;
-  letter-spacing: .1em;
+  letter-spacing: .08em;
   white-space: nowrap;
 }
 
@@ -780,8 +744,8 @@ nav a.active::after {
   width: 100%;
   max-width: 100%;
   color: #fff;
-  font: 900 clamp(9px, .78vw, 13px)/1 var(--display);
-  letter-spacing: -.05em;
+  font: 900 clamp(12px, .96vw, 16px)/1 var(--display);
+  letter-spacing: -.03em;
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
@@ -792,8 +756,8 @@ nav a.active::after {
   max-width: 100%;
   display: flex;
   align-items: end;
-  gap: 2px;
-  padding: 6px 5px;
+  gap: 3px;
+  padding: 7px 8px;
   color: #fff;
   background: #181818;
   border: 1px solid #555;
@@ -813,7 +777,7 @@ nav a.active::after {
 
 .demand-badge b {
   margin-left: 2px;
-  font: 900 8px/1 var(--display);
+  font: 900 9px/1 var(--display);
   letter-spacing: .03em;
 }
 
@@ -889,6 +853,76 @@ footer .brand {
   color: #fff;
   font-size: 12px;
   letter-spacing: .05em;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: #555;
+  text-underline-offset: 4px;
+}
+
+.footer-links a:hover {
+  text-decoration-color: #fff;
+}
+
+.legal-main {
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 86px 0 110px;
+}
+
+.legal-card {
+  padding: clamp(26px, 5vw, 56px);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, .08), transparent 32%),
+    #0b0b0b;
+  border: 1px solid #313131;
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+}
+
+.legal-card .section-kicker {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.legal-card h1 {
+  margin: 0 0 18px;
+  font: 900 clamp(2.2rem, 7vw, 4.6rem) / .9 var(--display);
+  text-transform: uppercase;
+}
+
+.legal-card h2 {
+  margin: 32px 0 10px;
+  font: 900 1rem var(--display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.legal-card p,
+.legal-card li {
+  color: #c9c9c9;
+  line-height: 1.75;
+}
+
+.legal-card a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.legal-card ul {
+  padding-left: 20px;
 }
 
 .back-to-top {
@@ -1920,9 +1954,9 @@ footer.custom-guide-footer {
   width: 100%;
   min-width: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 28px;
-  background: linear-gradient(145deg, #1b1b1b, #090909);
+  background: linear-gradient(145deg, #181818, #090909);
   border: 1px solid #3b3b3b;
   border-radius: 12px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
@@ -1931,13 +1965,13 @@ footer.custom-guide-footer {
 
 .detail-market-item {
   min-width: 0;
-  min-height: 96px;
+  min-height: 94px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 11px;
-  padding: 15px 8px;
+  gap: 10px;
+  padding: 15px 10px;
   text-align: center;
 }
 
@@ -1946,10 +1980,10 @@ footer.custom-guide-footer {
 }
 
 .detail-market small {
-  color: #aaa;
-  font-size: 9px;
+  color: #a7a7a7;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: .08em;
+  letter-spacing: .09em;
   white-space: nowrap;
 }
 
@@ -1958,26 +1992,26 @@ footer.custom-guide-footer {
   max-width: 100%;
   display: block;
   color: #fff;
-  font: 900 clamp(18px, 1.8vw, 24px)/1 var(--display);
-  letter-spacing: -.04em;
+  font: 900 clamp(20px, 2vw, 26px)/1 var(--display);
+  letter-spacing: -.03em;
   text-align: center;
   white-space: nowrap;
 }
 
 .detail-market strong.compact-value {
-  font-size: clamp(12px, 1.25vw, 17px);
+  font-size: clamp(13px, 1.35vw, 18px);
 }
 
 .detail-market strong.extra-compact-value {
-  font-size: clamp(10px, 1vw, 14px);
+  font-size: clamp(11px, 1.1vw, 15px);
 }
 
 .detail-market .demand-badge {
-  padding: 9px 10px;
+  padding: 9px 11px;
 }
 
 .detail-market .demand-badge b {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .detail-content button {
@@ -2101,29 +2135,10 @@ footer.custom-guide-footer {
     padding-inline: 14px;
   }
 
-  nav {
-    display: none;
-  }
-
-  .header-actions {
-    gap: 6px;
-  }
-
-  .header-actions a {
-    min-height: 39px;
-    padding: 0 10px;
-    font-size: 10px;
-  }
-
   .header-edit-button {
     min-height: 39px;
     padding: 0 10px;
     font-size: 10px;
-  }
-
-  .header-actions svg {
-    width: 17px;
-    height: 17px;
   }
 
   .hero {
@@ -2376,21 +2391,12 @@ footer.custom-guide-footer {
     font-size: 13px;
   }
 
-  .header-actions a {
-    width: 39px;
-    padding: 0;
-  }
-
   .header-edit-button {
     width: 39px;
     padding: 0;
   }
 
   .header-edit-button span {
-    display: none;
-  }
-
-  .header-actions a span {
     display: none;
   }
 
@@ -2426,7 +2432,7 @@ footer.custom-guide-footer {
   }
 
   .market-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .market-stat {

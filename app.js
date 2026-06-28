@@ -10,20 +10,22 @@ const MODEL_DEFAULTS = {
   "ARP Drum": "ARP Drum",
   AK47: "AK-47 Custom"
 };
-const PLACEHOLDER_VALUE = "$BLUDARIEL";
+const PLACEHOLDER_VALUE = "N/A";
 const DEFAULT_DEMAND = "TBD";
-const DEFAULT_QUANTITY = "TBD";
-const INDEX_UPDATED = "2026-06-12";
+const INDEX_UPDATED = "2026-06-27";
 const DATABASE_NAME = "chicblocko-custom-editor";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "site-data";
 const STATE_KEY = "current-listings";
+const SAFE_IMAGE_PATTERN = /^(assets\/(?:guns|team)\/[-a-z0-9_/.]+|assets\/chicblocko-logo\.webp)$/i;
+const SAFE_UPLOAD_TYPES = new Set(["image/png", "image/jpeg", "image/webp"]);
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
+const REMOVED_LISTING_IDS = new Set(["glock18drum-065", "glock18ext-008", "arp-drum-003"]);
 
 const $ = (selector) => document.querySelector(selector);
 const cardGrid = $("#cardGrid");
 const detailDialog = $("#detailDialog");
 const editorDialog = $("#editorDialog");
-const customGuideDialog = $("#customGuideDialog");
 const searchInput = $("#searchInput");
 const sortSelect = $("#sortSelect");
 const backToTop = $("#backToTop");
@@ -36,8 +38,6 @@ let searchTimer = 0;
 let saveTimer = 0;
 let editorRenderTimer = 0;
 let publicRenderTimer = 0;
-let customGuideCloseTimer = 0;
-let customGuideSettleTimer = 0;
 let detailCloseTimer = 0;
 let databasePromise;
 
@@ -50,20 +50,41 @@ function normalizeCategory(item) {
   return CATEGORY_ORDER.includes(item.category) ? item.category : "EXT";
 }
 
+function cleanText(value, fallback, maxLength = 90) {
+  const text = String(value ?? fallback)
+    .replace(/[\u0000-\u001f\u007f]/g, "")
+    .trim()
+    .slice(0, maxLength);
+  return text || fallback;
+}
+
+function sanitizeImageSource(value) {
+  const image = String(value || "").trim();
+  if (!image) return "";
+  if (/^data:image\/(?:png|jpe?g|webp);base64,[a-z0-9+/=]+$/i.test(image)) return image;
+  if (image.includes("..")) return "";
+  return SAFE_IMAGE_PATTERN.test(image) ? image : "";
+}
+
+function normalizeDemand(value) {
+  const demand = String(value || DEFAULT_DEMAND).toUpperCase();
+  return ["TBD", "LOW", "MEDIUM", "HIGH"].includes(demand) ? demand : DEFAULT_DEMAND;
+}
+
 function normalizeListing(item, index) {
   return {
-    id: String(item.id || `custom-${Date.now()}-${index}`),
-    name: String(item.name || "New Custom"),
-    model: String(item.model || "Unknown Model"),
+    id: cleanText(item.id, `custom-${Date.now()}-${index}`, 90),
+    name: cleanText(item.name, "New Custom", 80),
+    model: cleanText(item.model, "Unknown Model", 60),
     category: normalizeCategory(item),
-    image: String(item.image || ""),
-    value: String(item.value || PLACEHOLDER_VALUE),
-    demand: String(item.demand || DEFAULT_DEMAND).toUpperCase(),
-    quantity: String(item.quantity || DEFAULT_QUANTITY).toUpperCase(),
+    image: sanitizeImageSource(item.image),
+    value: cleanText(item.value, PLACEHOLDER_VALUE, 30),
+    demand: normalizeDemand(item.demand),
     imageX: Number.isFinite(Number(item.imageX)) ? Number(item.imageX) : 50,
     imageY: Number.isFinite(Number(item.imageY)) ? Number(item.imageY) : 50,
     imageZoom: Number.isFinite(Number(item.imageZoom)) ? Number(item.imageZoom) : 1,
     imageFit: item.imageFit === "cover" ? "cover" : "contain",
+    localOnly: item.localOnly === true,
     order: Number.isFinite(Number(item.order)) ? Number(item.order) : index
   };
 }
@@ -105,8 +126,10 @@ async function readSavedListings() {
 
 async function writeSavedListings() {
   const status = $("#autosaveStatus");
-  status.classList.add("saving");
-  status.lastChild.textContent = "Saving";
+  if (status) {
+    status.classList.add("saving");
+    status.lastChild.textContent = "Saving";
+  }
 
   try {
     const database = await openDatabase();
@@ -116,13 +139,23 @@ async function writeSavedListings() {
       transaction.oncomplete = resolve;
       transaction.onerror = () => reject(transaction.error);
     });
-    status.lastChild.textContent = "Saved";
+    if (status) status.lastChild.textContent = "Saved";
   } catch (error) {
     console.error("Could not save editor changes.", error);
-    status.lastChild.textContent = "Save failed";
+    if (status) status.lastChild.textContent = "Save failed";
   } finally {
-    status.classList.remove("saving");
+    if (status) status.classList.remove("saving");
   }
+}
+
+async function writeListingsToStorage(items) {
+  const database = await openDatabase();
+  await new Promise((resolve, reject) => {
+    const transaction = database.transaction(STORE_NAME, "readwrite");
+    transaction.objectStore(STORE_NAME).put(items, STATE_KEY);
+    transaction.oncomplete = resolve;
+    transaction.onerror = () => reject(transaction.error);
+  });
 }
 
 async function clearSavedListings() {
@@ -137,9 +170,53 @@ async function clearSavedListings() {
 
 function scheduleSave() {
   window.clearTimeout(saveTimer);
-  $("#autosaveStatus").classList.add("saving");
-  $("#autosaveStatus").lastChild.textContent = "Unsaved";
+  const status = $("#autosaveStatus");
+  if (status) {
+    status.classList.add("saving");
+    status.lastChild.textContent = "Unsaved";
+  }
   saveTimer = window.setTimeout(writeSavedListings, 350);
+}
+
+function mergeSavedListings(saved) {
+  const merged = new Map();
+  sourceListings.forEach((item, index) => {
+    const normalized = normalizeListing(item, index);
+    merged.set(normalized.id, normalized);
+  });
+
+  if (Array.isArray(saved)) {
+    saved.map(normalizeListing).forEach((item) => {
+      if (REMOVED_LISTING_IDS.has(item.id)) return;
+      const source = merged.get(item.id);
+      if (!source && item.localOnly !== true) return;
+      merged.set(item.id, source
+        ? { ...source, ...item, category: source.category, model: source.model, value: source.value, demand: source.demand, image: item.image || source.image }
+        : item);
+    });
+  }
+
+  return [...merged.values()].sort((a, b) => {
+    const categoryDifference = CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+    return categoryDifference || a.order - b.order;
+  });
+}
+
+async function cleanRemovedSavedListings(saved) {
+  if (!Array.isArray(saved)) return saved;
+  const sourceIds = new Set(sourceListings.map((item) => item.id));
+  const cleaned = saved.filter((item) => {
+    const id = String(item?.id || "");
+    if (REMOVED_LISTING_IDS.has(id)) return false;
+    return sourceIds.has(id) || item?.localOnly === true;
+  });
+  if (cleaned.length === saved.length) return saved;
+  try {
+    await writeListingsToStorage(cleaned);
+  } catch (error) {
+    console.warn("Could not clean removed customs from local editor storage.", error);
+  }
+  return cleaned;
 }
 
 function availableCategories() {
@@ -172,16 +249,70 @@ function renderFilters() {
   $("#categoryFilters").append(fragment);
 }
 
+function normalizeSearchText(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/gi, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function parseValueToken(token, fallbackUnit = "") {
+  const match = String(token).trim().match(/^(\d+(?:\.\d+)?)([km])?$/i);
+  if (!match) return null;
+
+  const amount = Number(match[1]);
+  const unit = (match[2] || fallbackUnit || "").toUpperCase();
+
+  if (unit === "M") return amount * 1000000;
+  if (unit === "K") return amount * 1000;
+  return amount;
+}
+
+function valueRank(item) {
+  const text = String(item.value || "").toUpperCase();
+  if (!text || text.includes("N/A") || text.includes("NA") || text.includes("?")) return null;
+
+  const fallbackUnit = text.includes("M") ? "M" : text.includes("K") ? "K" : "";
+  const values = [...text.matchAll(/\d+(?:\.\d+)?\s*[KM]?/gi)]
+    .map((match) => parseValueToken(match[0].replace(/\s+/g, ""), fallbackUnit))
+    .filter((value) => Number.isFinite(value));
+
+  if (!values.length) return null;
+  return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+function compareByValue(direction) {
+  return (a, b) => {
+    const aValue = valueRank(a);
+    const bValue = valueRank(b);
+    const fallback = a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+
+    if (aValue === null && bValue === null) return fallback;
+    if (aValue === null) return 1;
+    if (bValue === null) return -1;
+    return direction * (aValue - bValue) || fallback;
+  };
+}
+
 function filteredListings() {
-  const query = searchInput.value.trim().toLocaleLowerCase();
+  const query = normalizeSearchText(searchInput.value);
+  const compactQuery = query.replace(/\s+/g, "");
   const result = publicListings().filter((item) => {
     const matchesCategory = activeCategory === "All" || item.category === activeCategory;
-    const searchableText = `${item.name} ${item.model} ${item.category}`.toLocaleLowerCase();
-    return matchesCategory && searchableText.includes(query);
+    const searchableText = normalizeSearchText(`${item.name} ${item.model} ${item.category} ${item.value} ${item.demand}`);
+    const compactSearchableText = searchableText.replace(/\s+/g, "");
+    const matchesSearch = !query || searchableText.includes(query) || compactSearchableText.includes(compactQuery);
+    return matchesCategory && matchesSearch;
   });
 
   if (sortSelect.value === "name") {
     result.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
+  } else if (sortSelect.value === "value-low") {
+    result.sort(compareByValue(1));
+  } else if (sortSelect.value === "value-high") {
+    result.sort(compareByValue(-1));
   } else {
     result.sort((a, b) => {
       const categoryDifference = CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
@@ -230,7 +361,6 @@ function renderCards() {
     cardFragment.querySelector(".card-value").textContent = item.value;
     cardFragment.querySelector(".card-demand").textContent = item.demand;
     cardFragment.querySelector(".demand-badge").dataset.demand = item.demand.toLowerCase();
-    cardFragment.querySelector(".card-quantity").textContent = item.quantity;
     fragment.append(cardFragment);
   });
 
@@ -283,7 +413,6 @@ function showDetails(item) {
   detailValue.classList.toggle("extra-compact-value", item.value.length > 10);
   $("#detailDemand").querySelector("b").textContent = item.demand;
   $("#detailDemand").dataset.demand = item.demand.toLowerCase();
-  $("#detailQuantity").textContent = item.quantity;
   $("#detailFlip").classList.remove("is-visible");
 
   detailDialog.showModal();
@@ -312,6 +441,7 @@ function selectedListing() {
 
 function populateCategorySelect() {
   const select = $("#customCategory");
+  if (!select) return;
   select.replaceChildren();
   CATEGORY_ORDER.forEach((category) => {
     const option = document.createElement("option");
@@ -338,7 +468,11 @@ function renderEditorModels() {
   const addButton = document.createElement("button");
   addButton.type = "button";
   addButton.className = "new-custom-button";
-  addButton.innerHTML = "<i>+</i><span>NEW CUSTOM</span>";
+  const addIcon = document.createElement("i");
+  addIcon.textContent = "+";
+  const addLabel = document.createElement("span");
+  addLabel.textContent = "NEW CUSTOM";
+  addButton.append(addIcon, addLabel);
   fragment.append(addButton);
   row.append(fragment);
 }
@@ -359,7 +493,11 @@ function renderEditorGrid() {
   const addCard = document.createElement("button");
   addCard.type = "button";
   addCard.className = "editor-add-card";
-  addCard.innerHTML = "<b>+</b><span>ADD CUSTOM</span>";
+  const addIcon = document.createElement("b");
+  addIcon.textContent = "+";
+  const addLabel = document.createElement("span");
+  addLabel.textContent = "ADD CUSTOM";
+  addCard.append(addIcon, addLabel);
   fragment.append(addCard);
 
   filteredEditorListings().forEach((item) => {
@@ -394,7 +532,6 @@ function showEditorForm(item, isNew = false) {
   $("#customName").value = item.name;
   $("#customValue").value = item.value;
   $("#customDemand").value = item.demand;
-  $("#customQuantity").value = item.quantity;
   $("#imagePreview").src = item.image;
   $("#imagePreview").alt = item.image ? `${item.name} preview` : "";
   $("#deleteCustom").hidden = isNew && !item.image;
@@ -411,7 +548,7 @@ function createCustom() {
     image: "",
     value: PLACEHOLDER_VALUE,
     demand: DEFAULT_DEMAND,
-    quantity: DEFAULT_QUANTITY,
+    localOnly: true,
     order: listings.length
   }, listings.length);
 
@@ -438,8 +575,8 @@ function updateSelectedListing(field, value) {
 }
 
 async function fileToOptimizedDataUrl(file) {
-  if (!file.type.startsWith("image/")) throw new Error("Please choose an image file.");
-  if (file.size > 15 * 1024 * 1024) throw new Error("Image must be smaller than 15 MB.");
+  if (!SAFE_UPLOAD_TYPES.has(file.type)) throw new Error("Use a PNG, JPG, or WebP image.");
+  if (file.size > MAX_UPLOAD_BYTES) throw new Error("Image must be smaller than 8 MB.");
 
   const bitmap = "createImageBitmap" in window
     ? await createImageBitmap(file)
@@ -449,7 +586,7 @@ async function fileToOptimizedDataUrl(file) {
       image.onerror = () => reject(new Error("This image could not be opened."));
       image.src = URL.createObjectURL(file);
     });
-  const maxDimension = 1400;
+  const maxDimension = 1200;
   const sourceWidth = bitmap.width || bitmap.naturalWidth;
   const sourceHeight = bitmap.height || bitmap.naturalHeight;
   const scale = Math.min(1, maxDimension / Math.max(sourceWidth, sourceHeight));
@@ -498,9 +635,14 @@ function exportEditorData() {
 }
 
 async function importEditorData(file) {
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) throw new Error("Backup file must be smaller than 2 MB.");
+  const isJson = file.type === "application/json" || file.name.toLowerCase().endsWith(".json");
+  if (!isJson) throw new Error("Choose a JSON backup file.");
   const parsed = JSON.parse(await file.text());
   const imported = Array.isArray(parsed) ? parsed : parsed.listings;
   if (!Array.isArray(imported) || imported.length === 0) throw new Error("This backup has no customs.");
+  if (imported.length > 500) throw new Error("This backup has too many customs.");
   listings = imported.map(normalizeListing);
   selectedListingId = null;
   editorCategory = "All";
@@ -514,37 +656,15 @@ async function importEditorData(file) {
 }
 
 function openEditor() {
+  if (!editorDialog) return;
   renderEditorModels();
   renderEditorGrid();
   editorDialog.showModal();
 }
 
 function closeEditor() {
+  if (!editorDialog) return;
   editorDialog.close();
-}
-
-function openCustomGuide() {
-  window.clearTimeout(customGuideCloseTimer);
-  window.clearTimeout(customGuideSettleTimer);
-  if (customGuideDialog.open) return;
-  const panel = $("#customGuidePanel");
-  panel.classList.remove("is-visible", "is-settled");
-  customGuideDialog.showModal();
-  panel.scrollTop = 0;
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    panel.classList.add("is-visible");
-    customGuideSettleTimer = window.setTimeout(() => panel.classList.add("is-settled"), 620);
-  }));
-}
-
-function closeCustomGuide() {
-  if (!customGuideDialog.open) return;
-  window.clearTimeout(customGuideCloseTimer);
-  window.clearTimeout(customGuideSettleTimer);
-  $("#customGuidePanel").classList.remove("is-visible", "is-settled");
-  customGuideCloseTimer = window.setTimeout(() => {
-    if (customGuideDialog.open) customGuideDialog.close();
-  }, 220);
 }
 
 $("#categoryFilters").addEventListener("click", (event) => {
@@ -564,14 +684,20 @@ cardGrid.addEventListener("keydown", (event) => {
 
 searchInput.addEventListener("input", () => {
   window.clearTimeout(searchTimer);
-  searchTimer = window.setTimeout(() => presentResults({ scroll: false }), 120);
+  searchTimer = window.setTimeout(() => presentResults({ scroll: false }), 80);
+});
+
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !searchInput.value) return;
+  searchInput.value = "";
+  presentResults({ scroll: false });
 });
 
 sortSelect.addEventListener("change", () => {
   const sortBox = sortSelect.closest(".sort-box");
   sortBox.classList.add("sort-changed");
   window.setTimeout(() => sortBox.classList.remove("sort-changed"), 350);
-  presentResults();
+  presentResults({ scroll: false });
 });
 
 function updateBackToTop() {
@@ -586,16 +712,6 @@ backToTop.addEventListener("click", () => {
 });
 window.addEventListener("scroll", updateBackToTop, { passive: true });
 
-$("#openCustomGuide").addEventListener("click", openCustomGuide);
-$("#closeCustomGuide").addEventListener("click", closeCustomGuide);
-customGuideDialog.addEventListener("click", (event) => {
-  if (event.target === customGuideDialog) closeCustomGuide();
-});
-customGuideDialog.addEventListener("cancel", (event) => {
-  event.preventDefault();
-  closeCustomGuide();
-});
-
 $("#closeDetail").addEventListener("click", closeDetails);
 $("#detailBack").addEventListener("click", closeDetails);
 detailDialog.addEventListener("click", (event) => {
@@ -606,110 +722,114 @@ detailDialog.addEventListener("cancel", (event) => {
   closeDetails();
 });
 
-$("#openEditor").addEventListener("click", openEditor);
-$("#closeEditor").addEventListener("click", closeEditor);
-$("#doneEditing").addEventListener("click", closeEditor);
-editorDialog.addEventListener("cancel", (event) => {
-  event.preventDefault();
-  closeEditor();
-});
-
-$("#editorModels").addEventListener("click", (event) => {
-  if (event.target.closest(".new-custom-button")) {
-    createCustom();
-    return;
-  }
-  const button = event.target.closest(".editor-model-button");
-  if (!button) return;
-  editorCategory = button.dataset.category;
-  renderEditorModels();
-  renderEditorGrid();
-});
-
-$("#editorCustomGrid").addEventListener("click", (event) => {
-  if (event.target.closest(".editor-add-card")) {
-    createCustom();
-    return;
-  }
-  const card = event.target.closest(".editor-custom-card");
-  if (!card) return;
-  const item = listings.find((listing) => listing.id === card.dataset.id);
-  if (item) showEditorForm(item);
-});
-
-$("#editorSearch").addEventListener("input", renderEditorGrid);
-$("#customForm").addEventListener("submit", (event) => event.preventDefault());
-$("#customCategory").addEventListener("change", (event) => {
-  updateSelectedListing("category", event.target.value);
-  editorCategory = event.target.value;
-  renderEditorModels();
-});
-$("#customModel").addEventListener("input", (event) => updateSelectedListing("model", event.target.value));
-$("#customName").addEventListener("input", (event) => updateSelectedListing("name", event.target.value));
-$("#customValue").addEventListener("input", (event) => updateSelectedListing("value", event.target.value || PLACEHOLDER_VALUE));
-$("#customDemand").addEventListener("change", (event) => updateSelectedListing("demand", event.target.value));
-$("#customQuantity").addEventListener("input", (event) => updateSelectedListing("quantity", event.target.value || DEFAULT_QUANTITY));
-$("#customImage").addEventListener("change", (event) => applyImageFile(event.target.files[0]));
-
-["dragenter", "dragover"].forEach((type) => {
-  $("#imageDrop").addEventListener(type, (event) => {
+if (editorDialog) {
+  $("#openEditor").addEventListener("click", openEditor);
+  $("#closeEditor").addEventListener("click", closeEditor);
+  $("#doneEditing").addEventListener("click", closeEditor);
+  editorDialog.addEventListener("cancel", (event) => {
     event.preventDefault();
-    $("#imageDrop").classList.add("dragging");
+    closeEditor();
   });
-});
-["dragleave", "drop"].forEach((type) => {
-  $("#imageDrop").addEventListener(type, (event) => {
-    event.preventDefault();
-    $("#imageDrop").classList.remove("dragging");
+
+  $("#editorModels").addEventListener("click", (event) => {
+    if (event.target.closest(".new-custom-button")) {
+      createCustom();
+      return;
+    }
+    const button = event.target.closest(".editor-model-button");
+    if (!button) return;
+    editorCategory = button.dataset.category;
+    renderEditorModels();
+    renderEditorGrid();
   });
-});
-$("#imageDrop").addEventListener("drop", (event) => applyImageFile(event.dataTransfer.files[0]));
 
-$("#deleteCustom").addEventListener("click", () => {
-  const item = selectedListing();
-  if (!item || !window.confirm(`Delete "${item.name}"?`)) return;
-  listings = listings.filter((listing) => listing.id !== item.id);
-  selectedListingId = null;
-  $("#formContent").hidden = true;
-  $("#formEmpty").hidden = false;
-  renderEditorGrid();
-  scheduleSave();
-  renderFilters();
-  renderCards();
-});
+  $("#editorCustomGrid").addEventListener("click", (event) => {
+    if (event.target.closest(".editor-add-card")) {
+      createCustom();
+      return;
+    }
+    const card = event.target.closest(".editor-custom-card");
+    if (!card) return;
+    const item = listings.find((listing) => listing.id === card.dataset.id);
+    if (item) showEditorForm(item);
+  });
 
-$("#exportData").addEventListener("click", exportEditorData);
-$("#importData").addEventListener("click", () => $("#importFile").click());
-$("#importFile").addEventListener("change", async (event) => {
-  try {
-    await importEditorData(event.target.files[0]);
-  } catch (error) {
-    window.alert(error.message);
-  } finally {
-    event.target.value = "";
-  }
-});
+  $("#editorSearch").addEventListener("input", renderEditorGrid);
+  $("#customForm").addEventListener("submit", (event) => event.preventDefault());
+  $("#customCategory").addEventListener("change", (event) => {
+    updateSelectedListing("category", event.target.value);
+    editorCategory = event.target.value;
+    renderEditorModels();
+  });
+  $("#customModel").addEventListener("input", (event) => updateSelectedListing("model", event.target.value));
+  $("#customName").addEventListener("input", (event) => updateSelectedListing("name", event.target.value));
+  $("#customValue").addEventListener("input", (event) => updateSelectedListing("value", event.target.value || PLACEHOLDER_VALUE));
+  $("#customDemand").addEventListener("change", (event) => updateSelectedListing("demand", event.target.value));
+  $("#customImage").addEventListener("change", (event) => applyImageFile(event.target.files[0]));
 
-$("#resetData").addEventListener("click", async () => {
-  if (!window.confirm("Reset every local edit and restore the original customs?")) return;
-  await clearSavedListings();
-  listings = sourceListings.map((item, index) => normalizeListing(item, index));
-  selectedListingId = null;
-  editorCategory = "All";
-  renderEditorModels();
-  renderEditorGrid();
-  $("#formContent").hidden = true;
-  $("#formEmpty").hidden = false;
-  renderFilters();
-  renderCards();
-});
+  ["dragenter", "dragover"].forEach((type) => {
+    $("#imageDrop").addEventListener(type, (event) => {
+      event.preventDefault();
+      $("#imageDrop").classList.add("dragging");
+    });
+  });
+  ["dragleave", "drop"].forEach((type) => {
+    $("#imageDrop").addEventListener(type, (event) => {
+      event.preventDefault();
+      $("#imageDrop").classList.remove("dragging");
+    });
+  });
+  $("#imageDrop").addEventListener("drop", (event) => applyImageFile(event.dataTransfer.files[0]));
+
+  $("#deleteCustom").addEventListener("click", () => {
+    const item = selectedListing();
+    if (!item || !window.confirm(`Delete "${item.name}"?`)) return;
+    listings = listings.filter((listing) => listing.id !== item.id);
+    selectedListingId = null;
+    $("#formContent").hidden = true;
+    $("#formEmpty").hidden = false;
+    renderEditorGrid();
+    scheduleSave();
+    renderFilters();
+    renderCards();
+  });
+
+  $("#exportData").addEventListener("click", exportEditorData);
+  $("#importData").addEventListener("click", () => $("#importFile").click());
+  $("#importFile").addEventListener("change", async (event) => {
+    try {
+      await importEditorData(event.target.files[0]);
+    } catch (error) {
+      window.alert(error.message);
+    } finally {
+      event.target.value = "";
+    }
+  });
+
+  $("#resetData").addEventListener("click", async () => {
+    if (!window.confirm("Reset every local edit and restore the original customs?")) return;
+    await clearSavedListings();
+    listings = sourceListings.map((item, index) => normalizeListing(item, index));
+    selectedListingId = null;
+    editorCategory = "All";
+    renderEditorModels();
+    renderEditorGrid();
+    $("#formContent").hidden = true;
+    $("#formEmpty").hidden = false;
+    renderFilters();
+    renderCards();
+  });
+}
 
 async function initialize() {
   populateCategorySelect();
-  const saved = await readSavedListings();
-  listings = Array.isArray(saved) && saved.length
-    ? saved.map(normalizeListing)
-    : sourceListings.map((item, index) => normalizeListing(item, index));
+  if (editorDialog) {
+    const saved = await readSavedListings();
+    const cleanedSaved = await cleanRemovedSavedListings(saved);
+    listings = mergeSavedListings(cleanedSaved);
+  } else {
+    listings = sourceListings.map((item, index) => normalizeListing(item, index));
+  }
 
   const updatedDate = new Date(`${INDEX_UPDATED}T12:00:00`);
   const updatedLabel = updatedDate.toLocaleDateString(undefined, { month: "short", day: "numeric" }).toUpperCase();

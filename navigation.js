@@ -1,9 +1,4 @@
 (() => {
-  if (window.location.protocol !== "file:" && window.location.pathname.endsWith("/index.html")) {
-    const cleanPath = window.location.pathname.slice(0, -"index.html".length);
-    window.history.replaceState(null, "", `${cleanPath}${window.location.search}${window.location.hash}`);
-  }
-
   const nav = document.querySelector(".site-header > nav");
   if (!nav) return;
 

@@ -16,12 +16,21 @@
   const patrolClose = document.getElementById("closePatrolDialog");
   if (!card || !dialog || !closeButton) return;
   let returnDialog = null;
+  const safeImagePattern = /^(assets\/(?:guns|team)\/[-a-z0-9_/.]+|assets\/chicblocko-logo\.webp)$/i;
 
   const normalizeName = (value) => String(value || "")
     .toLowerCase()
     .replace(/\([^)]*\)/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
+
+  const sanitizeImageSource = (value) => {
+    const image = String(value || "").trim();
+    if (!image) return "";
+    if (/^data:image\/(?:png|jpe?g|webp);base64,[a-z0-9+/=]+$/i.test(image)) return image;
+    if (image.includes("..")) return "";
+    return safeImagePattern.test(image) ? image : "";
+  };
 
   const aliases = {
     "og xmas custom": ["og xmas custom", "xmas 22 custom"],
@@ -58,8 +67,9 @@
       const category = gunCard.querySelector(":scope > span:not(.owned-rank)");
       const title = gunCard.querySelector("h3");
       const model = gunCard.querySelector("p");
-      if (image && listing.image && gunCard.dataset.fixedImage !== "true") {
-        image.src = listing.image;
+      const safeImage = sanitizeImageSource(listing.image);
+      if (image && safeImage && gunCard.dataset.fixedImage !== "true") {
+        image.src = safeImage;
         image.alt = listing.name || gunCard.dataset.customName;
         image.style.objectFit = "contain";
         image.style.objectPosition = "center";

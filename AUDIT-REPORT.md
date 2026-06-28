@@ -1,55 +1,47 @@
 # Production Audit Report
 
-Audit date: June 10, 2026
+Audit date: June 18, 2026
 
-Target: `outputs/chicblocko-gun-values-public`
+Target: `outputs/chicblocko-gun-values-with-nav-restored-zip`
 
 ## Fixed Issues
 
-| Severity | Issue found | File affected | Fix applied | Why necessary |
+| Severity | Issue found | File affected | Fix applied | Why the fix was necessary |
 |---|---|---|---|---|
-| High | Public content could be silently overridden by stale admin-era `localStorage` data | `app.js` | Removed browser storage and made the deployed dataset the only source of truth | Prevents inconsistent or user-modified content from replacing production data |
-| High | 220 unused PNG originals added 40.47 MB to the deployment | `assets/` | Removed all unreferenced PNG files after validating every live image reference | Reduced transfer/storage cost and deployment failures |
-| High | Hidden synthetic numeric values still controlled value sorting even though cards showed creator credit | `assets-data.js`, `index.html`, `app.js` | Removed fake numeric fields and misleading high/low sort options | Prevents users from receiving an inaccurate ordering presented as real value data |
-| Medium | Generated CSS contained duplicated themes and a complete dead admin interface | `styles.css` | Replaced the layered 38 KB stylesheet with one production stylesheet containing only live selectors | Removed conflicts, reduced maintenance risk, and fixed hover ownership bugs |
-| Medium | Card reveal animation could retain control of `transform` and block hover | `styles.css`, `app.js` | Scoped hover animation correctly and automatically clears reveal state | Restores reliable card pop animation after search/filter/sort |
-| Medium | Public page loaded stale cached CSS and JavaScript | `index.html` | Bumped versioned asset URLs | Ensures updated deployments replace old browser-cached files |
-| Medium | Every card installed separate click and keyboard listeners and appended directly to the live DOM | `app.js` | Added event delegation and batched rendering with `DocumentFragment` | Reduces listener count and render work across 208 cards |
-| Medium | External links lacked explicit opener protection | `index.html` | Added `target="_blank"` with `rel="noopener noreferrer"` | Prevents opened pages from controlling the source tab |
-| Medium | No content security policy or referrer policy | `index.html` | Added a restrictive CSP and `no-referrer` policy | Limits script/resource injection and unnecessary referrer disclosure |
-| Medium | Search, filters, results, and dialog semantics were incomplete | `index.html`, `app.js`, `styles.css` | Added a skip link, explicit labels, `aria-pressed`, live results, dialog labeling, focus styles, and descriptive card labels | Improves screen-reader and keyboard usability |
-| Medium | Images lacked intrinsic dimensions and useful generated alt text | `index.html`, `app.js` | Added width/height attributes and item-specific alt text | Reduces layout shift and improves accessibility |
-| Medium | Missing data or a failed image had no usable fallback | `app.js`, `styles.css` | Added empty-dataset and image-failure states | Avoids blank or broken interfaces when assets fail |
-| Low | “Updated today” became false after the deployment date | `index.html`, `app.js` | Replaced it with a real machine-readable update date formatted by JavaScript | Avoids permanently misleading freshness claims |
-| Low | Unused Google Fonts added external requests while the final theme used system fonts | `index.html` | Removed font preconnects and stylesheet request | Improves privacy, speed, and offline reliability |
-| Low | Missing search metadata and crawler instructions | `index.html`, `robots.txt` | Added description, robots metadata, color scheme, and `robots.txt` | Improves search presentation and crawler behavior |
-| Low | Generic `#` home links created unnecessary history entries | `index.html` | Pointed home links to `#values` | Provides predictable navigation |
-| Low | Runtime repaired inconsistent raw categories on every page load | `assets-data.js`, `work/prepare-public-data.mjs` | Wrote final EXT, Drum, ARP Drum, and AK47 categories into production data | Simplifies runtime logic and prevents category drift |
+| High | Recovered customs were stored as large base64 strings in JavaScript | `assets-data.js`, `assets/guns/recovered/` | Exported all recovered images to real WebP files and updated the data file | Reduces JavaScript parse cost, improves caching, and prevents huge inline data from slowing the first render |
+| High | Imported/saved data could inject unsafe image sources into rendered cards | `app.js`, `historic-records.js` | Added image source sanitization and safe merge logic for saved editor data | Prevents unsafe paths or unsupported data URLs from being used in the DOM |
+| High | Drag-and-drop image upload accepted any `image/*` type | `app.js`, `index.html` | Restricted uploads to PNG, JPG, and WebP with an 8 MB limit and 1200px optimization cap | Blocks SVG/unsupported image uploads and prevents huge local editor images from slowing the page |
+| Medium | Backup import accepted oversized or non-JSON files | `app.js` | Added JSON type checks, 2 MB limit, and max custom count validation | Prevents accidental browser lockups and malformed imports |
+| Medium | Header loaded external Play/Discord actions on every page | `index.html`, `contributors.html`, `milestones.html`, `styles.css`, `navigation.css` | Removed the top-right external buttons and dead CSS tied to them | Reduces clutter, avoids extra outbound links, and keeps navigation consistent |
+| Medium | Contributors and Historic Records were marked `noindex` | `contributors.html`, `milestones.html` | Changed to `index, follow` and added canonical URLs | Allows production pages to be indexed correctly |
+| Medium | Missing Open Graph and Twitter metadata | `index.html`, `contributors.html`, `milestones.html` | Added OG title, description, URL, image, and Twitter card metadata | Improves link previews and SEO presentation |
+| Medium | No legal pages existed | `privacy.html`, `terms.html`, `styles.css` | Added Privacy Policy and Terms templates with matching site styling | Gives the deployment required legal placeholders that can be replaced with formal text later |
+| Medium | No sitemap and minimal crawler instructions | `sitemap.xml`, `robots.txt` | Added a sitemap and linked it from robots.txt | Helps crawlers discover the production pages cleanly |
+| Medium | Duplicate Historic Records copy existed under `/historic-records/` | `historic-records/index.html` | Replaced the duplicate full page with a canonical redirect | Avoids duplicate SEO content and reduces maintenance drift |
+| Medium | Large animated logo and special PNG assets were heavy | `assets/chicblocko-logo.webp`, `assets/team/*.webp`, HTML/data references | Optimized the animated logo into a small static WebP and converted large special PNGs to WebP | Cuts page weight while keeping the same visible artwork |
+| Medium | Static avatar/custom images lacked lazy loading | `contributors.html`, `milestones.html` | Added `loading="lazy"` and `decoding="async"` where appropriate | Improves mobile performance and reduces main-thread image pressure |
+| Medium | Long card grid rendered all offscreen card layout immediately | `styles.css` | Added `content-visibility: auto` and `contain-intrinsic-size` to cards | Helps browser skip offscreen card work while scrolling large catalogs |
+| Low | Old mobile rule could fight the shared navigation stylesheet | `styles.css` | Removed the stale `nav { display: none; }` mobile rule | Keeps Values, Contributors, and Historic Records navigation visible on all device sizes |
+| Low | Root scroll calculations could create tiny horizontal scroll readings | `styles.css` | Added root/body horizontal clipping | Prevents tiny sideways scroll caused by border/shadow math |
+| Low | CSS was not minified for production loading | `*.min.css`, HTML pages | Generated minified CSS files and pointed pages to them | Reduces CSS transfer and parse size while preserving source CSS for editing |
+| Low | Non-production backup/debug files were in the publish root | `outputs/_site-backups/` | Moved recovered backup files outside the deploy folder | Prevents old local state from being published accidentally |
+| Low | Two custom names had broken encoded characters | `assets-data.js` | Restored the HOMIXIDE custom names with the correct peso symbol | Fixes visible text corruption in the catalog |
+| Low | Security headers were not documented for static hosts | `_headers` | Added a static-host header template | Gives Netlify/Cloudflare-style hosts production security headers when supported |
 
 ## Validation Results
 
-- JavaScript syntax checks passed for `app.js` and `assets-data.js`.
-- CSS structure passed with balanced braces and no admin selectors.
-- All 208 records have unique IDs and valid required fields.
-- All 208 referenced gun images exist.
-- All 209 WebP assets decoded successfully; no corrupt images found.
-- No duplicate HTML IDs, unnamed controls, or images missing `alt`.
-- Exactly one page-level `h1` and a valid meta description.
-- Desktop browser QA passed at 1440 x 1000.
-- Tablet browser QA passed at 768 x 1024.
-- Mobile browser QA passed at 390 x 844.
-- Search, category filters, sorting, hover, keyboard activation, detail dialog, and close actions passed.
-- No console errors, page errors, failed local requests, or horizontal overflow.
-- Roblox link resolves to the ChicBlocko game page.
-- Discord button uses the requested `https://discord.gg/chicblocko` invite URL.
+- Catalog integrity passed: 221 customs, no duplicate IDs, no missing images, no base64 images.
+- JavaScript syntax checks passed for `app.js`, `historic-records.js`, `navigation.js`, and `page-transition.js`.
+- Security scan found no live `innerHTML`, `insertAdjacentHTML`, `eval`, `new Function`, inline event handlers, API keys, tokens, or passwords in runtime code.
+- Local reference validation passed: no missing local CSS, JS, image, or page references.
+- Headless Edge QA passed for desktop `1366x768`, tablet `768x1024`, and mobile `390x844`.
+- Values page passed: 221 cards rendered, search for `cole` worked, detail dialog opened/closed, custom guide opened/closed, editor opened/closed.
+- Historic Records passed: Vell owned custom dialog, Vell detail owner text, return-to-list behavior, Cole owned custom flow, and Scuba patrol dialog.
+- No browser console errors or page errors were detected during the QA run.
+- Navigation stayed visible on all tested page sizes.
 
-## Performance Result
+## Remaining Notes
 
-- Production folder reduced from roughly 44 MB to 3.49 MB.
-- CSS reduced from 38,235 bytes to about 20.6 KB.
-- Dataset reduced from 56,498 bytes to about 27.4 KB.
-- Removed external font requests and 220 unused images.
-
-## Remaining Deployment Note
-
-The site is static and has no API, authentication, payment flow, or server-side state to audit. A production host should also set HTTP security headers where supported; the included meta CSP provides a static-host fallback.
+- This is a static site, so server-only protections such as real HTTP headers depend on the host. `_headers` is included for hosts that support it; GitHub Pages may ignore that file.
+- Community images, Discord avatars, Roblox-related screenshots, and badges should be used only with proper permission from their owners. I did not replace requested community assets because they are part of the site content, but licensing should be confirmed before a formal public launch.
+- JavaScript files were left readable because no trusted JS minifier is bundled in this environment. CSS is minified and linked for production; JS was syntax-tested and flow-tested instead of being run through a risky homemade minifier.

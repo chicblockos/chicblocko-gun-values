@@ -650,7 +650,8 @@ nav a.active::after {
   backface-visibility: hidden;
 }
 
-.image-error .card-image::after {
+.image-error .card-image::after,
+.detail-image.image-error::after {
   content: "IMAGE UNAVAILABLE";
   position: absolute;
   inset: 0;
@@ -660,6 +661,10 @@ nav a.active::after {
   background: #171717;
   font: 900 11px var(--display);
   letter-spacing: .08em;
+}
+
+.detail-image.image-error img {
+  opacity: 0;
 }
 
 .card-body {
@@ -1893,6 +1898,7 @@ footer.custom-guide-footer {
 }
 
 .detail-image {
+  position: relative;
   min-height: 510px;
   display: grid;
   place-items: center;

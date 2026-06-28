@@ -684,20 +684,20 @@ cardGrid.addEventListener("keydown", (event) => {
 
 searchInput.addEventListener("input", () => {
   window.clearTimeout(searchTimer);
-  searchTimer = window.setTimeout(() => presentResults({ scroll: false }), 80);
+  searchTimer = window.setTimeout(() => presentResults({ scroll: false, animate: false }), 60);
 });
 
 searchInput.addEventListener("keydown", (event) => {
   if (event.key !== "Escape" || !searchInput.value) return;
   searchInput.value = "";
-  presentResults({ scroll: false });
+  presentResults({ scroll: false, animate: false });
 });
 
 sortSelect.addEventListener("change", () => {
   const sortBox = sortSelect.closest(".sort-box");
   sortBox.classList.add("sort-changed");
   window.setTimeout(() => sortBox.classList.remove("sort-changed"), 350);
-  presentResults({ scroll: false });
+  presentResults({ scroll: false, animate: false });
 });
 
 function updateBackToTop() {

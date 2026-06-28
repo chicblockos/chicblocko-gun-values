@@ -12,7 +12,7 @@ const MODEL_DEFAULTS = {
 };
 const PLACEHOLDER_VALUE = "N/A";
 const DEFAULT_DEMAND = "TBD";
-const INDEX_UPDATED = "2026-06-27";
+const INDEX_UPDATED = "2026-06-28";
 const DATABASE_NAME = "chicblocko-custom-editor";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "site-data";
@@ -220,12 +220,12 @@ async function cleanRemovedSavedListings(saved) {
 }
 
 function availableCategories() {
-  const available = new Set(listings.filter((item) => item.image).map((item) => item.category));
+  const available = new Set(listings.map((item) => item.category));
   return CATEGORY_ORDER.filter((category) => available.has(category));
 }
 
 function publicListings() {
-  return listings.filter((item) => item.image);
+  return listings;
 }
 
 function renderFilters() {
@@ -296,6 +296,31 @@ function compareByValue(direction) {
   };
 }
 
+const DEMAND_ORDER = new Map([
+  ["LOW", 1],
+  ["MEDIUM", 2],
+  ["MID", 2],
+  ["HIGH", 3]
+]);
+
+function demandRank(item) {
+  const demand = String(item.demand || "").trim().toUpperCase();
+  return DEMAND_ORDER.get(demand) ?? null;
+}
+
+function compareByDemand(direction) {
+  return (a, b) => {
+    const aDemand = demandRank(a);
+    const bDemand = demandRank(b);
+    const fallback = a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+
+    if (aDemand === null && bDemand === null) return fallback;
+    if (aDemand === null) return 1;
+    if (bDemand === null) return -1;
+    return direction * (aDemand - bDemand) || fallback;
+  };
+}
+
 function filteredListings() {
   const query = normalizeSearchText(searchInput.value);
   const compactQuery = query.replace(/\s+/g, "");
@@ -313,6 +338,10 @@ function filteredListings() {
     result.sort(compareByValue(1));
   } else if (sortSelect.value === "value-high") {
     result.sort(compareByValue(-1));
+  } else if (sortSelect.value === "demand-low") {
+    result.sort(compareByDemand(1));
+  } else if (sortSelect.value === "demand-high") {
+    result.sort(compareByDemand(-1));
   } else {
     result.sort((a, b) => {
       const categoryDifference = CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
@@ -344,8 +373,14 @@ function renderCards() {
     card.dataset.id = item.id;
     card.setAttribute("aria-label", `View ${item.name}, ${item.model}`);
 
-    image.src = item.image;
-    image.alt = `${item.name} for ${item.model}`;
+    if (item.image) {
+      image.src = item.image;
+      image.alt = `${item.name} for ${item.model}`;
+    } else {
+      image.removeAttribute("src");
+      image.alt = "";
+      card.classList.add("image-error");
+    }
     image.decoding = "async";
     image.loading = index < 8 ? "eager" : "lazy";
     image.fetchPriority = index < 4 ? "high" : "auto";
@@ -398,8 +433,15 @@ function showDetails(item) {
   window.clearTimeout(detailCloseTimer);
   if (detailDialog.open) return;
   const detailImage = $("#detailImage");
-  detailImage.src = item.image;
-  detailImage.alt = `${item.name} for ${item.model}`;
+  const detailImageFrame = detailImage.closest(".detail-image");
+  detailImageFrame.classList.toggle("image-error", !item.image);
+  if (item.image) {
+    detailImage.src = item.image;
+    detailImage.alt = `${item.name} for ${item.model}`;
+  } else {
+    detailImage.removeAttribute("src");
+    detailImage.alt = "";
+  }
   updateImageStyles(detailImage, item);
 
   $("#detailCategory").textContent = item.category;

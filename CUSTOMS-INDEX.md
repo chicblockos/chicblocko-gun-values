@@ -163,6 +163,7 @@ Total customs: 218
 - LLJW X TY999 Custom - Glock 18 Drum - assets/guns/recovered/lljw-x-ty999-custom.webp
 - Shiesty Custom - Glock 18 Drum - assets/guns/recovered/shiesty-custom.webp
 - REALBLEEDA Custom - Glock 18 Drum - assets/guns/recovered/realbleeda-custom.webp
+- SleezyWrld Custom - Glock 18 Drum - N/A
 
 ### AR-15
 
@@ -174,7 +175,6 @@ Total customs: 218
 - Summer 25 Custom - AR-15 Custom - assets/guns/ar-15-006.webp
 - July 25 Custom - AR-15 Custom - assets/guns/ar-15-007.webp
 - Blue Beam Custom - AR-15 Custom - assets/guns/ar-15-008.webp
-- Purple Camo/MarbledAmethyst Custom - AR-15 Custom - assets/guns/ar-15-009.webp
 - XMAS 23 Custom - AR-15 Custom - assets/guns/ar-15-010.webp
 - Halloween 22 Custom - AR-15 Custom - assets/guns/ar-15-011.webp
 - Spring 25 Custom - AR-15 Custom - assets/guns/ar-15-012.webp
@@ -233,7 +233,6 @@ Total customs: 218
 - XMAS 22 Custom - AK-47 Custom - assets/guns/ak-47-002.webp
 - New Year 23-24 Custom - AK-47 Custom - assets/guns/ak-47-003.webp
 - July 4 2024 Custom - AK-47 Custom - assets/guns/ak-47-004.webp
-- JustKill Custom - AK-47 Custom - assets/guns/ak-47-005.webp
 - Pressure|CHOPPA Custom - AK-47 Custom - assets/guns/ak-47-006.webp
 - Summer 24 Custom - AK-47 Custom - assets/guns/ak-47-007.webp
 - July 4 2025 Custom - AK-47 Custom - assets/guns/ak-47-008.webp
@@ -242,4 +241,3 @@ Total customs: 218
 - XMAS 25 Custom - AK-47 Custom - assets/guns/ak-47-011.webp
 - New Year 2026 Custom - AK-47 Custom - assets/guns/ak-47-012.webp
 - Killuminati Custom - AK-47 Custom - assets/guns/recovered/killuminati-custom.webp
-

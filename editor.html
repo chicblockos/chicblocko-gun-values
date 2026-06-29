@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Custom Value Editor | Chicblocko Gun Values</title>
+  <link rel="icon" type="image/webp" href="assets/chicblocko-logo.webp">
+  <script src="assets-data.js?v=20260629-2"></script>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #101010;
+      --panel-2: #171717;
+      --line: #343434;
+      --text: #f7f7f7;
+      --muted: #a8a8a8;
+      --soft: #737373;
+      --white: #fff;
+      --blue: #5d6dff;
+      --green: #74ff8b;
+      --red: #ff4b5f;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .58);
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --display: Impact, Haettenschweiler, "Arial Black", var(--font);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(93, 109, 255, .18), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, .08), transparent 28rem),
+        linear-gradient(180deg, #080808, var(--bg));
+      font-family: var(--font);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 86%);
+      pointer-events: none;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    button {
+      cursor: pointer;
+      border: 0;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 46px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border: 2px solid #fff;
+      border-radius: 14px;
+      box-shadow: 5px 5px 0 rgba(255, 255, 255, .18);
+    }
+
+    .brand b {
+      display: block;
+      font: 900 18px/1 var(--display);
+      letter-spacing: .05em;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 15px;
+      color: #000;
+      background: #fff;
+      border: 1px solid #fff;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 rgba(255, 255, 255, .18);
+    }
+
+    .button.secondary {
+      color: #fff;
+      background: #111;
+      border-color: #444;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+      padding: clamp(24px, 4vw, 42px);
+      background: rgba(13, 13, 13, .78);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .kicker {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font: 950 clamp(38px, 7vw, 82px)/.86 var(--display);
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+      text-shadow: 0 5px 0 rgba(255, 255, 255, .14);
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 17px 0 0;
+      color: #c8c8c8;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      gap: 10px;
+      min-width: 290px;
+    }
+
+    .stat {
+      padding: 18px;
+      background: #111;
+      border: 1px solid #353535;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .stat b {
+      display: block;
+      font: 950 28px/1 var(--display);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .notice {
+      margin: 0 0 22px;
+      padding: 16px 18px;
+      color: #d6d6d6;
+      background: rgba(255,255,255,.06);
+      border: 1px solid #333;
+      border-left: 4px solid #fff;
+      border-radius: 14px;
+      line-height: 1.55;
+    }
+
+    .notice strong { color: #fff; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 390px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: rgba(14,14,14,.92);
+      border: 1px solid #343434;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 18px;
+      border-bottom: 1px solid #2e2e2e;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font: 950 22px/1 var(--display);
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+    }
+
+    .panel-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .tools {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      background: #0c0c0c;
+      border-bottom: 1px solid #2e2e2e;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      color: #fff;
+      background: #161616;
+      border: 1px solid #3c3c3c;
+      border-radius: 12px;
+      outline: 0;
+    }
+
+    input, select { padding: 0 12px; }
+
+    textarea {
+      min-height: 140px;
+      padding: 13px;
+      resize: vertical;
+      line-height: 1.4;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,.1);
+    }
+
+    .list {
+      max-height: 690px;
+      overflow: auto;
+      padding: 10px;
+    }
+
+    .custom-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 10px;
+      color: inherit;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      text-align: left;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+    }
+
+    .custom-row:hover, .custom-row.active {
+      background: #181818;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .thumb {
+      width: 64px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #202020;
+      border: 1px solid #3a3a3a;
+      border-radius: 10px;
+      color: #777;
+      font-size: 8px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .row-title {
+      min-width: 0;
+    }
+
+    .row-title b {
+      display: block;
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 950;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .row-title span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .editor {
+      min-height: 620px;
+    }
+
+    .empty {
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      padding: 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty b {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+      font: 950 28px/1 var(--display);
+      text-transform: uppercase;
+    }
+
+    .edit-body {
+      display: none;
+      padding: 18px;
+    }
+
+    .editor.has-selection .empty { display: none; }
+    .editor.has-selection .edit-body { display: block; }
+
+    .preview {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border: 1px solid #383838;
+      border-radius: 18px;
+    }
+
+    .preview img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+    }
+
+    .preview span {
+      color: #777;
+      font: 950 14px var(--display);
+      letter-spacing: .08em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    .readonly {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: #d5d5d5;
+      background: #111;
+      border: 1px solid #2b2b2b;
+      border-radius: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .changed-pill {
+      display: none;
+      width: max-content;
+      margin-top: 14px;
+      padding: 9px 12px;
+      color: #000;
+      background: var(--green);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .editor.dirty .changed-pill { display: inline-flex; }
+
+    .export-box {
+      margin-top: 18px;
+      padding: 18px;
+      background: #0c0c0c;
+      border: 1px solid #303030;
+      border-radius: 18px;
+    }
+
+    .export-box h3 {
+      margin: 0 0 9px;
+      font: 950 18px/1 var(--display);
+      text-transform: uppercase;
+    }
+
+    .export-box p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      max-width: min(360px, calc(100% - 36px));
+      padding: 14px 16px;
+      color: #000;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.5);
+      font-size: 13px;
+      font-weight: 850;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero, .layout { grid-template-columns: 1fr; }
+      .stats { min-width: 0; }
+      .list { max-height: 420px; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 18px, 1180px); padding-top: 16px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .top-actions { justify-content: flex-start; }
+      .hero { padding: 22px; border-radius: 18px; }
+      .stats, .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./#values">
+        <img src="assets/chicblocko-logo.webp" width="58" height="58" alt="Chicblocko logo">
+        <span><b>CHICBLOCKO</b><span>Value editor</span></span>
+      </a>
+      <div class="top-actions">
+        <a class="button secondary" href="./#catalog">Back to values</a>
+        <button class="button" id="downloadTop" type="button">Export data</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="kicker">Local editing tool</span>
+        <h1>Custom Value Editor</h1>
+        <p>Edit values and demand without touching the big data file by hand. This page does not save to GitHub by itself. It downloads a new <strong>assets-data.js</strong> file for you to replace and push.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="totalCount">0</b><span>Customs loaded</span></div>
+        <div class="stat"><b id="changedCount">0</b><span>Unsaved edits</span></div>
+      </div>
+    </section>
+
+    <p class="notice"><strong>Safe workflow:</strong> search a custom, change value or demand, click export, then replace the old <strong>assets-data.js</strong> in your website folder. After that, commit and push through GitHub Desktop.</p>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Customs</h2>
+          <p>Search by custom name, model, category, value, or demand.</p>
+        </div>
+        <div class="tools">
+          <label class="field">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Type a custom name..." autocomplete="off">
+          </label>
+          <label class="field">
+            <span>Category</span>
+            <select id="categorySelect">
+              <option value="All">All categories</option>
+            </select>
+          </label>
+        </div>
+        <div class="list" id="customList" aria-live="polite"></div>
+      </section>
+
+      <section class="panel editor" id="editorPanel">
+        <div class="empty">
+          <div>
+            <b>Select a custom</b>
+            Pick one from the list to edit its value and demand.
+          </div>
+        </div>
+
+        <div class="edit-body">
+          <div class="panel-head">
+            <h2 id="editTitle">Custom</h2>
+            <p id="editMeta">Model and category</p>
+          </div>
+          <div class="preview" id="preview"></div>
+
+          <div class="form-grid">
+            <label class="field full">
+              <span>Custom name</span>
+              <div class="readonly" id="nameField"></div>
+            </label>
+            <label class="field">
+              <span>Gun model</span>
+              <div class="readonly" id="modelField"></div>
+            </label>
+            <label class="field">
+              <span>Category</span>
+              <div class="readonly" id="categoryField"></div>
+            </label>
+            <label class="field">
+              <span>Estimated value</span>
+              <input id="valueInput" type="text" placeholder="Example: 700K or 1.2M">
+            </label>
+            <label class="field">
+              <span>Demand</span>
+              <select id="demandInput">
+                <option value="N/A">N/A</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+              </select>
+            </label>
+          </div>
+
+          <span class="changed-pill" id="changedPill">Changed</span>
+
+          <div class="export-box">
+            <h3>Export when finished</h3>
+            <p>This creates a fresh <strong>assets-data.js</strong> file with all your edits included. Your browser may save it to Downloads.</p>
+            <div class="export-actions">
+              <button class="button" id="downloadData" type="button">Download assets-data.js</button>
+              <button class="button secondary" id="copyData" type="button">Copy file text</button>
+              <button class="button secondary" id="resetSelected" type="button">Reset selected</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const originalListings = Array.isArray(window.ALL_GUN_IMAGES)
+      ? JSON.parse(JSON.stringify(window.ALL_GUN_IMAGES))
+      : [];
+    const listings = JSON.parse(JSON.stringify(originalListings));
+    const categories = ["All", ...new Set(listings.map((item) => item.category).filter(Boolean))];
+    const changedIds = new Set();
+
+    let selectedId = listings[0]?.id || "";
+
+    const $ = (selector) => document.querySelector(selector);
+    const list = $("#customList");
+    const editor = $("#editorPanel");
+    const searchInput = $("#searchInput");
+    const categorySelect = $("#categorySelect");
+    const valueInput = $("#valueInput");
+    const demandInput = $("#demandInput");
+
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    }
+
+    function selectedItem() {
+      return listings.find((item) => item.id === selectedId) || listings[0] || null;
+    }
+
+    function originalItem(id) {
+      return originalListings.find((item) => item.id === id) || null;
+    }
+
+    function normalizeValue(value) {
+      const cleaned = String(value || "").trim();
+      if (!cleaned || /^na$/i.test(cleaned)) return "N/A";
+      return cleaned.toUpperCase();
+    }
+
+    function normalizeDemand(value) {
+      const demand = String(value || "").trim().toUpperCase();
+      if (["LOW", "MEDIUM", "HIGH"].includes(demand)) return demand;
+      return "N/A";
+    }
+
+    function hasChanged(item) {
+      const original = originalItem(item.id);
+      if (!original) return true;
+      return item.value !== original.value || item.demand !== original.demand;
+    }
+
+    function refreshChangedState(item) {
+      if (hasChanged(item)) changedIds.add(item.id);
+      else changedIds.delete(item.id);
+      $("#changedCount").textContent = changedIds.size;
+      editor.classList.toggle("dirty", selectedItem() ? changedIds.has(selectedItem().id) : false);
+    }
+
+    function filteredListings() {
+      const query = normalize(searchInput.value);
+      const category = categorySelect.value;
+      return listings.filter((item) => {
+        const text = normalize(`${item.name} ${item.model} ${item.category} ${item.value} ${item.demand}`);
+        const categoryMatch = category === "All" || item.category === category;
+        return categoryMatch && (!query || text.includes(query));
+      });
+    }
+
+    function renderCategories() {
+      categorySelect.replaceChildren();
+      for (const category of categories) {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category === "All" ? "All categories" : category;
+        categorySelect.append(option);
+      }
+    }
+
+    function makeThumb(item) {
+      const thumb = document.createElement("span");
+      thumb.className = "thumb";
+      if (item.image) {
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = "";
+        img.loading = "lazy";
+        img.decoding = "async";
+        thumb.append(img);
+      } else {
+        thumb.textContent = "NO IMAGE";
+      }
+      return thumb;
+    }
+
+    function renderList() {
+      const items = filteredListings();
+      const fragment = document.createDocumentFragment();
+
+      for (const item of items) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `custom-row${item.id === selectedId ? " active" : ""}`;
+        button.dataset.id = item.id;
+        button.append(makeThumb(item));
+
+        const title = document.createElement("span");
+        title.className = "row-title";
+        title.innerHTML = `<b></b><span></span>`;
+        title.querySelector("b").textContent = item.name;
+        title.querySelector("span").textContent = `${item.category} | ${item.value} | ${item.demand}`;
+        button.append(title);
+        fragment.append(button);
+      }
+
+      list.replaceChildren(fragment);
+      if (!items.length) {
+        const empty = document.createElement("p");
+        empty.style.color = "#aaa";
+        empty.style.padding = "18px";
+        empty.textContent = "No customs found.";
+        list.append(empty);
+      }
+    }
+
+    function renderEditor() {
+      const item = selectedItem();
+      if (!item) return;
+
+      editor.classList.add("has-selection");
+      $("#editTitle").textContent = item.name;
+      $("#editMeta").textContent = `${item.model} | ${item.category}`;
+      $("#nameField").textContent = item.name;
+      $("#modelField").textContent = item.model;
+      $("#categoryField").textContent = item.category;
+      valueInput.value = item.value || "N/A";
+      demandInput.value = normalizeDemand(item.demand);
+
+      const preview = $("#preview");
+      preview.replaceChildren();
+      if (item.image) {
+        const image = document.createElement("img");
+        image.src = item.image;
+        image.alt = item.name;
+        preview.append(image);
+      } else {
+        const empty = document.createElement("span");
+        empty.textContent = "IMAGE UNAVAILABLE";
+        preview.append(empty);
+      }
+
+      editor.classList.toggle("dirty", changedIds.has(item.id));
+    }
+
+    function updateSelectedValue() {
+      const item = selectedItem();
+      if (!item) return;
+      item.value = normalizeValue(valueInput.value);
+      item.demand = normalizeDemand(demandInput.value);
+      valueInput.value = item.value;
+      demandInput.value = item.demand;
+      refreshChangedState(item);
+      renderList();
+      renderEditor();
+    }
+
+    function resetSelected() {
+      const item = selectedItem();
+      const original = item && originalItem(item.id);
+      if (!item || !original) return;
+      item.value = original.value;
+      item.demand = original.demand;
+      changedIds.delete(item.id);
+      $("#changedCount").textContent = changedIds.size;
+      renderList();
+      renderEditor();
+      showToast("Selected custom reset.");
+    }
+
+    function buildExportText() {
+      return `window.ALL_GUN_IMAGES = ${JSON.stringify(listings)};\n`;
+    }
+
+    function downloadData() {
+      const blob = new Blob([buildExportText()], { type: "text/javascript;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "assets-data.js";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      showToast("Downloaded assets-data.js. Replace the old file with this one.");
+    }
+
+    async function copyData() {
+      const text = buildExportText();
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied the full assets-data.js text.");
+      } catch (error) {
+        showToast("Copy failed. Use Download instead.");
+      }
+    }
+
+    function init() {
+      $("#totalCount").textContent = listings.length;
+      $("#changedCount").textContent = "0";
+      renderCategories();
+      renderList();
+      renderEditor();
+
+      list.addEventListener("click", (event) => {
+        const row = event.target.closest(".custom-row");
+        if (!row) return;
+        selectedId = row.dataset.id;
+        renderList();
+        renderEditor();
+      });
+
+      searchInput.addEventListener("input", renderList);
+      categorySelect.addEventListener("change", renderList);
+      valueInput.addEventListener("change", updateSelectedValue);
+      demandInput.addEventListener("change", updateSelectedValue);
+      $("#downloadData").addEventListener("click", downloadData);
+      $("#downloadTop").addEventListener("click", downloadData);
+      $("#copyData").addEventListener("click", copyData);
+      $("#resetSelected").addEventListener("click", resetSelected);
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /editor.html
 
 Sitemap: https://chicblockos.github.io/chicblocko-gun-values/sitemap.xml

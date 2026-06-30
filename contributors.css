@@ -150,13 +150,13 @@
 }
 
 .contributor-grid {
-  max-width: 820px;
+  max-width: 920px;
   margin: 0 auto;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .contributor-grid .profile-card {
-  min-height: 245px;
+  min-height: 265px;
   justify-content: center;
   padding: 28px 30px;
 }
@@ -272,21 +272,23 @@
   color: #fff;
 }
 
-.role-badge {
-  width: 31px;
-  height: 31px;
-  object-fit: cover;
-  border-radius: 6px;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.45);
+.icon-badge {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.45));
 }
 
 .verified-badge {
   position: relative;
   width: 36px;
   height: 36px;
+  flex: 0 0 36px;
   border-radius: 3px;
   background: #0871ff;
   transform: rotate(15deg);
+  filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.45));
 }
 
 .verified-badge::after {

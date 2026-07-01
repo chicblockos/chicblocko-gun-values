@@ -142,10 +142,18 @@
       box-shadow: 0 8px 0 rgba(255, 255, 255, .18);
     }
 
+    .button.full { width: 100%; }
+
     .button.secondary {
       color: #fff;
       background: #111;
       border-color: #444;
+    }
+
+    .button.danger {
+      color: #fff;
+      background: #2a090d;
+      border-color: #ff4b5f;
     }
 
     .hero {
@@ -273,6 +281,62 @@
       border-bottom: 1px solid #2e2e2e;
     }
 
+    .tools.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .view-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .toggle-button {
+      min-height: 42px;
+      color: #aaa;
+      background: #151515;
+      border: 1px solid #3a3a3a;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .16s ease, color .16s ease, transform .16s ease;
+    }
+
+    .toggle-button.active,
+    .toggle-button:hover {
+      color: #000;
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .add-box {
+      display: grid;
+      gap: 12px;
+      margin: 14px;
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      border: 1px solid #353535;
+      border-radius: 18px;
+    }
+
+    .add-box summary {
+      cursor: pointer;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .add-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding-top: 10px;
+    }
+
     .field {
       display: grid;
       gap: 7px;
@@ -331,6 +395,18 @@
       transition: background .16s ease, border-color .16s ease, transform .16s ease;
     }
 
+    .custom-row.dragging,
+    .custom-card.dragging {
+      opacity: .45;
+      transform: scale(.985);
+    }
+
+    .custom-row.drop-target,
+    .custom-card.drop-target {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(116, 255, 139, .12);
+    }
+
     .custom-row:hover, .custom-row.active {
       background: #181818;
       border-color: #fff;
@@ -379,6 +455,115 @@
       font-size: 11px;
     }
 
+    .grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      padding: 14px;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.08), transparent 20rem),
+        #070707;
+    }
+
+    .custom-card {
+      min-height: 390px;
+      display: grid;
+      grid-template-rows: 190px auto;
+      gap: 14px;
+      padding: 16px;
+      color: inherit;
+      background: #111;
+      border: 1px solid #3a3a3a;
+      border-radius: 22px;
+      text-align: center;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .custom-card:hover,
+    .custom-card.active {
+      transform: translateY(-4px);
+      border-color: #fff;
+      box-shadow: 0 22px 52px rgba(0,0,0,.52);
+    }
+
+    .card-thumb {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #1d1d1d;
+      border: 1px solid #444;
+      border-radius: 15px;
+      color: #777;
+      font: 950 10px var(--display);
+      letter-spacing: .08em;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-copy {
+      display: grid;
+      align-content: center;
+      gap: 8px;
+    }
+
+    .card-copy small {
+      color: #aeb4c3;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .card-copy b {
+      font: 950 24px/1.05 var(--display);
+      text-transform: uppercase;
+      text-shadow: 0 2px 0 #000;
+    }
+
+    .card-copy span {
+      color: #cfcfcf;
+      font-size: 12px;
+    }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      margin-top: 10px;
+      overflow: hidden;
+      border: 1px solid #333;
+      border-radius: 14px;
+    }
+
+    .card-stats i {
+      display: grid;
+      gap: 5px;
+      padding: 12px 8px;
+      color: #fff;
+      background: #0f0f0f;
+      border-radius: 0;
+      font-size: 10px;
+      font-weight: 950;
+      font-style: normal;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .card-stats i + i { border-left: 1px solid #333; }
+
+    .card-stats i::before {
+      color: #9f9f9f;
+      font-size: 9px;
+      letter-spacing: .12em;
+    }
+
+    .card-stats i:first-child::before { content: "EST. VALUE"; }
+    .card-stats i:last-child::before { content: "DEMAND"; }
+
     .editor {
       min-height: 620px;
     }
@@ -417,6 +602,15 @@
       background: #1a1a1a;
       border: 1px solid #383838;
       border-radius: 18px;
+      cursor: pointer;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    .preview:hover,
+    .preview.drag-over {
+      border-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,.1);
+      transform: translateY(-1px);
     }
 
     .preview img {
@@ -429,6 +623,63 @@
       color: #777;
       font: 950 14px var(--display);
       letter-spacing: .08em;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .hidden-field {
+      display: none;
+    }
+
+    .image-drop {
+      min-height: 104px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      color: #e8e8e8;
+      background:
+        radial-gradient(circle at top left, rgba(93, 109, 255, .18), transparent 18rem),
+        #121212;
+      border: 1px dashed #5f5f5f;
+      border-radius: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .image-drop:hover,
+    .image-drop.drag-over {
+      transform: translateY(-2px);
+      border-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,.08);
+    }
+
+    .image-drop b {
+      display: block;
+      margin-bottom: 6px;
+      font: 950 18px/1 var(--display);
+      text-transform: uppercase;
+    }
+
+    .image-drop span {
+      color: #aaa;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .image-help {
+      margin: -6px 0 15px;
+      color: #aaa;
+      font-size: 12px;
+      text-align: center;
     }
 
     .form-grid {
@@ -529,7 +780,7 @@
       .topbar { align-items: flex-start; flex-direction: column; }
       .top-actions { justify-content: flex-start; }
       .hero { padding: 22px; border-radius: 18px; }
-      .stats, .form-grid { grid-template-columns: 1fr; }
+      .stats, .form-grid, .add-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
     }
   </style>
@@ -551,23 +802,23 @@
       <div>
         <span class="kicker">Local editing tool</span>
         <h1>Custom Value Editor</h1>
-        <p>Edit values and demand without touching the big data file by hand. This page does not save to GitHub by itself. It downloads a new <strong>assets-data.js</strong> file for you to replace and push.</p>
+        <p>Edit values and demand without touching the big data file by hand. Changes auto-save in this browser, so refreshing the page keeps your work. Export when you are ready to update the real site file.</p>
       </div>
       <div class="stats">
         <div class="stat"><b id="totalCount">0</b><span>Customs loaded</span></div>
-        <div class="stat"><b id="changedCount">0</b><span>Unsaved edits</span></div>
+        <div class="stat"><b id="changedCount">0</b><span>Local edits</span></div>
       </div>
     </section>
 
-    <p class="notice"><strong>Safe workflow:</strong> search a custom, change value or demand, click export, then replace the old <strong>assets-data.js</strong> in your website folder. After that, commit and push through GitHub Desktop.</p>
+    <p class="notice"><strong>Safe workflow:</strong> your edits auto-save locally after every change. When you are finished, click export, then replace the old <strong>assets-data.js</strong> in your website folder. After that, commit and push through GitHub Desktop.</p>
 
     <main class="layout">
       <section class="panel">
         <div class="panel-head">
           <h2>Customs</h2>
-          <p>Search by custom name, model, category, value, or demand.</p>
+          <p>Search, drag to reorder, switch views, and choose the visible index update date.</p>
         </div>
-        <div class="tools">
+        <div class="tools two">
           <label class="field">
             <span>Search</span>
             <input id="searchInput" type="search" placeholder="Type a custom name..." autocomplete="off">
@@ -578,7 +829,63 @@
               <option value="All">All categories</option>
             </select>
           </label>
+          <label class="field">
+            <span>Index updated</span>
+            <input id="updatedInput" type="date">
+          </label>
+          <label class="field">
+            <span>View</span>
+            <div class="view-toggle" role="group" aria-label="Editor view mode">
+              <button class="toggle-button active" id="listViewButton" type="button">List</button>
+              <button class="toggle-button" id="gridViewButton" type="button">Website preview</button>
+            </div>
+          </label>
         </div>
+        <details class="add-box">
+          <summary>+ Add new custom</summary>
+          <div class="add-grid">
+            <label class="field full">
+              <span>Custom name</span>
+              <input id="newNameInput" type="text" placeholder="Example: SleezyWrld Custom" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Gun model</span>
+              <input id="newModelInput" type="text" placeholder="Example: Glock 18 Drum" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Category</span>
+              <select id="newCategoryInput"></select>
+            </label>
+            <label class="field">
+              <span>Estimated value</span>
+              <input id="newValueInput" type="text" placeholder="Example: 1.2M or N/A" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Demand</span>
+              <select id="newDemandInput">
+                <option value="N/A">N/A</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+              </select>
+            </label>
+            <label class="field full hidden-field">
+              <span>Image data</span>
+              <input id="newImageInput" type="hidden" autocomplete="off">
+            </label>
+            <label class="field full">
+              <span>Custom image</span>
+              <div class="image-drop" id="newImageDrop" role="button" tabindex="0">
+                <div>
+                  <b>Drop image here</b>
+                  <span>or click to choose one from your computer</span>
+                </div>
+              </div>
+              <input class="file-input" id="newImageFileInput" type="file" accept="image/*">
+            </label>
+            <button class="button full" id="addCustomButton" type="button">Add custom</button>
+          </div>
+        </details>
         <div class="list" id="customList" aria-live="polite"></div>
       </section>
 
@@ -596,19 +903,25 @@
             <p id="editMeta">Model and category</p>
           </div>
           <div class="preview" id="preview"></div>
+          <p class="image-help">Click the image preview or drop a file on it to change this custom image.</p>
+          <input class="file-input" id="imageFileInput" type="file" accept="image/*">
 
           <div class="form-grid">
             <label class="field full">
               <span>Custom name</span>
-              <div class="readonly" id="nameField"></div>
+              <input id="nameInput" type="text" placeholder="Custom name">
             </label>
             <label class="field">
               <span>Gun model</span>
-              <div class="readonly" id="modelField"></div>
+              <input id="modelInput" type="text" placeholder="Gun model">
             </label>
             <label class="field">
               <span>Category</span>
-              <div class="readonly" id="categoryField"></div>
+              <input id="editCategoryInput" type="text" placeholder="Category">
+            </label>
+            <label class="field full hidden-field">
+              <span>Image data</span>
+              <input id="imageInput" type="hidden">
             </label>
             <label class="field">
               <span>Estimated value</span>
@@ -634,6 +947,8 @@
               <button class="button" id="downloadData" type="button">Download assets-data.js</button>
               <button class="button secondary" id="copyData" type="button">Copy file text</button>
               <button class="button secondary" id="resetSelected" type="button">Reset selected</button>
+              <button class="button danger" id="deleteSelected" type="button">Delete selected</button>
+              <button class="button secondary" id="clearBackup" type="button">Clear local save</button>
             </div>
           </div>
         </div>
@@ -648,18 +963,39 @@
       ? JSON.parse(JSON.stringify(window.ALL_GUN_IMAGES))
       : [];
     const listings = JSON.parse(JSON.stringify(originalListings));
-    const categories = ["All", ...new Set(listings.map((item) => item.category).filter(Boolean))];
+    let categories = ["All", ...new Set(listings.map((item) => item.category).filter(Boolean))];
     const changedIds = new Set();
+    const STORAGE_KEY = "chicblocko-custom-value-editor:v1";
 
     let selectedId = listings[0]?.id || "";
+    let saveTimer = 0;
+    let indexUpdated = new Date().toISOString().slice(0, 10);
+    let viewMode = "list";
+    let draggedId = "";
+    let orderChanged = false;
 
     const $ = (selector) => document.querySelector(selector);
     const list = $("#customList");
     const editor = $("#editorPanel");
     const searchInput = $("#searchInput");
     const categorySelect = $("#categorySelect");
+    const updatedInput = $("#updatedInput");
+    const listViewButton = $("#listViewButton");
+    const gridViewButton = $("#gridViewButton");
+    const nameInput = $("#nameInput");
+    const modelInput = $("#modelInput");
+    const editCategoryInput = $("#editCategoryInput");
+    const imageInput = $("#imageInput");
     const valueInput = $("#valueInput");
     const demandInput = $("#demandInput");
+    const newNameInput = $("#newNameInput");
+    const newModelInput = $("#newModelInput");
+    const newCategoryInput = $("#newCategoryInput");
+    const newValueInput = $("#newValueInput");
+    const newDemandInput = $("#newDemandInput");
+    const newImageInput = $("#newImageInput");
+    const imageFileInput = $("#imageFileInput");
+    const newImageFileInput = $("#newImageFileInput");
 
     function showToast(message) {
       const toast = $("#toast");
@@ -673,12 +1009,53 @@
       return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
     }
 
+    function todayStamp() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function touchIndexDate() {
+      indexUpdated = updatedInput?.value || todayStamp();
+      if (updatedInput && !updatedInput.value) updatedInput.value = indexUpdated;
+    }
+
+    function currentIndexDate() {
+      indexUpdated = updatedInput?.value || indexUpdated || todayStamp();
+      if (updatedInput) updatedInput.value = indexUpdated;
+      return indexUpdated;
+    }
+
     function selectedItem() {
       return listings.find((item) => item.id === selectedId) || listings[0] || null;
     }
 
     function originalItem(id) {
       return originalListings.find((item) => item.id === id) || null;
+    }
+
+    function makeSlug(value) {
+      const slug = String(value || "")
+        .toLowerCase()
+        .replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+      return slug || "custom";
+    }
+
+    function uniqueId(name, category) {
+      const base = makeSlug(`${category}-${name}`);
+      const used = new Set(listings.map((item) => item.id));
+      if (!used.has(base)) return base;
+      let count = 2;
+      while (used.has(`${base}-${count}`)) count += 1;
+      return `${base}-${count}`;
+    }
+
+    function rebuildCategories() {
+      const preferred = ["All", "EXT", "Drum", "AR-15", "Draco", "MAC", "ARP Drum", "AK47"];
+      const existing = new Set(listings.map((item) => item.category).filter(Boolean));
+      const ordered = preferred.filter((category) => category === "All" || existing.has(category));
+      const extra = [...existing].filter((category) => !preferred.includes(category)).sort();
+      categories = [...ordered, ...extra];
     }
 
     function normalizeValue(value) {
@@ -696,14 +1073,80 @@
     function hasChanged(item) {
       const original = originalItem(item.id);
       if (!original) return true;
-      return item.value !== original.value || item.demand !== original.demand;
+      return item.name !== original.name
+        || item.model !== original.model
+        || item.category !== original.category
+        || String(item.image || "") !== String(original.image || "")
+        || item.value !== original.value
+        || item.demand !== original.demand;
+    }
+
+    function recomputeChangedState() {
+      changedIds.clear();
+      for (const item of listings) {
+        if (hasChanged(item)) changedIds.add(item.id);
+      }
+      $("#totalCount").textContent = listings.length;
+      $("#changedCount").textContent = changedIds.size + (orderChanged ? 1 : 0);
+      editor.classList.toggle("dirty", selectedItem() ? changedIds.has(selectedItem().id) : false);
+    }
+
+    function saveLocalBackupSoon() {
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(saveLocalBackup, 120);
+    }
+
+    function saveLocalBackup() {
+      try {
+        const payload = {
+          savedAt: new Date().toISOString(),
+          indexUpdated,
+          viewMode,
+          orderChanged,
+          listings
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (error) {
+        showToast("Local auto-save is blocked in this browser.");
+      }
+    }
+
+    function loadLocalBackup() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const payload = JSON.parse(raw);
+        if (payload?.indexUpdated) indexUpdated = String(payload.indexUpdated);
+        if (payload?.viewMode) viewMode = payload.viewMode === "grid" ? "grid" : "list";
+        orderChanged = Boolean(payload?.orderChanged);
+        const savedListings = Array.isArray(payload?.listings) ? payload.listings : [];
+        if (!savedListings.length) return false;
+        listings.splice(0, listings.length, ...savedListings
+          .filter((item) => item?.id)
+          .map((item) => ({
+            id: String(item.id),
+            name: String(item.name || "New Custom").trim(),
+            model: String(item.model || "Unknown Model").trim(),
+            category: String(item.category || "EXT").trim(),
+            image: String(item.image || "").trim(),
+            value: normalizeValue(item.value),
+            demand: normalizeDemand(item.demand)
+          })));
+        selectedId = listings[0]?.id || "";
+        return true;
+      } catch (error) {
+        localStorage.removeItem(STORAGE_KEY);
+        return false;
+      }
     }
 
     function refreshChangedState(item) {
       if (hasChanged(item)) changedIds.add(item.id);
       else changedIds.delete(item.id);
-      $("#changedCount").textContent = changedIds.size;
+      touchIndexDate();
+      $("#changedCount").textContent = changedIds.size + (orderChanged ? 1 : 0);
       editor.classList.toggle("dirty", selectedItem() ? changedIds.has(selectedItem().id) : false);
+      saveLocalBackupSoon();
     }
 
     function filteredListings() {
@@ -717,12 +1160,20 @@
     }
 
     function renderCategories() {
+      rebuildCategories();
       categorySelect.replaceChildren();
+      newCategoryInput.replaceChildren();
       for (const category of categories) {
         const option = document.createElement("option");
         option.value = category;
         option.textContent = category === "All" ? "All categories" : category;
         categorySelect.append(option);
+        if (category !== "All") {
+          const addOption = document.createElement("option");
+          addOption.value = category;
+          addOption.textContent = category;
+          newCategoryInput.append(addOption);
+        }
       }
     }
 
@@ -742,24 +1193,109 @@
       return thumb;
     }
 
+    function makeCardThumb(item) {
+      const thumb = document.createElement("span");
+      thumb.className = "card-thumb";
+      if (item.image) {
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = "";
+        img.loading = "lazy";
+        img.decoding = "async";
+        thumb.append(img);
+      } else {
+        thumb.textContent = "NO IMAGE";
+      }
+      return thumb;
+    }
+
+    function moveListing(dragId, targetId) {
+      if (!dragId || !targetId || dragId === targetId) return false;
+      const from = listings.findIndex((item) => item.id === dragId);
+      const to = listings.findIndex((item) => item.id === targetId);
+      if (from < 0 || to < 0) return false;
+      const [moved] = listings.splice(from, 1);
+      listings.splice(to, 0, moved);
+      selectedId = moved.id;
+      orderChanged = true;
+      touchIndexDate();
+      recomputeChangedState();
+      saveLocalBackupSoon();
+      return true;
+    }
+
+    function decorateDraggable(element, item) {
+      element.draggable = true;
+      element.addEventListener("dragstart", (event) => {
+        draggedId = item.id;
+        element.classList.add("dragging");
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData("text/plain", item.id);
+      });
+      element.addEventListener("dragend", () => {
+        draggedId = "";
+        element.classList.remove("dragging");
+        for (const target of list.querySelectorAll(".drop-target")) {
+          target.classList.remove("drop-target");
+        }
+      });
+      element.addEventListener("dragover", (event) => {
+        if (!draggedId || draggedId === item.id) return;
+        event.preventDefault();
+        element.classList.add("drop-target");
+      });
+      element.addEventListener("dragleave", () => element.classList.remove("drop-target"));
+      element.addEventListener("drop", (event) => {
+        event.preventDefault();
+        element.classList.remove("drop-target");
+        const moved = moveListing(draggedId || event.dataTransfer.getData("text/plain"), item.id);
+        if (moved) {
+          renderList();
+          renderEditor();
+          showToast("Custom order updated.");
+        }
+      });
+    }
+
     function renderList() {
       const items = filteredListings();
       const fragment = document.createDocumentFragment();
+      list.classList.toggle("grid-view", viewMode === "grid");
 
       for (const item of items) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = `custom-row${item.id === selectedId ? " active" : ""}`;
-        button.dataset.id = item.id;
-        button.append(makeThumb(item));
+        if (viewMode === "grid") {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `custom-card${item.id === selectedId ? " active" : ""}`;
+          button.dataset.id = item.id;
+          button.append(makeCardThumb(item));
+          const copy = document.createElement("span");
+          copy.className = "card-copy";
+          copy.innerHTML = `<small></small><b></b><span></span><span class="card-stats"><i></i><i></i></span>`;
+          copy.querySelector("small").textContent = item.category;
+          copy.querySelector("b").textContent = item.name;
+          copy.querySelector("span").textContent = item.model;
+          copy.querySelectorAll("i")[0].textContent = item.value || "N/A";
+          copy.querySelectorAll("i")[1].textContent = item.demand || "N/A";
+          button.append(copy);
+          decorateDraggable(button, item);
+          fragment.append(button);
+        } else {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `custom-row${item.id === selectedId ? " active" : ""}`;
+          button.dataset.id = item.id;
+          button.append(makeThumb(item));
 
-        const title = document.createElement("span");
-        title.className = "row-title";
-        title.innerHTML = `<b></b><span></span>`;
-        title.querySelector("b").textContent = item.name;
-        title.querySelector("span").textContent = `${item.category} | ${item.value} | ${item.demand}`;
-        button.append(title);
-        fragment.append(button);
+          const title = document.createElement("span");
+          title.className = "row-title";
+          title.innerHTML = `<b></b><span></span>`;
+          title.querySelector("b").textContent = item.name;
+          title.querySelector("span").textContent = `${item.category} | ${item.value} | ${item.demand}`;
+          button.append(title);
+          decorateDraggable(button, item);
+          fragment.append(button);
+        }
       }
 
       list.replaceChildren(fragment);
@@ -779,9 +1315,10 @@
       editor.classList.add("has-selection");
       $("#editTitle").textContent = item.name;
       $("#editMeta").textContent = `${item.model} | ${item.category}`;
-      $("#nameField").textContent = item.name;
-      $("#modelField").textContent = item.model;
-      $("#categoryField").textContent = item.category;
+      nameInput.value = item.name || "";
+      modelInput.value = item.model || "";
+      editCategoryInput.value = item.category || "";
+      imageInput.value = item.image || "";
       valueInput.value = item.value || "N/A";
       demandInput.value = normalizeDemand(item.demand);
 
@@ -801,6 +1338,21 @@
       editor.classList.toggle("dirty", changedIds.has(item.id));
     }
 
+    function updateSelectedDetails(options = {}) {
+      const item = selectedItem();
+      if (!item) return;
+      item.name = nameInput.value.trim() || item.name;
+      item.model = modelInput.value.trim() || "Unknown Model";
+      item.category = editCategoryInput.value.trim() || "EXT";
+      item.image = imageInput.value.trim();
+      refreshChangedState(item);
+      if (options.render) {
+        renderCategories();
+        renderList();
+        renderEditor();
+      }
+    }
+
     function updateSelectedValue() {
       const item = selectedItem();
       if (!item) return;
@@ -816,18 +1368,163 @@
     function resetSelected() {
       const item = selectedItem();
       const original = item && originalItem(item.id);
-      if (!item || !original) return;
+      if (!item) return;
+      if (!original) {
+        listings.splice(listings.findIndex((custom) => custom.id === item.id), 1);
+        selectedId = listings[0]?.id || "";
+        renderCategories();
+        recomputeChangedState();
+        saveLocalBackupSoon();
+        renderList();
+        renderEditor();
+        showToast("Added custom removed.");
+        return;
+      }
+      item.name = original.name;
+      item.model = original.model;
+      item.category = original.category;
+      item.image = original.image || "";
       item.value = original.value;
       item.demand = original.demand;
       changedIds.delete(item.id);
       $("#changedCount").textContent = changedIds.size;
+      saveLocalBackupSoon();
       renderList();
       renderEditor();
       showToast("Selected custom reset.");
     }
 
+    function readImageFile(file, callback) {
+      if (!file || !file.type.startsWith("image/")) {
+        showToast("Drop or choose an image file.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener("load", () => callback(String(reader.result || "")));
+      reader.addEventListener("error", () => showToast("Could not read that image."));
+      reader.readAsDataURL(file);
+    }
+
+    function setSelectedImageFromFile(file) {
+      readImageFile(file, (dataUrl) => {
+        const item = selectedItem();
+        if (!item) return;
+        item.image = dataUrl;
+        imageInput.value = dataUrl;
+        refreshChangedState(item);
+        renderList();
+        renderEditor();
+        showToast("Image updated and auto-saved.");
+      });
+    }
+
+    function setNewImageFromFile(file) {
+      readImageFile(file, (dataUrl) => {
+        newImageInput.value = dataUrl;
+        $("#newImageDrop").innerHTML = "<div><b>Image ready</b><span>Drop another image here if you want to replace it</span></div>";
+        showToast("Image added to the new custom form.");
+      });
+    }
+
+    function resetNewImageDrop() {
+      $("#newImageDrop").innerHTML = "<div><b>Drop image here</b><span>or click to choose one from your computer</span></div>";
+    }
+
+    function wireImageDrop(zone, input, onFile) {
+      zone.addEventListener("click", () => input.click());
+      zone.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          input.click();
+        }
+      });
+      zone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        zone.classList.add("drag-over");
+      });
+      zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
+      zone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        zone.classList.remove("drag-over");
+        onFile(event.dataTransfer?.files?.[0]);
+      });
+    }
+
+    function clearLocalBackup() {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {}
+      listings.splice(0, listings.length, ...JSON.parse(JSON.stringify(originalListings)));
+      orderChanged = false;
+      selectedId = listings[0]?.id || "";
+      indexUpdated = todayStamp();
+      updatedInput.value = indexUpdated;
+      searchInput.value = "";
+      categorySelect.value = "All";
+      renderCategories();
+      recomputeChangedState();
+      renderList();
+      renderEditor();
+      showToast("Local save cleared. Editor restored to the current data file.");
+    }
+
+    function addCustom() {
+      const name = newNameInput.value.trim();
+      const model = newModelInput.value.trim();
+      const category = newCategoryInput.value.trim();
+      const image = newImageInput.value.trim();
+      if (!name || !model || !category) {
+        showToast("Add a custom name, gun model, and category first.");
+        return;
+      }
+      const item = {
+        id: uniqueId(name, category),
+        name,
+        model,
+        category,
+        image,
+        value: normalizeValue(newValueInput.value),
+        demand: normalizeDemand(newDemandInput.value)
+      };
+      listings.push(item);
+      selectedId = item.id;
+      newNameInput.value = "";
+      newModelInput.value = "";
+      newValueInput.value = "";
+      newDemandInput.value = "N/A";
+      newImageInput.value = "";
+      resetNewImageDrop();
+      searchInput.value = "";
+      categorySelect.value = "All";
+      renderCategories();
+      refreshChangedState(item);
+      renderList();
+      renderEditor();
+      showToast(`Added ${item.name}. Export when finished.`);
+    }
+
+    function deleteSelected() {
+      const item = selectedItem();
+      if (!item) return;
+      const confirmed = window.confirm(`Delete "${item.name}" from this editor and the exported data?`);
+      if (!confirmed) return;
+      const index = listings.findIndex((custom) => custom.id === item.id);
+      if (index === -1) return;
+      listings.splice(index, 1);
+      changedIds.delete(item.id);
+      orderChanged = true;
+      selectedId = listings[Math.max(0, index - 1)]?.id || listings[0]?.id || "";
+      renderCategories();
+      recomputeChangedState();
+      saveLocalBackupSoon();
+      renderList();
+      renderEditor();
+      showToast(`Deleted ${item.name}. Export when finished.`);
+    }
+
     function buildExportText() {
-      return `window.ALL_GUN_IMAGES = ${JSON.stringify(listings)};\n`;
+      const exportDate = currentIndexDate();
+      return `window.INDEX_UPDATED = ${JSON.stringify(exportDate)};\nwindow.ALL_GUN_IMAGES = ${JSON.stringify(listings)};\n`;
     }
 
     function downloadData() {
@@ -840,28 +1537,42 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      showToast("Downloaded assets-data.js. Replace the old file with this one.");
+      showToast(`Downloaded assets-data.js with index date ${currentIndexDate()}.`);
     }
 
     async function copyData() {
       const text = buildExportText();
       try {
         await navigator.clipboard.writeText(text);
-        showToast("Copied the full assets-data.js text.");
+        showToast(`Copied assets-data.js text with index date ${currentIndexDate()}.`);
       } catch (error) {
         showToast("Copy failed. Use Download instead.");
       }
     }
 
+    function setViewMode(mode) {
+      viewMode = mode === "grid" ? "grid" : "list";
+      listViewButton.classList.toggle("active", viewMode === "list");
+      gridViewButton.classList.toggle("active", viewMode === "grid");
+      renderList();
+      saveLocalBackupSoon();
+    }
+
     function init() {
       $("#totalCount").textContent = listings.length;
-      $("#changedCount").textContent = "0";
+      const restored = loadLocalBackup();
+      updatedInput.value = indexUpdated || todayStamp();
+      recomputeChangedState();
       renderCategories();
+      setViewMode(viewMode);
       renderList();
       renderEditor();
+      if (restored && changedIds.size) {
+        showToast(`Restored ${changedIds.size} local edit${changedIds.size === 1 ? "" : "s"}.`);
+      }
 
       list.addEventListener("click", (event) => {
-        const row = event.target.closest(".custom-row");
+        const row = event.target.closest(".custom-row, .custom-card");
         if (!row) return;
         selectedId = row.dataset.id;
         renderList();
@@ -870,12 +1581,42 @@
 
       searchInput.addEventListener("input", renderList);
       categorySelect.addEventListener("change", renderList);
+      updatedInput.addEventListener("change", () => {
+        indexUpdated = updatedInput.value || todayStamp();
+        saveLocalBackupSoon();
+        showToast(`Index date set to ${indexUpdated}.`);
+      });
+      listViewButton.addEventListener("click", () => setViewMode("list"));
+      gridViewButton.addEventListener("click", () => setViewMode("grid"));
+      nameInput.addEventListener("input", () => updateSelectedDetails());
+      modelInput.addEventListener("input", () => updateSelectedDetails());
+      editCategoryInput.addEventListener("input", () => updateSelectedDetails());
+      imageInput.addEventListener("input", () => updateSelectedDetails());
+      nameInput.addEventListener("change", () => updateSelectedDetails({ render: true }));
+      modelInput.addEventListener("change", () => updateSelectedDetails({ render: true }));
+      editCategoryInput.addEventListener("change", () => updateSelectedDetails({ render: true }));
+      imageInput.addEventListener("change", () => updateSelectedDetails({ render: true }));
+      valueInput.addEventListener("input", updateSelectedValue);
       valueInput.addEventListener("change", updateSelectedValue);
       demandInput.addEventListener("change", updateSelectedValue);
+      imageFileInput.addEventListener("change", () => {
+        setSelectedImageFromFile(imageFileInput.files?.[0]);
+        imageFileInput.value = "";
+      });
+      newImageFileInput.addEventListener("change", () => {
+        setNewImageFromFile(newImageFileInput.files?.[0]);
+        newImageFileInput.value = "";
+      });
+      wireImageDrop($("#preview"), imageFileInput, setSelectedImageFromFile);
+      wireImageDrop($("#newImageDrop"), newImageFileInput, setNewImageFromFile);
       $("#downloadData").addEventListener("click", downloadData);
       $("#downloadTop").addEventListener("click", downloadData);
       $("#copyData").addEventListener("click", copyData);
       $("#resetSelected").addEventListener("click", resetSelected);
+      $("#deleteSelected").addEventListener("click", deleteSelected);
+      $("#clearBackup").addEventListener("click", clearLocalBackup);
+      $("#addCustomButton").addEventListener("click", addCustom);
+      window.addEventListener("beforeunload", saveLocalBackup);
     }
 
     init();

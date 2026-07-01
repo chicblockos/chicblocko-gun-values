@@ -12,7 +12,7 @@ const MODEL_DEFAULTS = {
 };
 const PLACEHOLDER_VALUE = "N/A";
 const DEFAULT_DEMAND = "TBD";
-const INDEX_UPDATED = "2026-06-29";
+const INDEX_UPDATED = window.INDEX_UPDATED || "2026-07-01";
 const DATABASE_NAME = "chicblocko-custom-editor";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "site-data";

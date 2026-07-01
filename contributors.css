@@ -166,22 +166,6 @@
   padding-top: 16px;
 }
 
-.owner-grid {
-  max-width: 920px;
-  margin: 0 auto;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.owner-card {
-  min-height: 265px;
-  justify-content: center;
-  padding: 28px 30px;
-}
-
-.owner-card::after {
-  background: linear-gradient(to bottom, rgba(3, 5, 10, 0.18), rgba(3, 5, 10, 0.68) 44%, rgba(3, 5, 10, 0.99) 80%);
-}
-
 .profile-card {
   position: relative;
   isolation: isolate;

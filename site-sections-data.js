@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-07-02T18:40:29.989Z",
+  "exportedAt": "2026-07-02T18:53:45.043Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -95,7 +95,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/fyn.webp",
           "background": "assets/team/fyn.webp",
-          "description": ""
+          "description": "Builder - Chicblocko"
         },
         {
           "id": "run",
@@ -108,13 +108,13 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/run.webp",
           "background": "assets/team/run.webp",
-          "description": ""
+          "description": "Scripter - Chicblocko"
         },
         {
           "id": "darriel",
           "sectionId": "most-owned",
           "name": "darriel",
-          "role": "CREATOR of chicblocko values",
+          "role": "CREATOR - CHICBLOCKO VALUES",
           "stat": "",
           "badge": [
             "crown",

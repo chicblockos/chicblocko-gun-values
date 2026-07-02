@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-07-02T18:35:20.237Z",
+  "exportedAt": "2026-07-02T18:40:29.989Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -114,7 +114,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "id": "darriel",
           "sectionId": "most-owned",
           "name": "darriel",
-          "role": "CREATOR",
+          "role": "CREATOR of chicblocko values",
           "stat": "",
           "badge": [
             "crown",
@@ -124,7 +124,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/darriel.webp",
           "background": "assets/team/darriel.webp",
-          "description": "Creator of Chicblocko Gun Values, finished building a completed value index featuring estimated values and demand ratings. Gathered others to help on the project in making accurate ratings and values."
+          "description": "Creator of Chicblocko Gun Values, developed a new way to for others in the community to check the values of customs, where it features estimated values and demand ratings amongst all personal customs. Gathered a team of people who sells/trades customs and helped developed estimated values."
         }
       ]
     },

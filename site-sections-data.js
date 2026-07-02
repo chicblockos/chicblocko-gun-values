@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-07-02T18:20:18.945Z",
+  "exportedAt": "2026-07-02T18:35:20.237Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -124,7 +124,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/darriel.webp",
           "background": "assets/team/darriel.webp",
-          "description": "Creator of Chicblocko Gun Values, finished building a completed value index featuring estimated values and demand ratings. Gathered others to help on the project in making accurate ratings and values for the community."
+          "description": "Creator of Chicblocko Gun Values, finished building a completed value index featuring estimated values and demand ratings. Gathered others to help on the project in making accurate ratings and values."
         }
       ]
     },

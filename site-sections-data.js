@@ -85,6 +85,28 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "description": "Contributed - Value Contributor. Part of the Chicblocko Values group chat, helping catch mistakes in the value list and correct them with group agreement."
         },
         {
+          "id": "darriel",
+          "sectionId": "most-owned",
+          "name": "darriel",
+          "role": "CREATOR",
+          "stat": "",
+          "badge": [
+            "crown",
+            "check",
+            "code",
+            "link"
+          ],
+          "avatar": "assets/team/darriel.webp",
+          "background": "assets/team/darriel.webp",
+          "description": "Creator of Chicblocko Gun Values, finished building a completed value index featuring estimated values and demand ratings. Gathered others to help on the project in making accurate ratings and values for the community."
+        }
+      ]
+    },
+    "owners": {
+      "title": "GAME OWNERS",
+      "subtitle": "Chicblocko leadership",
+      "items": [
+        {
           "id": "fyn",
           "sectionId": "most-owned",
           "name": "fyn",
@@ -95,7 +117,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/fyn.webp",
           "background": "assets/team/fyn.webp",
-          "description": "Builder - Chicblocko"
+          "description": ""
         },
         {
           "id": "run",
@@ -108,23 +130,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           ],
           "avatar": "assets/team/run.webp",
           "background": "assets/team/run.webp",
-          "description": "Scripter - Chicblocko"
-        },
-        {
-          "id": "darriel",
-          "sectionId": "most-owned",
-          "name": "darriel",
-          "role": "CREATOR - CHICBLOCKO VALUES",
-          "stat": "",
-          "badge": [
-            "crown",
-            "check",
-            "code",
-            "link"
-          ],
-          "avatar": "assets/team/darriel.webp",
-          "background": "assets/team/darriel.webp",
-          "description": "Creator of Chicblocko Gun Values, developed a new way to for others in the community to check the values of customs, where it features estimated values and demand ratings amongst all personal customs. Gathered a team of people who sells/trades customs and helped developed estimated values."
+          "description": ""
         }
       ]
     },

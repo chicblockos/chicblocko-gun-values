@@ -87,7 +87,10 @@
     const insertBefore = returnLink || null;
     const items = data.items;
     const creator = items.find((item) => item.id === "darriel") || items.find((item) => cleanText(item.role).toLowerCase().includes("creator"));
-    const contributors = items.filter((item) => item !== creator);
+    const ownerFallbackIds = new Set(["fyn", "run"]);
+    const ownerIds = new Set([...(source.owners?.items || []).map((item) => item.id), ...ownerFallbackIds]);
+    const contributors = items.filter((item) => item !== creator && !ownerIds.has(item.id));
+    const owners = source.owners?.items?.length ? source.owners.items : items.filter((item) => ownerFallbackIds.has(item.id));
 
     if (creator) {
       const section = makeElement("section", "team-section creator-section");
@@ -108,6 +111,18 @@
     contributors.forEach((item) => grid.append(makeProfileCard(item)));
     section.append(header, grid);
     main.insertBefore(section, insertBefore);
+
+    if (owners.length) {
+      const ownerSection = makeElement("section", "team-section");
+      ownerSection.setAttribute("aria-labelledby", "owners-title");
+      const ownerHeader = makeElement("header", "team-heading");
+      ownerHeader.append(makeElement("h2", "", source.owners?.title || "GAME OWNERS"), makeElement("p", "", source.owners?.subtitle || "Chicblocko leadership"));
+      ownerHeader.querySelector("h2").id = "owners-title";
+      const ownerGrid = makeElement("div", "profile-grid contributor-grid");
+      owners.forEach((item) => ownerGrid.append(makeProfileCard(item)));
+      ownerSection.append(ownerHeader, ownerGrid);
+      main.insertBefore(ownerSection, insertBefore);
+    }
   }
 
   function makeRecordCard(item, sectionId) {

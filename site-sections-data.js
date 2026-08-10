@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-08-09T19:44:10.911Z",
+  "exportedAt": "2026-08-10T20:25:23.148Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -134,7 +134,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
       "sections": [
         {
           "id": "most-owned",
-          "title": "MOST OWNED CUSTOMS",
+          "title": "PULLED MOST BITCHES",
           "subtitle": "PLAYERS WITH THE MOST OWNED CUSTOMS"
         },
         {
@@ -196,6 +196,11 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "id": "highest-ranked-female",
           "title": "HIGHEST RANKED FEMALE",
           "subtitle": "THE HIGHEST RANKED FEMALE IN CHICBLOCKO"
+        },
+        {
+          "id": "record-section-1786308282693",
+          "title": "PULLED MOST CB BADDIES",
+          "subtitle": ""
         }
       ],
       "items": [
@@ -294,7 +299,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "role": "MOST BANS LOGGED IN A WEEK",
           "stat": "510 BANS LOGGED",
           "badge": [],
-          "avatar": "https://cdn.discordapp.com/avatars/1074573704081715292/3d4d0543a0fae683c33e02d1f8a40c94.webp?size=1280",
+          "avatar": "data:image/webp;base64,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",
           "background": "https://cdn.discordapp.com/avatars/1074573704081715292/3d4d0543a0fae683c33e02d1f8a40c94.webp?size=1280",
           "description": "Player that logged the most bans in a week."
         },
@@ -404,7 +409,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "role": "MOST TIMES BANNED",
           "stat": "BANNED 37 TIMES IN-GAME",
           "badge": [],
-          "avatar": "https://cdn.discordapp.com/avatars/1269976245383336050/697d369257d71e98f845c45b041f4df1.webp?size=1280",
+          "avatar": "data:image/webp;base64,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",
           "background": "https://cdn.discordapp.com/avatars/1269976245383336050/697d369257d71e98f845c45b041f4df1.webp?size=1280",
           "description": "Most times banned record holder."
         },

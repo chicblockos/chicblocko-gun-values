@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-08-10T20:28:45.309Z",
+  "exportedAt": "2026-08-10T20:50:09.002Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -149,8 +149,8 @@ window.CHICBLOCKO_SITE_SECTIONS = {
         },
         {
           "id": "fastest-promotion",
-          "title": "FASTEST PROMOTION DMOD -> MOD",
-          "subtitle": "FASTEST PROMOTION FROM DMOD -> MOD IN UNDER 10 DAYS"
+          "title": "FASTEST PROMOTION DMOD ➜ MOD",
+          "subtitle": "FASTEST PROMOTION FROM DMOD ➜ MOD IN UNDER 10 DAYS"
         },
         {
           "id": "weekly-bans",
@@ -274,7 +274,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "id": "corrlna-fast-promo",
           "sectionId": "fastest-promotion",
           "name": "corrlna",
-          "role": "FASTEST PROMOTION DMOD -> MOD",
+          "role": "FASTEST PROMOTION DMOD ➜ MOD",
           "stat": "PROMOTED AFTER 8 DAYS",
           "badge": [],
           "avatar": "https://cdn.discordapp.com/avatars/952098799243915275/2e09940462b9df3cfe1b061cc6b607c1.webp?size=1280",
@@ -285,12 +285,12 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "id": "ldion4-fast-promo",
           "sectionId": "fastest-promotion",
           "name": "ldion4",
-          "role": "FASTEST PROMOTION DMOD -> MOD",
+          "role": "FASTEST PROMOTION DMOD ➜ MOD",
           "stat": "PROMOTED AFTER 10 DAYS",
           "badge": [],
           "avatar": "https://cdn.discordapp.com/avatars/1163858882066661376/d313cb06f7b1efd27fc2711e3c528a39.webp?size=1280",
           "background": "https://cdn.discordapp.com/avatars/1163858882066661376/d313cb06f7b1efd27fc2711e3c528a39.webp?size=1280",
-          "description": "Fast promotion from DMOD to MOD."
+          "description": "Fastest promotion from DMOD to MOD."
         },
         {
           "id": "copo-weekly-bans",
@@ -387,7 +387,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
           "role": "MOST TIMES BANNED",
           "stat": "BANNED 40 TIMES IN-GAME",
           "badge": [],
-          "avatar": "https://cdn.discordapp.com/avatars/1347353396054720613/a_6969b7db0d936d6ba9cae6964d2b1a67.webp?size=1280&animated=true",
+          "avatar": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrrFhUAAAAjVBMVEX6phr6qyj7wWH8zX78x3D8wWH7vFP+47j+9OP/////+fH6sTf+9OL92Jv+6cb904z80o37t0X++vH93qn90436sTb7sTb7x3D80oz93an+7tT92Zv7wmH9zX/8zH7+79P7tkX92Jr82Jr/+vH+6Mb/9OP/9OL7qyj947j6rCj+79T8zX/95Lj7sTf915vvhd1yAAAEbklEQVR4AezBgQAAAACAoP2pF6kCAAAAAAAAAAAAAAAAAAAAAIDZuc/tRpUYAMAisAK54AAJnvFNZ5zYTnn/t7t9dXJc0Y4N8o6//0o8QlMpB0VXcQKt/Ygx+o3ajnGaEdGgdZuGGRGN0hh/h8aPc/ppAi1dc0g+RjhfRZwTE5TAsKTv8riAM4TjjJisBCpaN6rw3FpfEpOUAI8A55yD4qakHSayEWDNaHwL6kXc7/eUQF1cTWMztsyYeIpYw78y2i1PQLXhjovPqrGdlbRTmaemor1Gld4ywJw6kSKoNKbO/AEKJdQhVNj9M+rQKAJtKmJBdoKCWJidIKOOjUCVa+rcBBQZUvcGt4GOgCwHNe6oFxjoCMhmetaAPbkHFaKMejKIAp0C2UTLJiDoEqioRxMda6CgS6CiXk3CLgAFJVBRzyYKpoCQS+CBKOwSyIiCLoGEFIihP4+kQA69QVIBA50DWapzERTAMJiQEhONQ2AAw+ATqYGBDoHsOdBVIBuEughgqK4HBNAHMqKg+wAShd0HXkiVZ9WroCZzs4YE5CEjvfsAF9fwjyKZy0Nm1FatdB/wit+D5uKQu7nSY5G0Zdd8E48c6yFG5564+cVtmvEI0TQRPknbz8yRQ1gBXYqphQVss6A93K8vOmN1Q8BrDdssG9pNHsIsdCnzOKcxRw1hI22rgEENIL2egpB+VwJ3XiX54hGyxx10x3j9HvQIUbIdcHRYBLss5UW8VLYUauiglXwIHQhC+h0Fl55H1c4jZI9I1WFIetwEWFVrwSkdZv0TIF15TaErRmcXeFa1EB7JR7SR5wGUVXAcJpgGRSFALax0HQYg7IJeIQqOBJae57SVR4iKefDJ87GFzCNExXYI/R5bSDxCdNwduSOfEogycQhwiI6FQOz1fu9YHnJNuhJgfF5qevcK2c+ouy2YwLpEHoLqbhBaau1GfjHlIczqSwBVt8Bg+OERoigBjiQq3P91Jf8QlupKACtza21aniyE5T0kQI9LAi4JuCTgkoBLAjpwScAlAZcEWFLKXhIQwmPCCs4DDCllejgTVCVWdHOYXDyno3mNVwoORcUP7OCCjsJhy36HWu4M8dHmp5mTp8a8te54BXQkaeiAUcLlYj1y0Fjk/1nSAU0MnflcUfsUyHPArX8TfLPZ1dAlQ5IUABpHIrMvBIY5qbn87HMuSwG8oXENtdC4r7s3WG++nsvPTNMmBbfwXXH35Wa0U7b4mhbwXXRTkrbLzz6t6JCfQYFT82Wdm2X/cc5aM72r32ANLkrSd/mlb0Hlp914v/6APpmTzs7YfpnA1PUDe8qzF1tD/z7d6R7cKQ6tkXXA+cn26C+6m88SJ3lzSmDZKG8+Q7dnV+ThQVPz5cOhPckZdIqg0+f6rqepwdtnI5j4tA0G8dE/2uiu3oCpLwN35BsxjSlAPz4A4BngOJ2g4Q3y2eQggSNJ/mn9G5ybQuWf+qs9OJABAAAAGORvfY+vAgAAAAAAAAAAAAAAAAAAAABYCfy25L0QL4/pAAAAAElFTkSuQmCC",
           "background": "https://cdn.discordapp.com/avatars/1347353396054720613/a_6969b7db0d936d6ba9cae6964d2b1a67.webp?size=1280&animated=true",
           "description": "Most times banned record holder."
         },

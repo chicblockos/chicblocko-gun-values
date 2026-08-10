@@ -1,6 +1,6 @@
 window.CHICBLOCKO_SITE_SECTIONS = {
   "note": "Chicblocko site section editor export. Use this file as your saved contributors and historic records source.",
-  "exportedAt": "2026-08-10T20:25:23.148Z",
+  "exportedAt": "2026-08-10T20:28:45.309Z",
   "data": {
     "contributors": {
       "title": "CONTRIBUTORS",
@@ -134,7 +134,7 @@ window.CHICBLOCKO_SITE_SECTIONS = {
       "sections": [
         {
           "id": "most-owned",
-          "title": "PULLED MOST BITCHES",
+          "title": "MOST CUSTOMS OWNED",
           "subtitle": "PLAYERS WITH THE MOST OWNED CUSTOMS"
         },
         {

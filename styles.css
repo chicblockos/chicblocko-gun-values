@@ -275,6 +275,33 @@ nav a.active::after {
   padding: 86px 0 72px;
   position: relative;
   text-align: center;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -52px calc(50% - 50vw) -34px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, .88), rgba(0, 0, 0, .54) 45%, rgba(0, 0, 0, .88)),
+    linear-gradient(180deg, rgba(0, 0, 0, .78), rgba(0, 0, 0, .28) 48%, rgba(0, 0, 0, .82)),
+    url("assets/chicblocko-hero-bg.webp") center / cover no-repeat;
+  filter: blur(7px) saturate(.9);
+  transform: scale(1.06);
+  opacity: .88;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -52px calc(50% - 50vw) -34px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 150px),
+    linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,.08) 45%, transparent 72%);
+  opacity: .35;
+  pointer-events: none;
 }
 
 .hero-logo-link {
@@ -351,9 +378,11 @@ nav a.active::after {
 .hero-copy {
   max-width: 650px;
   margin: 0 auto;
-  color: #b7b7b7;
+  color: #dedede;
   font-size: 16px;
+  font-weight: 800;
   line-height: 1.6;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .85);
 }
 
 .hero-stats {
@@ -821,9 +850,27 @@ nav a.active::after {
   letter-spacing: .03em;
 }
 
-.demand-badge[data-demand="high"] i { background: #fff; }
-.demand-badge[data-demand="medium"] i:nth-child(-n+2) { background: #fff; }
-.demand-badge[data-demand="low"] i:first-child { background: #fff; }
+.demand-badge[data-demand="high"] {
+  color: #7cff8a;
+  border-color: rgba(124, 255, 138, .65);
+  background: rgba(17, 52, 22, .65);
+}
+
+.demand-badge[data-demand="medium"] {
+  color: #ffe56e;
+  border-color: rgba(255, 229, 110, .65);
+  background: rgba(70, 56, 11, .62);
+}
+
+.demand-badge[data-demand="low"] {
+  color: #ff7474;
+  border-color: rgba(255, 116, 116, .65);
+  background: rgba(66, 17, 17, .62);
+}
+
+.demand-badge[data-demand="high"] i { background: #7cff8a; }
+.demand-badge[data-demand="medium"] i:nth-child(-n+2) { background: #ffe56e; }
+.demand-badge[data-demand="low"] i:first-child { background: #ff7474; }
 
 .card-grid.cards-enter .gun-card {
   animation: cardReveal .3s cubic-bezier(.2, .8, .2, 1) both;

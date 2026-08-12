@@ -573,13 +573,13 @@ nav a.active::after {
 }
 
 .filter-button.has-new-badge {
-  padding-right: 45px;
+  padding-right: 15px;
 }
 
 .filter-new-badge {
   position: absolute;
   top: -11px;
-  right: 8px;
+  right: -5px;
   padding: 3px 8px 2px;
   border-radius: 999px;
   border: 2px solid #fff;

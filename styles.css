@@ -113,13 +113,18 @@ svg {
 .site-header {
   width: 100%;
   min-height: 84px;
+  position: sticky;
+  z-index: 50;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 14px max(22px, calc((100% - 1320px) / 2));
-  background: #101010;
+  background: rgba(8, 8, 8, .96);
   border-bottom: 2px solid #2d2d2d;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .72);
+  backdrop-filter: blur(14px);
 }
 
 .brand {

@@ -1,6 +1,6 @@
 "use strict";
 
-const CATEGORY_ORDER = ["EXT", "Drum", "AR-15", "Draco", "MAC", "ARP Drum", "AK47"];
+const CATEGORY_ORDER = ["EXT", "Drum", "AR-15", "Draco", "MAC", "ARP Drum", "Kriss Vector", "AK47"];
 const MODEL_DEFAULTS = {
   EXT: "Glock 18 Extended",
   Drum: "Glock 18 Drum",
@@ -221,7 +221,9 @@ async function cleanRemovedSavedListings(saved) {
 
 function availableCategories() {
   const available = new Set(listings.map((item) => item.category));
-  return CATEGORY_ORDER.filter((category) => available.has(category));
+  const ordered = [...CATEGORY_ORDER];
+  const extra = [...available].filter((category) => category && !CATEGORY_ORDER.includes(category)).sort();
+  return [...ordered, ...extra];
 }
 
 function publicListings() {

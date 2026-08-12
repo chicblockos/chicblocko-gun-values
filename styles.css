@@ -551,6 +551,11 @@ nav a.active::after {
   font-size: 12px;
   font-weight: 800;
   transition: color .18s, background .18s, border-color .18s, transform .18s, box-shadow .18s;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .filter-button:hover,
@@ -565,6 +570,36 @@ nav a.active::after {
   font-weight: 900;
   transform: translateY(-2px);
   box-shadow: 0 4px 0 #777;
+}
+
+.filter-button.has-new-badge {
+  padding-right: 45px;
+}
+
+.filter-new-badge {
+  position: absolute;
+  top: -11px;
+  right: 8px;
+  padding: 3px 8px 2px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  background: #111;
+  color: #fff;
+  font-family: var(--display);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.28), 0 0 14px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.filter-button:hover .filter-new-badge,
+.filter-button.active .filter-new-badge {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
 }
 
 .sort-box {

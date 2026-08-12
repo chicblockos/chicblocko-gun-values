@@ -243,7 +243,18 @@ function renderFilters() {
     button.type = "button";
     button.className = `filter-button${isActive ? " active" : ""}`;
     button.dataset.category = category;
-    button.textContent = category;
+    button.textContent = "";
+    const label = document.createElement("span");
+    label.className = "filter-label";
+    label.textContent = category;
+    button.append(label);
+    if (category === "Kriss Vector") {
+      const badge = document.createElement("span");
+      badge.className = "filter-new-badge";
+      badge.textContent = "NEW";
+      button.append(badge);
+      button.classList.add("has-new-badge");
+    }
     button.setAttribute("aria-pressed", String(isActive));
     fragment.append(button);
   });

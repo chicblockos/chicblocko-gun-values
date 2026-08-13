@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://chicblockos.github.io/chicblocko-gun-values/</loc>
-    <lastmod>2026-06-18</lastmod>
+    <loc>https://chicblocko.com/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://chicblockos.github.io/chicblocko-gun-values/contributors/</loc>
-    <lastmod>2026-06-18</lastmod>
-    <priority>0.7</priority>
+    <loc>https://chicblocko.com/contributors/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chicblockos.github.io/chicblocko-gun-values/historic-records/</loc>
-    <lastmod>2026-06-18</lastmod>
-    <priority>0.7</priority>
+    <loc>https://chicblocko.com/historic-records/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

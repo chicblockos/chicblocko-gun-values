@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 Disallow: /editor.html
+Disallow: /contributors-editor.html
+Disallow: /site-sections-editor.html
+Disallow: /*backup*
+Disallow: /AUDIT-REPORT.md
+Disallow: /CUSTOMS-INDEX.md
 
-Sitemap: https://chicblockos.github.io/chicblocko-gun-values/sitemap.xml
+Sitemap: https://chicblocko.com/sitemap.xml

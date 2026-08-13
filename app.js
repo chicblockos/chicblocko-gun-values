@@ -12,7 +12,7 @@ const MODEL_DEFAULTS = {
 };
 const PLACEHOLDER_VALUE = "N/A";
 const DEFAULT_DEMAND = "TBD";
-const INDEX_UPDATED = window.INDEX_UPDATED || "2026-07-01";
+const INDEX_UPDATED = window.INDEX_UPDATED || "2026-08-13";
 const DATABASE_NAME = "chicblocko-custom-editor";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "site-data";
@@ -890,9 +890,14 @@ async function initialize() {
 
   const updatedDate = new Date(`${INDEX_UPDATED}T12:00:00`);
   const updatedLabel = updatedDate.toLocaleDateString(undefined, { month: "short", day: "numeric" }).toUpperCase();
-  $("#lastUpdated").dateTime = INDEX_UPDATED;
-  $("#lastUpdated").querySelector("b").textContent = updatedLabel;
-  $("#updatedCount").textContent = `${listings.length} CUSTOMS`;
+  const lastUpdated = $("#lastUpdated");
+  if (lastUpdated) {
+    lastUpdated.dateTime = INDEX_UPDATED;
+    const updatedDateText = lastUpdated.querySelector(".updated-date b");
+    if (updatedDateText) updatedDateText.textContent = updatedLabel;
+  }
+  const updatedCount = $("#updatedCount");
+  if (updatedCount) updatedCount.textContent = `${listings.length} CUSTOMS`;
   $("#year").textContent = new Date().getFullYear();
 
   renderFilters();

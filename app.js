@@ -892,6 +892,7 @@ async function initialize() {
   const updatedLabel = updatedDate.toLocaleDateString(undefined, { month: "short", day: "numeric" }).toUpperCase();
   $("#lastUpdated").dateTime = INDEX_UPDATED;
   $("#lastUpdated").querySelector("b").textContent = updatedLabel;
+  $("#updatedCount").textContent = `${listings.length} CUSTOMS`;
   $("#year").textContent = new Date().getFullYear();
 
   renderFilters();

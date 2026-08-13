@@ -2310,7 +2310,12 @@ footer.custom-guide-footer {
 
   .hero {
     width: calc(100% - 28px);
-    padding: 190px 0 65px;
+    padding: 190px 0 54px;
+  }
+
+  .hero::before,
+  .hero::after {
+    inset: -52px calc(50% - 50vw) 18px;
   }
 
   .hero-logo-link {
@@ -2349,8 +2354,26 @@ footer.custom-guide-footer {
   }
 
   .catalog-shell {
+    position: relative;
+    z-index: 2;
     width: calc(100% - 16px);
-    padding: 35px 15px 50px;
+    margin-top: 18px;
+    padding: 30px 15px 50px;
+    background:
+      linear-gradient(180deg, rgba(11, 11, 11, .98), rgba(11, 11, 11, .96)),
+      var(--panel);
+    box-shadow: 0 -24px 42px rgba(0, 0, 0, .92), 0 18px 42px rgba(0, 0, 0, .45);
+  }
+
+  .catalog-topline {
+    gap: 14px;
+  }
+
+  .catalog-topline h2 {
+    font-size: clamp(28px, 9vw, 42px);
+    line-height: .95;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .toolbar {

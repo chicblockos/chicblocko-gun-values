@@ -113,13 +113,18 @@ svg {
 .site-header {
   width: 100%;
   min-height: 84px;
+  position: sticky;
+  z-index: 50;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 14px max(22px, calc((100% - 1320px) / 2));
-  background: #101010;
+  background: rgba(8, 8, 8, .96);
   border-bottom: 2px solid #2d2d2d;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .72);
+  backdrop-filter: blur(14px);
 }
 
 .brand {
@@ -281,27 +286,34 @@ nav a.active::after {
 .hero::before {
   content: "";
   position: absolute;
-  z-index: -2;
-  inset: -52px calc(50% - 50vw) -34px;
+  z-index: 0;
+  inset: -64px calc(50% - 50vw) -42px;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, .88), rgba(0, 0, 0, .54) 45%, rgba(0, 0, 0, .88)),
-    linear-gradient(180deg, rgba(0, 0, 0, .78), rgba(0, 0, 0, .28) 48%, rgba(0, 0, 0, .82)),
+    linear-gradient(90deg, rgba(0, 0, 0, .78), rgba(0, 0, 0, .34) 45%, rgba(0, 0, 0, .78)),
+    linear-gradient(180deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .22) 48%, rgba(0, 0, 0, .78)),
     url("assets/chicblocko-hero-bg.webp") center / cover no-repeat;
-  filter: blur(7px) saturate(.9);
-  transform: scale(1.06);
-  opacity: .88;
+  filter: blur(5px) saturate(1.15);
+  transform: scale(1.08);
+  opacity: .98;
+  pointer-events: none;
 }
 
 .hero::after {
   content: "";
   position: absolute;
-  z-index: -1;
-  inset: -52px calc(50% - 50vw) -34px;
+  z-index: 0;
+  inset: -64px calc(50% - 50vw) -42px;
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 150px),
-    linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,.08) 45%, transparent 72%);
-  opacity: .35;
+    linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,.10) 45%, transparent 72%),
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, .12), transparent 38%);
+  opacity: .48;
   pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-logo-link {
@@ -481,36 +493,94 @@ nav a.active::after {
 }
 
 .updated {
-  min-height: 42px;
+  min-height: 70px;
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 8px;
-  padding: 0 13px;
-  color: #8e8e8e;
-  background: var(--panel-raised);
-  border: 1px solid #343434;
-  border-radius: 10px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .1em;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 18% 30%, rgba(255, 255, 255, .12), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .025));
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 17px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .12);
+  backdrop-filter: blur(16px);
+}
+
+.updated-main,
+.updated-date {
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.updated-main {
+  min-width: 190px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 24px;
+  position: relative;
+}
+
+.updated-main > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #bdbdbd;
+  font: 900 10px var(--body);
+  letter-spacing: .16em;
 }
 
 .updated i {
   width: 8px;
   height: 8px;
-  background: #fff;
+  flex: 0 0 auto;
+  background: #ff3157;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(255, 255, 255, .45);
+  box-shadow: 0 0 0 7px rgba(255, 49, 87, .12), 0 0 18px rgba(255, 49, 87, .55);
+  animation: livePulse 1.6s ease-in-out infinite;
+}
+
+.updated strong {
+  color: #fff;
+  font: 900 20px var(--display);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.updated-date {
+  min-width: 112px;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 18px;
+  background: rgba(255, 255, 255, .055);
+  border-left: 1px solid rgba(255, 255, 255, .14);
 }
 
 .updated b {
-  padding: 5px 7px;
+  min-width: 72px;
+  padding: 8px 10px;
+  text-align: center;
   color: #050505;
-  background: #fff;
-  border-radius: 5px;
-  font: 900 9px var(--display);
+  background: linear-gradient(180deg, #fff, #dcdcdc);
+  border-radius: 10px;
+  box-shadow: 0 6px 0 rgba(255, 255, 255, .22);
+  font: 900 13px var(--display);
   letter-spacing: .03em;
+}
+
+.updated em {
+  color: #ededed;
+  font: 900 10px var(--body);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+@keyframes livePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(.72); opacity: .65; }
 }
 
 .toolbar {

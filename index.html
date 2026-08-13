@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chicblocko Customs Index, owned by bludariel. Built to help the community browse custom guns, compare custom values, track demand, and find customs faster.">
+  <meta name="description" content="Search Chicblocko customs by gun model, compare estimated values, and check demand ratings from one organized value index.">
   <meta name="robots" content="index, follow">
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
-  <title>Chicblocko Customs Index</title>
+  <title>Chicblocko Values | Gun Values &amp; Demand Index</title>
   <link rel="canonical" href="https://chicblockos.github.io/chicblocko-gun-values/">
   <link rel="icon" type="image/webp" href="assets/chicblocko-logo.webp">
   <link rel="apple-touch-icon" href="assets/chicblocko-logo.webp">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Chicblocko Customs Index">
-  <meta property="og:description" content="Chicblocko Customs Index, owned by bludariel. Built to help the community browse custom guns, compare custom values, track demand, and find customs faster.">
-  <meta name="twitter:title" content="Chicblocko Customs Index">
-  <meta name="twitter:description" content="Chicblocko Customs Index, owned by bludariel. Built to help the community browse custom guns, compare custom values, track demand, and find customs faster.">
+  <meta property="og:title" content="Chicblocko Values | Gun Values &amp; Demand Index">
+  <meta property="og:description" content="Search Chicblocko customs by gun model, compare estimated values, and check demand ratings from one organized value index.">
+  <meta name="twitter:title" content="Chicblocko Values | Gun Values &amp; Demand Index">
+  <meta name="twitter:description" content="Search Chicblocko customs by gun model, compare estimated values, and check demand ratings from one organized value index.">
   <meta property="og:url" content="https://chicblockos.github.io/chicblocko-gun-values/">
   <meta property="og:image" content="https://chicblockos.github.io/chicblocko-gun-values/assets/chicblocko-logo.webp">
+  <meta name="twitter:image" content="https://chicblockos.github.io/chicblocko-gun-values/assets/chicblocko-logo.webp">
   <meta name="twitter:card" content="summary">
   <link rel="preload" href="assets/chicblocko-logo.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260812-3">
-  <link rel="stylesheet" href="navigation.css?v=20260618-3">
+  <link rel="stylesheet" href="styles.css?v=20260812-5">
+  <link rel="stylesheet" href="navigation.css?v=20260812-1">
 </head>
 <body class="values-page">
   <a class="skip-link" href="#catalog">Skip to gun values</a>
@@ -44,7 +45,7 @@
 
   <main>
     <section class="hero" id="values">
-      <a class="hero-logo-link" href="#catalog" aria-label="Jump to Chicblocko gun values">
+      <a class="hero-logo-link" href="#catalog" aria-label="Jump to chicblockovalues">
         <img class="hero-logo" src="assets/chicblocko-logo.webp" width="255" height="255" alt="Chicblocko logo" decoding="async" fetchpriority="high">
       </a>
       <div class="eyebrow">COMMUNITY VALUE LIST</div>
@@ -68,9 +69,12 @@
       <div class="catalog-topline">
         <div>
           <span class="section-kicker">FULL COLLECTION</span>
-          <h2>Chicblocko Gun Values</h2>
+          <h2>chicblockovalues</h2>
         </div>
-        <time class="updated" id="lastUpdated" datetime="2026-07-01"><i></i><span>INDEX UPDATED</span><b>JUL 1</b></time>
+        <time class="updated" id="lastUpdated" datetime="2026-07-01">
+          <span class="updated-main"><i></i><span>INDEX REFRESH</span><strong id="updatedCount">154 CUSTOMS</strong></span>
+          <span class="updated-date"><b>JUL 1</b><em>LIVE</em></span>
+        </time>
       </div>
 
       <div class="toolbar">
@@ -84,6 +88,7 @@
           <span>Sort</span>
           <select id="sortSelect" aria-label="Sort customs">
             <option value="collection">Collection order</option>
+            <option value="recent">Recently listed</option>
             <option value="name">Name: A to Z</option>
             <option value="value-low">Value: Low to High</option>
             <option value="value-high">Value: High to Low</option>
@@ -110,9 +115,9 @@
   </main>
 
   <footer>
-    <a class="brand" href="#values"><img class="brand-mark" src="assets/chicblocko-logo.webp" width="255" height="255" alt=""><span>CHICBLOCKO GUN VALUES</span></a>
+    <a class="brand" href="#values"><img class="brand-mark" src="assets/chicblocko-logo.webp" width="255" height="255" alt=""><span>chicblockovalues</span></a>
     <p>Community-made value guide. Not affiliated with Roblox.</p>
-    <p>Copyright &copy; <span id="year"></span> Darriel. Chicblocko Gun Values is owned and maintained by Darriel. All rights reserved for the original site layout, written content, and compiled value data.</p>
+    <p>Copyright &copy; <span id="year"></span> Darriel. chicblockovalues is owned and maintained by Darriel. All rights reserved for the original site layout, written content, and compiled value data.</p>
   </footer>
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Go to the top">
@@ -169,8 +174,9 @@
   </template>
 
   <script src="assets-data.js?v=20260629-2"></script>
-  <script src="app.js?v=20260812-3"></script>
+  <script src="app.js?v=20260812-4"></script>
   <script src="navigation.js?v=20260627-12"></script>
 </body>
 </html>
+
 

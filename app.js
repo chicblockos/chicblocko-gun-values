@@ -347,6 +347,8 @@ function filteredListings() {
 
   if (sortSelect.value === "name") {
     result.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
+  } else if (sortSelect.value === "recent") {
+    result.sort((a, b) => (b.order ?? 0) - (a.order ?? 0) || a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
   } else if (sortSelect.value === "value-low") {
     result.sort(compareByValue(1));
   } else if (sortSelect.value === "value-high") {
@@ -890,6 +892,7 @@ async function initialize() {
   const updatedLabel = updatedDate.toLocaleDateString(undefined, { month: "short", day: "numeric" }).toUpperCase();
   $("#lastUpdated").dateTime = INDEX_UPDATED;
   $("#lastUpdated").querySelector("b").textContent = updatedLabel;
+  $("#updatedCount").textContent = `${listings.length} CUSTOMS`;
   $("#year").textContent = new Date().getFullYear();
 
   renderFilters();

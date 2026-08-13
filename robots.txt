@@ -7,4 +7,4 @@ Disallow: /*backup*
 Disallow: /AUDIT-REPORT.md
 Disallow: /CUSTOMS-INDEX.md
 
-Sitemap: https://chicblocko.com/sitemap.xml
+Sitemap: https://chicblockos.github.io/chicblocko-gun-values/sitemap.xml

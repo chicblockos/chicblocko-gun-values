@@ -846,6 +846,7 @@ nav a.active::after {
   line-height: 1.14;
 }
 
+
 .model-name {
   margin: 0;
   color: #aaa;
@@ -2780,3 +2781,4 @@ footer.custom-guide-footer {
     transition-duration: .01ms !important;
   }
 }
+

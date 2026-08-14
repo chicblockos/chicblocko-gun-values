@@ -8,6 +8,7 @@ const MODEL_DEFAULTS = {
   Draco: "Draco Custom",
   MAC: "MAC Custom",
   "ARP Drum": "ARP Drum",
+  "Kriss Vector": "Kriss Vector",
   AK47: "AK-47 Custom"
 };
 const PLACEHOLDER_VALUE = "N/A";
@@ -47,7 +48,8 @@ function normalizeCategory(item) {
   if (id.startsWith("glock18drum-")) return "Drum";
   if (id.startsWith("arp-drum-")) return "ARP Drum";
   if (id.startsWith("ak-47-")) return "AK47";
-  return CATEGORY_ORDER.includes(item.category) ? item.category : "EXT";
+  const category = cleanText(item.category, "EXT", 40);
+  return category || "EXT";
 }
 
 function cleanText(value, fallback, maxLength = 90) {
@@ -197,7 +199,10 @@ function mergeSavedListings(saved) {
   }
 
   return [...merged.values()].sort((a, b) => {
-    const categoryDifference = CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+    const leftIndex = CATEGORY_ORDER.indexOf(a.category);
+    const rightIndex = CATEGORY_ORDER.indexOf(b.category);
+    const categoryDifference = (leftIndex === -1 ? CATEGORY_ORDER.length : leftIndex)
+      - (rightIndex === -1 ? CATEGORY_ORDER.length : rightIndex);
     return categoryDifference || a.order - b.order;
   });
 }
@@ -500,7 +505,7 @@ function populateCategorySelect() {
   const select = $("#customCategory");
   if (!select) return;
   select.replaceChildren();
-  CATEGORY_ORDER.forEach((category) => {
+  ["All", ...availableCategories()].forEach((category) => {
     const option = document.createElement("option");
     option.value = category;
     option.textContent = category;
@@ -513,7 +518,7 @@ function renderEditorModels() {
   const fragment = document.createDocumentFragment();
   row.replaceChildren();
 
-  ["All", ...CATEGORY_ORDER].forEach((category) => {
+  ["All", ...availableCategories()].forEach((category) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `editor-model-button${editorCategory === category ? " active" : ""}`;
@@ -771,6 +776,8 @@ window.addEventListener("scroll", updateBackToTop, { passive: true });
 
 $("#closeDetail").addEventListener("click", closeDetails);
 $("#detailBack").addEventListener("click", closeDetails);
+\n
+
 detailDialog.addEventListener("click", (event) => {
   if (event.target === detailDialog) closeDetails();
 });
@@ -906,3 +913,5 @@ async function initialize() {
 }
 
 initialize();
+
+

@@ -776,7 +776,6 @@ window.addEventListener("scroll", updateBackToTop, { passive: true });
 
 $("#closeDetail").addEventListener("click", closeDetails);
 $("#detailBack").addEventListener("click", closeDetails);
-\n
 
 detailDialog.addEventListener("click", (event) => {
   if (event.target === detailDialog) closeDetails();

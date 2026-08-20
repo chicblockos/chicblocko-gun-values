@@ -25,6 +25,8 @@ const REMOVED_LISTING_IDS = new Set(["glock18drum-065", "glock18ext-008", "arp-d
 
 const $ = (selector) => document.querySelector(selector);
 const cardGrid = $("#cardGrid");
+const loadMoreWrap = $("#loadMoreWrap");
+const loadMoreButton = $("#loadMoreButton");
 const detailDialog = $("#detailDialog");
 const editorDialog = $("#editorDialog");
 const searchInput = $("#searchInput");
@@ -41,6 +43,15 @@ let editorRenderTimer = 0;
 let publicRenderTimer = 0;
 let detailCloseTimer = 0;
 let databasePromise;
+let visibleCardCount = initialCardLimit();
+
+function initialCardLimit() {
+  return window.matchMedia("(max-width: 760px)").matches ? 20 : 48;
+}
+
+function resetVisibleCards() {
+  visibleCardCount = initialCardLimit();
+}
 
 function normalizeCategory(item) {
   const id = String(item.id || "");
@@ -381,11 +392,13 @@ function updateImageStyles(image, item) {
 
 function renderCards() {
   const items = filteredListings();
+  const visibleItems = items.slice(0, visibleCardCount);
   const fragment = document.createDocumentFragment();
+  const isSmallScreen = window.matchMedia("(max-width: 760px)").matches;
 
   cardGrid.setAttribute("aria-busy", "true");
 
-  items.forEach((item, index) => {
+  visibleItems.forEach((item, index) => {
     const cardFragment = $("#cardTemplate").content.cloneNode(true);
     const card = cardFragment.querySelector(".gun-card");
     const image = cardFragment.querySelector("img");
@@ -402,8 +415,8 @@ function renderCards() {
       card.classList.add("image-error");
     }
     image.decoding = "async";
-    image.loading = index < 8 ? "eager" : "lazy";
-    image.fetchPriority = index < 4 ? "high" : "auto";
+    image.loading = isSmallScreen || index >= 4 ? "lazy" : "eager";
+    if (!isSmallScreen) image.fetchPriority = index < 4 ? "high" : "auto";
     image.addEventListener("error", () => card.classList.add("image-error"), { once: true });
     updateImageStyles(image, item);
 
@@ -422,7 +435,12 @@ function renderCards() {
   cardGrid.replaceChildren(fragment);
   cardGrid.setAttribute("aria-busy", "false");
   $("#emptyState").hidden = items.length !== 0;
-  $("#resultsStatus").textContent = `${items.length} custom${items.length === 1 ? "" : "s"} shown`;
+  if (loadMoreWrap && loadMoreButton) {
+    const hasMore = visibleItems.length < items.length;
+    loadMoreWrap.hidden = !hasMore;
+    loadMoreButton.textContent = `Show more customs (${items.length - visibleItems.length} left)`;
+  }
+  $("#resultsStatus").textContent = `${visibleItems.length} of ${items.length} custom${items.length === 1 ? "" : "s"} shown`;
   $("#itemCount").textContent = publicListings().length;
   $("#categoryCount").textContent = availableCategories().length;
 }
@@ -445,6 +463,7 @@ function schedulePublicRefresh() {
   window.clearTimeout(publicRenderTimer);
   publicRenderTimer = window.setTimeout(() => {
     renderFilters();
+    resetVisibleCards();
     renderCards();
   }, 80);
 }
@@ -733,6 +752,7 @@ $("#categoryFilters").addEventListener("click", (event) => {
   const button = event.target.closest(".filter-button");
   if (!button) return;
   activeCategory = button.dataset.category;
+  resetVisibleCards();
   renderFilters();
   presentResults();
 });
@@ -746,12 +766,16 @@ cardGrid.addEventListener("keydown", (event) => {
 
 searchInput.addEventListener("input", () => {
   window.clearTimeout(searchTimer);
-  searchTimer = window.setTimeout(() => presentResults({ scroll: false, animate: false }), 60);
+  searchTimer = window.setTimeout(() => {
+    resetVisibleCards();
+    presentResults({ scroll: false, animate: false });
+  }, 60);
 });
 
 searchInput.addEventListener("keydown", (event) => {
   if (event.key !== "Escape" || !searchInput.value) return;
   searchInput.value = "";
+  resetVisibleCards();
   presentResults({ scroll: false, animate: false });
 });
 
@@ -759,8 +783,16 @@ sortSelect.addEventListener("change", () => {
   const sortBox = sortSelect.closest(".sort-box");
   sortBox.classList.add("sort-changed");
   window.setTimeout(() => sortBox.classList.remove("sort-changed"), 350);
+  resetVisibleCards();
   presentResults({ scroll: false, animate: false });
 });
+
+if (loadMoreButton) {
+  loadMoreButton.addEventListener("click", () => {
+    visibleCardCount += initialCardLimit();
+    presentResults({ scroll: false, animate: false });
+  });
+}
 
 function updateBackToTop() {
   backToTop.classList.toggle("is-visible", window.scrollY > 600);

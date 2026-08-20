@@ -975,6 +975,41 @@ nav a.active::after {
   animation: none;
 }
 
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.load-more-wrap[hidden] {
+  display: none;
+}
+
+.load-more-button {
+  min-height: 54px;
+  padding: 0 28px;
+  color: #050505;
+  background: #fff;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 0 #9c9c9c, 0 20px 40px rgba(0, 0, 0, .35);
+  cursor: pointer;
+  font: 900 14px var(--display);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.load-more-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 #9c9c9c, 0 26px 46px rgba(0, 0, 0, .42);
+}
+
+.load-more-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #9c9c9c, 0 16px 32px rgba(0, 0, 0, .35);
+}
+
 .empty-state {
   padding: 80px 20px;
   text-align: center;
@@ -2310,6 +2345,20 @@ footer.custom-guide-footer {
 }
 
 @media (max-width: 760px) {
+  /* Safari/iOS is sensitive to large blurred composited layers on long pages. */
+  .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .hero::before {
+    filter: none;
+    transform: none;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, .84), rgba(0, 0, 0, .48) 45%, rgba(0, 0, 0, .84)),
+      url("assets/chicblocko-hero-bg.webp") center / cover no-repeat;
+  }
+
   .site-header {
     padding-inline: 14px;
   }
@@ -2413,6 +2462,21 @@ footer.custom-guide-footer {
     gap: 10px;
   }
 
+  .gun-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 360px;
+    box-shadow: none;
+  }
+
+  .card-grid.cards-enter .gun-card {
+    animation: none;
+  }
+
+  .card-image img {
+    transform: scale(var(--image-zoom, 1));
+    will-change: auto;
+  }
+
   .card-image {
     min-height: 150px;
   }
@@ -2464,6 +2528,14 @@ footer.custom-guide-footer {
 
   .detail-content button {
     margin-top: 6px;
+  }
+
+  .load-more-wrap {
+    margin-top: 20px;
+  }
+
+  .load-more-button {
+    width: min(100%, 320px);
   }
 
   footer {

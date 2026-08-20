@@ -22,7 +22,7 @@
   <meta property="og:image" content="https://chicblocko.com/assets/chicblocko-logo.webp">
   <meta name="twitter:card" content="summary">
   <link rel="preload" href="assets/chicblocko-logo.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260813-2">
+  <link rel="stylesheet" href="styles.css?v=20260820-1">
   <link rel="stylesheet" href="navigation.css?v=20260812-1">
 </head>
 <body class="values-page">
@@ -100,6 +100,9 @@
 
       <p class="results-status visually-hidden" id="resultsStatus" aria-live="polite"></p>
       <div class="card-grid" id="cardGrid" aria-busy="true"></div>
+      <div class="load-more-wrap" id="loadMoreWrap" hidden>
+        <button class="load-more-button" id="loadMoreButton" type="button">Show more customs</button>
+      </div>
       <div class="empty-state" id="emptyState" hidden>
         <span>NO MATCH</span>
         <h3>Nothing in the vault.</h3>
@@ -123,7 +126,8 @@
   <button class="back-to-top" id="backToTop" type="button" aria-label="Go to the top">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg>
     <span>GO TO THE TOP</span>
-  </button>`r`n
+  </button>
+
   <dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailName">
     <div class="detail-flip" id="detailFlip">
       <button class="detail-close" id="closeDetail" type="button" aria-label="Close custom details">&times;</button>
@@ -173,7 +177,7 @@
   </template>
 
   <script src="assets-data.js?v=20260629-2"></script>
-  <script src="app.js?v=20260813-2"></script>
+  <script src="app.js?v=20260820-1"></script>
   <script src="navigation.js?v=20260627-12"></script>
 </body>
 </html>

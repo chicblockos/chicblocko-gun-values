@@ -14,11 +14,6 @@
 
   links.forEach((link, index) => {
     link.addEventListener("click", (event) => {
-      if (link.classList.contains("market-tab")) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
       if (link.classList.contains("active") || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       nav.style.setProperty("--active-index", index);

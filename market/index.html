@@ -1,50 +1,206 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chicblocko Market is coming soon.">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="referrer" content="no-referrer">
-  <meta name="theme-color" content="#000000">
-  <meta name="color-scheme" content="dark">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
-  <title>Market Coming Soon | chicblockovalues</title>
-  <base href="../">
-  <link rel="icon" type="image/webp" href="assets/chicblocko-logo.webp">
-  <link rel="apple-touch-icon" href="assets/chicblocko-logo.webp">
-  <link rel="stylesheet" href="styles.css?v=20260813-2">
-  <link rel="stylesheet" href="navigation.css?v=20260814-market-minimal">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicblocko Market</title>
+  <meta name="description" content="Browse Chicblocko custom gun seller markets with prices, models, images, and listing notes." />
   <style>
-    .market-coming-page {
+    :root {
+      color-scheme: dark;
+      --bg: #030303;
+      --panel: rgba(18, 18, 20, 0.92);
+      --line: rgba(255, 255, 255, 0.17);
+      --line-strong: rgba(255, 255, 255, 0.34);
+      --text: #fff;
+      --muted: rgba(255, 255, 255, 0.66);
+      --blue: #5d7bff;
+      --cyan: #66e7ff;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.55);
+      --radius: 28px;
+      --font-heavy: Impact, Haettenschweiler, "Arial Black", sans-serif;
+      --display: Impact, Haettenschweiler, "Arial Black", sans-serif;
+      --font-main: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
       min-height: 100vh;
+      font-family: var(--font-main);
+      color: var(--text);
       background:
-        radial-gradient(circle at 50% 12%, rgba(255,255,255,.09), transparent 26%),
-        radial-gradient(circle at 16% 78%, rgba(72,129,255,.12), transparent 24%),
-        #000;
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.11), transparent 30%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 72px 72px, 72px 72px, auto;
+      overflow-x: hidden;
     }
 
-    .market-page-main {
-      width: min(980px, calc(100% - 28px));
-      min-height: calc(100vh - 180px);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -16%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 28%, rgba(76, 111, 255, 0.18), transparent 25%),
+        radial-gradient(circle at 82% 18%, rgba(91, 255, 233, 0.1), transparent 24%);
+      filter: blur(20px);
+      opacity: .75;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
       margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .site-header {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display: grid;
-      place-items: center;
-      padding: clamp(42px, 8vw, 92px) 0;
+      grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr);
+      gap: 12px;
+      row-gap: 10px;
+      align-items: center;
+      min-height: 84px;
+      padding: 14px max(22px, calc((100% - 1320px) / 2));
+      border-bottom: 2px solid #2d2d2d;
+      background: rgba(8, 8, 8, 0.96);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(14px);
     }
 
-    .market-tab {
+    .site-header > .brand {
+      display: flex;
+      align-items: center;
+      justify-self: start;
+      gap: 0;
+      min-width: 0;
+    }
+
+    .brand-title {
+      display: grid;
+      gap: 1px;
+      padding-left: 11px;
       position: relative;
+      transform: skew(-4deg);
     }
 
-    .market-tab::before {
+    .brand-title::before {
+      content: "";
+      position: absolute;
+      inset: 2px auto 2px 0;
+      width: 4px;
+      background: #fff;
+      border-radius: 3px;
+    }
+
+    .brand-title b {
+      font: 900 18px/.9 var(--display);
+      letter-spacing: -.055em;
+      text-shadow: 0 2px 0 #000;
+      -webkit-text-stroke: .7px #000;
+    }
+
+    .brand-title em {
+      color: #a8a8a8;
+      font: 800 8px/1.1 Arial, sans-serif;
+      font-style: normal;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border: 2px solid #fff;
+      border-radius: 8px;
+    }
+
+    .site-header > .brand img:not(.brand-mark) {
+      display: none;
+    }
+
+    .site-header > nav {
+      --active-index: 2;
+      --tab-count: 4;
+      width: clamp(430px, 42vw, 560px);
+      display: grid !important;
+      grid-template-columns: repeat(var(--tab-count), minmax(0, 1fr));
+      align-items: center;
+      position: relative;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+      gap: 4px;
+      padding: 3px;
+      border: 1px solid #303030;
+      border-radius: 12px;
+      background: rgba(3, 3, 3, 0.98);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.08), 0 12px 34px rgba(0, 0, 0, 0.62);
+      isolation: isolate;
+    }
+
+    .site-header > nav .nav-indicator {
+      position: absolute;
+      z-index: 0;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      width: calc((100% - 6px - (var(--tab-count) - 1) * 4px) / var(--tab-count));
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 3px #555, 0 8px 18px rgba(255, 255, 255, 0.08);
+      transform: translateX(calc(var(--active-index) * (100% + 4px)));
+      transition: transform 200ms ease;
+    }
+
+    .site-header > nav a {
+      position: relative;
+      z-index: 1;
+      min-width: 0 !important;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px !important;
+      border-radius: 8px;
+      color: #d7d7d7 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      font-size: .7rem !important;
+      font-weight: 900 !important;
+      text-align: center;
+      white-space: nowrap;
+      line-height: 1.1;
+      transition: color 180ms ease, transform 180ms ease !important;
+    }
+
+    .site-header > nav a::after { display: none !important; }
+    .site-header > nav a:hover { transform: translateY(-1px); color: #fff !important; }
+    .site-header > nav a.active { color: #050505 !important; }
+
+    .site-header > nav a.market-tab { position: relative; }
+
+    .site-header > nav a.market-tab::before {
       content: "COMING SOON";
       position: absolute;
       left: 50%;
-      bottom: calc(100% + 6px);
+      bottom: calc(100% + 2px);
       transform: translateX(-50%);
       padding: 3px 9px 4px;
-      border: 1px solid rgba(255,255,255,.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       border-radius: 999px;
       background: #070707;
       color: #fff;
@@ -52,250 +208,2131 @@
       font-weight: 1000;
       letter-spacing: .08em;
       line-height: 1;
-      box-shadow: 0 0 12px rgba(255,255,255,.18);
+      box-shadow: 0 0 12px rgba(255, 255, 255, .18);
       pointer-events: none;
       white-space: nowrap;
     }
 
-    .market-card {
-      position: relative;
-      width: min(760px, 100%);
-      overflow: hidden;
-      padding: clamp(28px, 6vw, 54px);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 30px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.025) 38%, rgba(0,0,0,.62)),
-        rgba(15,15,15,.86);
-      box-shadow: 0 32px 100px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.16);
-      text-align: center;
-      isolation: isolate;
+    .site-header::after { content: ""; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: .2px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
     }
 
-    .market-card::before {
+    .pill:hover { transform: translateY(-2px); border-color: #fff; background: rgba(255,255,255,.1); }
+    .pill.primary { color: #000; background: #fff; }
+    .pill.buy-market {
+      position: relative;
+      overflow: hidden;
+      border-color: rgba(255,255,255,.45);
+      box-shadow: 0 4px 0 rgba(255,255,255,.2);
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .pill.buy-market::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: translateX(-120%);
+      transition: transform .45s ease;
+    }
+    .pill.buy-market:hover::before { transform: translateX(120%); }
+    .pill.buy-market:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(255,255,255,.18); }
+
+    .hero {
+      min-height: 410px;
+      display: grid;
+      place-items: center;
+      padding: 72px 0 42px;
+      text-align: center;
+    }
+
+    .hero-content {
+      width: min(880px, 100%);
+      animation: rise .55s ease both;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin: 0; }
+
+    h1 {
+      font-family: var(--font-heavy);
+      font-size: clamp(64px, 12vw, 138px);
+      line-height: .82;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+      text-shadow: 0 5px 0 #000, 0 14px 26px rgba(0,0,0,.75);
+    }
+
+    .tagline {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 18px 12px;
+      border-radius: 14px;
+      background: #fff;
+      color: #000;
+      font-family: var(--font-heavy);
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: .82;
+      text-transform: uppercase;
+      box-shadow: 8px 8px 0 rgba(255,255,255,.42);
+    }
+
+    .hero p.desc {
+      width: min(660px, 100%);
+      margin: 28px auto 0;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 14px;
+      margin: 10px 0 22px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .searchbox, .sortbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(0,0,0,.24);
+    }
+
+    .searchbox span, .sortbox span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .searchbox input, .sortbox select {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      color: #fff;
+      background: transparent;
+      font-weight: 900;
+    }
+
+    .sortbox select option { color: #000; }
+
+    .category-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 11px;
+      margin: -4px 0 24px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.015)),
+        rgba(0,0,0,.18);
+    }
+
+    .market-category {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: rgba(255,255,255,.74);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(255,255,255,.08), transparent 42%),
+        rgba(255,255,255,.035);
+      font-size: 12px;
+      font-weight: 1000;
+      cursor: pointer;
+      text-align: left;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+
+    .market-category:hover,
+    .market-category:focus-visible {
+      transform: translateY(-2px);
+      border-color: #fff;
+      color: #fff;
+      outline: none;
+    }
+
+    .market-category.active {
+      color: #000;
+      background: #fff;
+      box-shadow: 0 4px 0 rgba(255,255,255,.35), 0 18px 36px rgba(255,255,255,.12);
+    }
+
+    .market-category-main {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .market-category-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .market-category-meta {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .market-category.active .market-category-meta { color: rgba(0,0,0,.58); }
+
+    .market-category-count {
+      min-width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      color: #fff;
+      font-family: var(--font-heavy);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .market-category.active .market-category-count {
+      border-color: rgba(0,0,0,.2);
+      background: #000;
+      color: #fff;
+    }
+
+    .market-category-badge {
+      display: inline-block;
+      width: max-content;
+      padding: 3px 7px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .seller-card {
+      position: relative;
+      min-height: 256px;
+      overflow: hidden;
+      border: 1px solid rgba(122, 151, 255, .35);
+      border-radius: var(--radius);
+      background: #0b0c10;
+      cursor: pointer;
+      box-shadow: 0 22px 60px rgba(0,0,0,.35);
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    .seller-card::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: .55;
-      pointer-events: none;
-      z-index: -2;
+        linear-gradient(90deg, rgba(5, 6, 9, .97), rgba(5, 6, 9, .65), rgba(5, 6, 9, .95)),
+        var(--avatar) center/cover;
+      filter: saturate(.9);
+      transform: scale(1.08);
+      opacity: .78;
+      transition: transform .35s ease, opacity .22s ease;
     }
 
-    .market-card::after {
+    .seller-card::after {
       content: "";
       position: absolute;
-      inset: -30% -45%;
-      background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.12), transparent 48%);
-      transform: translateX(-35%) rotate(7deg);
-      animation: soft-sweep 5.5s ease-in-out infinite;
-      pointer-events: none;
-      z-index: -1;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.11), transparent 35%, rgba(97,115,255,.12));
+      opacity: .8;
     }
 
-    .market-logo {
-      width: 88px;
-      height: 88px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,.88);
-      border-radius: 22px;
-      box-shadow: 0 16px 34px rgba(0,0,0,.48);
+    .seller-card:hover {
+      transform: translateY(-7px);
+      border-color: #fff;
+      box-shadow: 0 30px 90px rgba(0,0,0,.58), 0 0 34px rgba(93,123,255,.18);
     }
 
-    .market-kicker {
-      width: fit-content;
-      margin: 24px auto 16px;
-      padding: 7px 14px;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 999px;
+    .seller-card:hover::before { transform: scale(1.14); opacity: .9; }
+
+    .seller-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 256px;
+      padding: 22px;
+    }
+
+    .seller-tag, .model {
       color: rgba(255,255,255,.72);
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 1000;
-      letter-spacing: .18em;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    .market-card h1 {
-      margin: 0;
-      color: #fff;
-      font-family: var(--font-display);
-      font-size: clamp(54px, 11vw, 116px);
-      line-height: .83;
-      letter-spacing: -.045em;
-      text-shadow: 0 6px 0 rgba(0,0,0,.55);
+    .seller-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 0;
     }
 
-    .market-card h1 strong {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 8px 20px 13px;
+    .avatar {
+      width: 78px;
+      height: 78px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #050505;
+      border: 4px solid #fff;
+      box-shadow: 0 8px 22px rgba(0,0,0,.45);
+    }
+
+    .seller-name {
+      font-family: var(--font-heavy);
+      font-size: 36px;
+      line-height: .9;
+      text-shadow: 0 4px 0 #000;
+      overflow-wrap: anywhere;
+    }
+
+    .seller-status {
+      margin-top: 8px;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .seller-handle {
+      margin-top: 5px;
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: .7px;
+      text-transform: none;
+    }
+
+    .market-handle {
+      margin-top: 7px;
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+    }
+
+    .seller-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.2);
+      padding-top: 16px;
+    }
+
+    .mini {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 54px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.14);
       border-radius: 14px;
-      background: #fff;
-      color: #000;
-      box-shadow: 8px 9px 0 rgba(255,255,255,.36), 0 10px 0 rgba(0,0,0,.7);
+      background: rgba(0,0,0,.22);
     }
 
-    .market-copy {
-      max-width: 560px;
-      margin: 26px auto 0;
-      color: rgba(255,255,255,.74);
-      font-size: clamp(16px, 2vw, 20px);
+    .mini b {
+      display: block;
+      font-family: var(--font-heavy);
+      font-size: 24px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .mini b.market-type {
+      font-size: 18px;
+      line-height: .95;
+      text-align: center;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .mini span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .market-view {
+      margin-top: 26px;
+      min-height: 1px;
+    }
+
+    .market-panel {
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: rgba(12,12,14,.92);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      animation: slideIn .32s ease both;
+    }
+
+    .market-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .market-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .market-title h2 {
+      font-family: var(--font-heavy);
+      font-size: clamp(34px, 5vw, 72px);
+      line-height: .85;
+      text-transform: uppercase;
+      text-shadow: 0 4px 0 #000;
+    }
+
+    .back {
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      color: #000;
+      background: #fff;
+      font-weight: 1000;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .back:hover { transform: translateY(-2px); box-shadow: 0 5px 0 rgba(255,255,255,.35); }
+
+    .listings {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .listing-card {
+      position: relative;
+      padding: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .listing-card:hover,
+    .listing-card:focus-visible {
+      transform: translateY(-5px);
+      border-color: #fff;
+      box-shadow: 0 22px 52px rgba(0, 0, 0, .42);
+      outline: none;
+    }
+
+    .listing-image-frame {
+      aspect-ratio: 735 / 430;
+      min-height: 178px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 60%),
+        #111;
+    }
+
+    .listing-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding: 6px;
+      object-fit: contain;
+      object-position: center;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .listing-card.sold-out {
+      border-color: rgba(255,80,105,.55);
+      background:
+        linear-gradient(135deg, rgba(255,56,86,.08), rgba(255,255,255,.035));
+    }
+
+    .listing-card.sold-out .listing-image-frame {
+      border-color: rgba(255,80,105,.45);
+    }
+
+    .soldout-ribbon {
+      position: absolute;
+      top: 28px;
+      right: -42px;
+      z-index: 3;
+      width: 170px;
+      padding: 8px 0;
+      border: 1px solid rgba(255,255,255,.6);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,45,70,.95), rgba(110,0,20,.95));
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1.7px;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(35deg);
+      box-shadow: 0 12px 26px rgba(255,40,70,.24);
+    }
+
+    .model {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .listing-card h3 {
+      margin-top: 10px;
+      min-height: 0;
+      font-family: var(--font-heavy);
+      font-size: 26px;
+      line-height: .95;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 0 3px 0 #000;
+      overflow-wrap: anywhere;
+    }
+
+    .gun-name {
+      min-height: 0;
+      margin-top: 6px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .stock-pill {
+      width: max-content;
+      max-width: 100%;
+      margin: 7px auto 0;
+      padding: 6px 11px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .stock-pill.sold-out-pill,
+    .listing-detail-stock.sold-out-pill {
+      border-color: rgba(255,80,105,.65);
+      background: linear-gradient(135deg, rgba(255,45,70,.24), rgba(255,255,255,.06));
+      box-shadow: 0 0 24px rgba(255,45,70,.16), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .price-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .price-row div {
+      min-height: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 8px;
+    }
+
+    .price-row div + div { border-left: 1px solid var(--line); }
+    .price-row span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 1000;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+    .price-row b {
+      font-family: var(--font-heavy);
+      font-size: 25px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .price-row .want {
+      font-size: 18px;
+      color: var(--cyan);
+    }
+
+    .empty {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      text-align: center;
+    }
+
+    .empty h2 {
+      font-family: var(--font-heavy);
+      font-size: 40px;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      margin-top: 46px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .listing-detail-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .78);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+
+    .listing-detail-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .listing-detail-card {
+      position: relative;
+      width: min(920px, 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 22% 5%, rgba(255, 255, 255, .12), transparent 38%),
+        linear-gradient(145deg, rgba(24, 24, 27, .98), rgba(8, 8, 10, .98));
+      box-shadow: 0 36px 120px rgba(0, 0, 0, .78), inset 0 1px 0 rgba(255, 255, 255, .08);
+      transform: translateY(16px) scale(.98);
+      transition: transform .24s ease;
+    }
+
+    .listing-detail-modal.open .listing-detail-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .listing-detail-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      color: #000;
+      background: #fff;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: 1000;
+      box-shadow: 0 5px 0 rgba(255,255,255,.34);
+    }
+
+    .listing-detail-media {
+      min-height: 450px;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      border-right: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .06), transparent 58%),
+        #111;
+    }
+
+    .listing-detail-media img {
+      width: 100%;
+      max-height: 520px;
+      display: block;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #171717;
+    }
+
+    .listing-detail-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 58px 32px 32px;
+    }
+
+    .listing-detail-model {
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .listing-detail-content h2 {
+      font-family: var(--font-heavy);
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: .84;
+      text-transform: uppercase;
+      text-shadow: 0 4px 0 #000;
+      overflow-wrap: anywhere;
+    }
+
+    .listing-detail-gun {
+      color: rgba(255,255,255,.66);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .listing-detail-stock {
+      width: max-content;
+      max-width: 100%;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .listing-detail-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      overflow: hidden;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(0,0,0,.18);
+    }
+
+    .listing-detail-stats div {
+      min-height: 82px;
+      display: grid;
+      place-items: center;
+      gap: 7px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .listing-detail-stats div + div {
+      border-left: 1px solid var(--line);
+    }
+
+    .listing-detail-stats span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 1000;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .listing-detail-stats b {
+      font-family: var(--font-heavy);
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .listing-detail-stats .want {
+      color: var(--cyan);
+    }
+
+    .listing-detail-notes {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
       font-weight: 800;
       line-height: 1.5;
     }
 
-    .progress-wrap {
-      margin: 34px auto 0;
-      max-width: 560px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 20px;
-      background: rgba(0,0,0,.34);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    .buy-modal {
+      position: relative;
+      width: min(820px, 100%);
+      max-height: min(94vh, 820px);
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 16% 0%, rgba(255,255,255,.12), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.018)),
+        rgba(11, 11, 13, .97);
+      box-shadow: 0 36px 120px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.1);
+      transform: translateY(18px) scale(.98);
+      transition: transform .24s ease;
     }
 
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      color: rgba(255,255,255,.72);
-      font-size: 11px;
+    .modal-backdrop.open .buy-modal { transform: translateY(0) scale(1); }
+
+    .modal-close {
+      position: sticky;
+      top: 16px;
+      z-index: 2;
+      float: right;
+      width: 46px;
+      height: 46px;
+      margin: 16px 16px 0 0;
+      border: 0;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      font-size: 24px;
       font-weight: 1000;
-      letter-spacing: .14em;
+      cursor: pointer;
+      box-shadow: 0 5px 0 rgba(255,255,255,.34);
+      transition: transform .18s ease;
+    }
+
+    .modal-close:hover { transform: translateY(-2px) rotate(4deg); }
+
+    .modal-step {
+      display: none;
+      padding: 34px 38px 36px;
+      animation: modalStep .22s ease both;
+    }
+
+    .modal-step[data-step="intro"] { overflow: hidden; }
+
+    .modal-step[data-step="packages"] {
+      padding: 30px 38px 28px;
+    }
+
+    .modal-step.active { display: block; }
+
+    .modal-step h2 {
+      font-family: var(--font-heavy);
+      font-size: clamp(44px, 8vw, 78px);
+      line-height: .82;
       text-transform: uppercase;
+      text-shadow: 0 5px 0 #000;
     }
 
-    .progress-track {
-      height: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #fff, #aab7ff);
-      box-shadow: 0 0 24px rgba(255,255,255,.38);
-    }
-
-    .progress-note {
+    .modal-copy {
+      width: min(560px, 100%);
       margin: 12px 0 0;
-      color: rgba(255,255,255,.56);
-      font-size: 13px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      line-height: 1.45;
       font-weight: 800;
     }
 
-    .market-actions {
-      display: flex;
-      justify-content: center;
-      margin-top: 28px;
+    .how-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .market-button {
-      display: inline-flex;
+    .how-list li {
+      display: grid;
+      grid-template-columns: 52px 1fr;
       align-items: center;
-      justify-content: center;
-      min-height: 50px;
-      padding: 0 24px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 14px;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+      font-weight: 1000;
+    }
+
+    .how-list b {
+      display: grid;
+      place-items: center;
+      height: 40px;
+      border-radius: 12px;
       background: #fff;
       color: #000;
-      font-size: 14px;
+      font-family: var(--font-heavy);
+      font-size: 22px;
+    }
+
+    .buy-icon-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .buy-icon-card {
+      min-height: 96px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .buy-icon-card.interactive {
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .buy-icon-card.interactive:hover,
+    .buy-icon-card.interactive:focus-visible {
+      transform: translateY(-2px);
+      border-color: #fff;
+      background: rgba(255,255,255,.075);
+      outline: none;
+    }
+
+    .buy-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: #fff;
+      color: #000;
+      font-family: var(--font-heavy);
+      font-size: 18px;
+      line-height: 1;
+      box-shadow: 0 4px 0 rgba(255,255,255,.22);
+    }
+
+    .buy-icon img,
+    .buy-icon svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .buy-icon.cbv {
+      overflow: hidden;
+      background: rgba(255,255,255,.08);
+    }
+
+    .buy-icon.cbv img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .buy-icon.discord {
+      color: #fff;
+      background: #5865f2;
+      font-family: var(--font-main);
       font-weight: 1000;
-      letter-spacing: .03em;
-      text-decoration: none;
-      box-shadow: 0 6px 0 rgba(255,255,255,.34);
-      transition: transform .18s ease, box-shadow .18s ease;
+      font-size: 20px;
     }
 
-    .market-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 9px 0 rgba(255,255,255,.28), 0 18px 40px rgba(0,0,0,.34);
+    .buy-icon.image {
+      overflow: hidden;
+      padding: 0;
+      background: rgba(255,255,255,.06);
     }
 
-    @keyframes soft-sweep {
-      0%, 100% { transform: translateX(-38%) rotate(7deg); opacity: .28; }
-      50% { transform: translateX(38%) rotate(7deg); opacity: .52; }
+    .buy-icon.image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
-    @media (max-width: 720px) {
-      .market-tab::before {
-        display: none;
+    .buy-icon-card b {
+      display: block;
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .buy-icon-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .discord-step h2 {
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: .8;
+      margin-bottom: 8px;
+    }
+
+    .discord-step .modal-copy {
+      max-width: 560px;
+      margin-bottom: 0;
+    }
+
+    .discord-profile {
+      position: relative;
+      overflow: hidden;
+      margin-top: 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+        #111214;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.1),
+        0 22px 55px rgba(0,0,0,.28);
+    }
+
+    .discord-banner {
+      height: 116px;
+      background:
+        radial-gradient(circle at 22% 20%, rgba(255,255,255,.08), transparent 28%),
+        linear-gradient(135deg, #050505, #111214 52%, #000);
+    }
+
+    .discord-profile-body {
+      position: relative;
+      padding: 0 22px 22px;
+    }
+
+    .discord-avatar {
+      position: relative;
+      z-index: 1;
+      width: 92px;
+      height: 92px;
+      margin-top: -46px;
+      border: 7px solid #111214;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background: #111216;
+      box-shadow: 0 10px 28px rgba(0,0,0,.42);
+    }
+
+    .discord-name-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      margin-top: 8px;
+    }
+
+    .discord-name-row h3 {
+      font-family: var(--font-heavy);
+      font-size: 36px;
+      line-height: .9;
+      text-shadow: 0 3px 0 #000;
+    }
+
+    .discord-user {
+      color: rgba(255,255,255,.58);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .discord-role {
+      width: max-content;
+      max-width: 100%;
+      margin-top: 14px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .discord-about-label {
+      display: block;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .discord-profile p {
+      margin: 7px 0 0;
+      max-width: 560px;
+      color: rgba(255,255,255,.76);
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .discord-step .modal-actions {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+      align-items: stretch;
+    }
+
+    .package-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+      padding: 22px 20px 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,.12), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02)),
+        rgba(255,255,255,.035);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .package-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .72;
+    }
+
+    .package-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .package-card.plan-featured {
+      border-color: rgba(255, 216, 94, .48);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255, 212, 86, .24), transparent 42%),
+        linear-gradient(180deg, rgba(255, 209, 67, .08), rgba(255,255,255,.022)),
+        rgba(255,255,255,.035);
+    }
+
+    .package-card.plan-featured::before {
+      background: linear-gradient(135deg, rgba(255, 232, 130, .18), transparent 42%, rgba(255, 180, 45, .09));
+    }
+
+    .package-card.plan-premium {
+      border-color: rgba(177, 116, 255, .52);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(156, 83, 255, .28), transparent 42%),
+        linear-gradient(180deg, rgba(119, 78, 255, .11), rgba(255,255,255,.022)),
+        rgba(255,255,255,.035);
+    }
+
+    .package-card.plan-premium::before {
+      background: linear-gradient(135deg, rgba(198, 134, 255, .2), transparent 42%, rgba(94, 71, 255, .12));
+    }
+
+    .package-card:hover {
+      transform: translateY(-4px);
+      border-color: #fff;
+      box-shadow: 0 22px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.16);
+    }
+
+    .package-card h3 {
+      font-family: var(--font-heavy);
+      font-size: clamp(24px, 2.35vw, 32px);
+      line-height: .86;
+      margin-top: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 3px 0 #000;
+      overflow-wrap: anywhere;
+    }
+
+    .plan-subtitle {
+      width: max-content;
+      max-width: 100%;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.78);
+      font-size: 9px;
+      font-weight: 1000;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .plan-desc {
+      margin: 2px 0 4px;
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.38;
+    }
+
+    .package-card ul {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      color: rgba(255,255,255,.74);
+      list-style: none;
+      font-size: 11.5px;
+      line-height: 1.25;
+      font-weight: 950;
+    }
+
+    .package-card li {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      padding: 5px 8px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      background: rgba(0,0,0,.12);
+    }
+
+    .package-card li::before {
+      content: "✓";
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    .package-price {
+      margin-top: auto;
+      padding-top: 12px;
+      font-family: var(--font-heavy);
+      font-size: 32px;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 761px) and (min-height: 760px) {
+      .modal-step[data-step="packages"] .modal-copy {
+        margin-top: 8px;
       }
 
-      .market-card {
-        padding: 26px 18px;
-        border-radius: 24px;
+      .modal-step[data-step="packages"] .package-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .market-logo {
-        width: 72px;
-        height: 72px;
+      .modal-step[data-step="packages"] .modal-actions {
+        margin-top: 16px;
       }
+    }
 
-      .market-card h1 {
-        font-size: clamp(48px, 15vw, 78px);
-      }
+    .modal-link {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 1000;
+    }
 
-      .progress-top {
-        align-items: flex-start;
-        flex-direction: column;
+    .setup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 24px;
+    }
+
+    .setup-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .setup-field.full { grid-column: 1 / -1; }
+
+    .setup-field label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 1000;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .setup-field input,
+    .setup-field select,
+    .setup-field textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      outline: 0;
+      color: #fff;
+      background: rgba(0,0,0,.28);
+      font-weight: 900;
+    }
+
+    .setup-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .selected-package {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.05);
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @keyframes modalStep {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+
+    @media (max-width: 920px) {
+      .site-header { grid-template-columns: 1fr auto; }
+      .actions { justify-content: center; }
+      .site-header > nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: min(100%, 560px);
       }
+      .market-grid, .listings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 22px, 1180px); padding-top: 10px; }
+      .hero { min-height: 360px; padding-top: 44px; }
+      h1 { letter-spacing: -1px; }
+      .toolbar, .market-grid, .listings { grid-template-columns: 1fr; }
+      .category-strip { grid-template-columns: 1fr; }
+      .market-head { align-items: flex-start; flex-direction: column; }
+      .seller-meta { grid-template-columns: 1fr; }
+      .listing-image-frame { min-height: 150px; }
+      .listing-detail-card {
+        max-height: calc(100vh - 26px);
+        grid-template-columns: 1fr;
+        overflow: auto;
+      }
+      .listing-detail-media {
+        min-height: 245px;
+        padding: 18px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .listing-detail-content {
+        padding: 24px 18px 18px;
+      }
+      .listing-detail-content h2 {
+        font-size: clamp(34px, 13vw, 48px);
+      }
+      .listing-detail-stats {
+        grid-template-columns: 1fr;
+      }
+      .listing-detail-stats div + div {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+      .site-header > nav { width: min(100%, 520px); margin: 0 auto; }
+      .site-header > nav a { padding-inline: 4px !important; font-size: .54rem !important; }
+      .modal-step { padding: 34px 18px 24px; }
+      .package-grid, .setup-grid, .buy-icon-row { grid-template-columns: 1fr; }
+      .modal-actions .pill { width: 100%; }
+      .modal-link { width: 100%; min-height: 42px; }
+      .discord-step h2 { font-size: clamp(42px, 16vw, 58px); }
+      .discord-banner { height: 92px; }
+      .discord-profile-body { padding: 0 16px 18px; }
+      .discord-avatar {
+        width: 78px;
+        height: 78px;
+        margin-top: -39px;
+        border-width: 6px;
+      }
+      .discord-name-row h3 { font-size: 30px; }
     }
   </style>
 </head>
-<body class="values-page market-coming-page">
-  <header class="site-header">
-    <a class="brand" href="./#values" aria-label="chicblockovalues home">
-      <span class="brand-lockup">
+<body>
+  <header class="site-header" aria-label="Market navigation">
+    <a class="brand" href="index.html" aria-label="Chicblocko Market home">
+      <span class="brand-title">
         <b>CHICBLOCKO</b>
-        <small>THE CUSTOM VALUE INDEX</small>
+        <em>THE CUSTOM VALUE INDEX</em>
       </span>
     </a>
-    <nav class="page-tabs" aria-label="Primary">
-      <a href="./#values" data-page-key="values">Values</a>
-      <a href="contributors/" data-page-key="contributors">Contributors</a>
-      <a class="active market-tab" href="market/" data-page-key="market" aria-current="page">Market</a>
-      <a href="historic-records/" data-page-key="historic">Historic Records</a>
+    <nav aria-label="Pages">
+      <span class="nav-indicator" aria-hidden="true"></span>
+      <a href="../index.html">Values</a>
+      <a href="../contributors/">Contributors</a>
+      <a class="active market-tab" href="index.html" aria-current="page">Market</a>
+      <a href="../historic-records/">Historic Records</a>
     </nav>
   </header>
 
-  <main class="market-page-main" id="market-coming">
-    <section class="market-card" aria-labelledby="market-title">
-      <img class="market-logo" src="assets/chicblocko-logo.webp" width="88" height="88" alt="Chicblocko logo" decoding="async" fetchpriority="high">
-      <div class="market-kicker">Coming Soon</div>
-      <h1 id="market-title">CHICBLOCKO <strong>MARKET</strong></h1>
-      <p class="market-copy">A simple marketplace page for Chicblocko custom listings is being prepared.</p>
-
-      <div class="progress-wrap" aria-label="Market build progress">
-        <div class="progress-top">
-          <span>Build progress</span>
-          <span>0% completed out of 100</span>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Player listings</p>
+        <h1>CHICBLOCKO</h1>
+        <span class="tagline">MARKET</span>
+        <p class="desc">
+          Browse seller tabs, open each player's market, and preview custom guns they are listing with prices,
+          model names, images, and notes in the same dark Chicblocko value-index style.
+        </p>
+        <div class="hero-buttons">
+          <a class="pill primary" href="#markets">View Markets</a>
+          <button class="pill buy-market" id="openBuyMarket" type="button">+ Buy Market</button>
         </div>
-        <div class="progress-track" aria-hidden="true">
-          <div class="progress-fill"></div>
-        </div>
-        <p class="progress-note">Market page coming soon.</p>
-      </div>
-
-      <div class="market-actions">
-        <a class="market-button" href="./#catalog">Back to Values</a>
       </div>
     </section>
+
+    <section class="toolbar" id="markets" aria-label="Search and sort market listings">
+      <label class="searchbox">
+        <span>Search</span>
+        <input id="marketSearch" type="search" placeholder="Seller, custom, model, price..." autocomplete="off" />
+      </label>
+      <label class="sortbox">
+        <span>Sort</span>
+        <select id="marketSort">
+          <option value="active">Featured first</option>
+          <option value="priceHigh">Highest total</option>
+          <option value="listings">Most listings</option>
+          <option value="az">Seller A-Z</option>
+        </select>
+      </label>
+    </section>
+    <section class="category-strip" id="marketCategories" aria-label="Market categories"></section>
+
+    <section class="market-grid" id="sellerGrid" aria-label="Seller markets"></section>
+    <section class="market-view" id="marketView" aria-live="polite"></section>
+
+    <footer class="footer">
+      Chicblocko Market listings are updated through the private market editor.
+    </footer>
   </main>
 
-  <footer class="site-footer">
-    <a class="brand" href="./#values"><img loading="lazy" decoding="async" class="brand-mark" src="assets/chicblocko-logo.webp" width="255" height="255" alt=""><span>chicblockovalues</span></a>
-    <p>Copyright &copy; 2026 Darriel. chicblockovalues is owned and maintained by Darriel. All rights reserved for the original site layout, written content, and compiled value data.</p>
-  </footer>
-  <script src="navigation.js?v=20260814-market-minimal"></script>
+  <div class="modal-backdrop" id="buyMarketModal" aria-hidden="true">
+    <section class="buy-modal" role="dialog" aria-modal="true" aria-labelledby="buyMarketTitle">
+      <button class="modal-close" id="closeBuyMarket" type="button" aria-label="Close buy market popup">&times;</button>
+
+      <div class="modal-step active" data-step="intro">
+        <p class="eyebrow">In-game market access</p>
+        <h2 id="buyMarketTitle">Buy Market</h2>
+        <p class="modal-copy">
+          Create your own Chicblocko seller market. Markets are handled through Chicblocko, not a website
+          checkout. Pay in-game, send your details, then your listings can be reviewed and added.
+        </p>
+        <div class="buy-icon-row" aria-label="Market setup platforms">
+          <div class="buy-icon-card">
+            <span class="buy-icon cbv"><img src="../assets/chicblocko-logo.webp" alt="" /></span>
+            <b>CBV Market</b>
+            <span>Your listing gets added to the Chicblocko Values market page.</span>
+          </div>
+          <div class="buy-icon-card">
+            <span class="buy-icon image"><img src="assets/chicblocko-game-logo.webp" alt="" /></span>
+            <b>Chicblocko Game</b>
+            <span>Payment is made inside Chicblocko through the game.</span>
+          </div>
+          <button class="buy-icon-card interactive" type="button" data-buy-step="discord" aria-label="Open bludariel Discord setup profile">
+            <span class="buy-icon image"><img src="assets/discord-logo.webp" alt="" /></span>
+            <b>Discord Setup</b>
+            <span>Use Discord to send seller info, images, and update notes.</span>
+          </button>
+        </div>
+        <ul class="how-list" aria-label="How buying a market works">
+          <li><b>01</b><span>Choose your market.</span></li>
+          <li><b>02</b><span>Submit your information.</span></li>
+          <li><b>03</b><span>Market gets reviewed.</span></li>
+          <li><b>04</b><span>Start listing your customs.</span></li>
+        </ul>
+        <div class="modal-actions">
+          <button class="pill primary" type="button" data-buy-step="packages">View Market Options →</button>
+          <button class="modal-link" type="button" data-close-buy-market>Maybe Later</button>
+        </div>
+      </div>
+
+      <div class="modal-step" data-step="packages">
+        <p class="eyebrow">Choose your market type</p>
+        <h2>Choose Your Market</h2>
+        <p class="modal-copy">Select the market that fits your needs. These tiers are not purchasable yet.</p>
+        <div class="package-grid" id="marketPlanGrid" aria-label="Market package options"></div>
+        <div class="modal-actions">
+          <button class="pill" type="button" data-buy-step="intro">Back</button>
+        </div>
+      </div>
+
+      <div class="modal-step discord-step" data-step="discord">
+        <p class="eyebrow">Discord setup</p>
+        <h2>DM BLUDARIEL</h2>
+        <p class="modal-copy">Message @bludariel on Discord to set up your Chicblocko Market listing.</p>
+        <article class="discord-profile" aria-label="bludariel Discord profile card">
+          <div class="discord-banner" aria-hidden="true"></div>
+          <div class="discord-profile-body">
+            <img class="discord-avatar" src="assets/bludariel-profile.webp" alt="bludariel profile picture" />
+            <div class="discord-name-row">
+              <h3>darriel</h3>
+              <span class="discord-user">@bludariel</span>
+            </div>
+            <div class="discord-role">Founder of Chicblocko Values Market</div>
+            <span class="discord-about-label">About Me</span>
+            <p>Send your seller name, profile picture, custom images, asking prices, and any notes you want shown on the market.</p>
+          </div>
+        </article>
+        <div class="modal-actions">
+          <button class="pill" type="button" data-buy-step="intro">← Back</button>
+          <button class="pill primary" type="button" data-buy-step="packages">View Market Options →</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="listing-detail-modal" id="listingDetailModal" aria-hidden="true">
+    <article class="listing-detail-card" role="dialog" aria-modal="true" aria-labelledby="listingDetailName">
+      <button class="listing-detail-close" id="closeListingDetail" type="button" aria-label="Close listing details">&times;</button>
+      <div class="listing-detail-media">
+        <img id="listingDetailImage" src="" alt="" loading="lazy" />
+      </div>
+      <div class="listing-detail-content">
+        <div class="listing-detail-model" id="listingDetailModel"></div>
+        <h2 id="listingDetailName"></h2>
+        <div class="listing-detail-gun" id="listingDetailGun"></div>
+        <div class="listing-detail-stock" id="listingDetailStock"></div>
+        <div class="listing-detail-stats">
+          <div><span>Asking Price</span><b id="listingDetailPrice"></b></div>
+          <div><span>Type</span><b class="want" id="listingDetailType"></b></div>
+        </div>
+        <p class="listing-detail-notes" id="listingDetailNotes"></p>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "chicblockoMarketData";
+    const assetBase = "../assets/";
+    const fallbackLogo = assetBase + "chicblocko-logo.webp";
+    const fallbackGun = assetBase + "guns/recovered/dxrk-custom.webp";
+    const defaultCategories = [
+      { name: "Featured Market", type: "Featured", visibility: "Visible", status: "Active" },
+      { name: "Collector Market", type: "Collection", visibility: "Visible", status: "Active" },
+      { name: "High Value Market", type: "Market", visibility: "Visible", status: "Active" },
+      { name: "Player Market", type: "Market", visibility: "Visible", status: "Active" }
+    ];
+
+    const marketPlans = [
+      {
+        id: "player",
+        name: "Player Market",
+        subtitle: "Personal market",
+        description: "Your own seller storefront for Chicblocko customs.",
+        priceCash: 50000,
+        features: ["Custom seller profile", "Custom listings", "Seller notes", "3 Listings"],
+        badge: "",
+        order: 1,
+        enabled: false,
+        comingSoon: true
+      },
+      {
+        id: "featured",
+        name: "Featured Market",
+        subtitle: "More visibility",
+        description: "A higher-visibility market slot for active sellers.",
+        priceCash: 125000,
+        features: ["Everything in Player Market", "Featured placement", "5 listings"],
+        badge: "Popular",
+        order: 2,
+        enabled: false,
+        comingSoon: true
+      },
+      {
+        id: "premium",
+        name: "Premium Market",
+        subtitle: "Top-tier market",
+        description: "Priority placement and cleaner styling for larger inventories.",
+        priceCash: 250000,
+        features: ["Everything in Featured Market", "Priority placement", "Large inventory", "Premium styling", "10 Listings"],
+        badge: "Premium",
+        order: 3,
+        enabled: false,
+        comingSoon: true
+      }
+    ];
+
+    const defaultSellers = [
+      {
+        user: "darriel",
+        discord: "",
+        pfp: assetBase + "team/darriel.webp",
+        tag: "Featured Market",
+        status: "Open to offers",
+        listings: [
+          { custom: "DXRK CUSTOM", model: "EXT", gun: "Glock 18 Extended", price: "1.5M", type: "Selling", image: assetBase + "guns/recovered/dxrk-custom.webp", notes: "DM seller before buying." },
+          { custom: "JALES CUSTOM", model: "EXT", gun: "Glock 18 Extended", price: "550K", type: "Selling", image: assetBase + "guns/recovered/jales-custom.webp", notes: "Price can be updated in editor." },
+          { custom: "FIRE CUSTOM", model: "DRUM", gun: "Glock 18 Drum", price: "1.7M", type: "Taking offers", image: assetBase + "guns/recovered/fire-custom.webp", notes: "Offer-ready listing." }
+        ]
+      },
+      {
+        user: "cole",
+        discord: "",
+        pfp: assetBase + "team/cole.webp",
+        tag: "Collector Market",
+        status: "Rare customs",
+        listings: [
+          { custom: "COLE CUSTOM", model: "DRUM", gun: "Glock 18 Drum", price: "5M", type: "Selling", image: assetBase + "team/cole-custom.webp", notes: "Collector custom listing." },
+          { custom: "COLE CAMO CUSTOM", model: "ARP DRUM", gun: "ARP Drum", price: "20M", type: "WTB/WTS", image: assetBase + "team/cole-camo-custom.webp", notes: "High value market check." },
+          { custom: "OG XMAS CUSTOM", model: "EXT", gun: "Glock 18 Extended", price: "Offers", type: "Watching", image: assetBase + "team/og-xmas-custom.webp", notes: "Offer only." }
+        ]
+      },
+      {
+        user: "vell",
+        discord: "",
+        pfp: assetBase + "team/vell.webp",
+        tag: "High Value Market",
+        status: "Fast replies",
+        listings: [
+          { custom: "LVL GHOST CUSTOM", model: "ARP DRUM", gun: "ARP Drum", price: "2M", type: "Selling", image: assetBase + "guns/recovered/lvl-ghost-custom.webp", notes: "Clean ARP Drum listing." },
+          { custom: "KILLUMINATI CUSTOM", model: "AK47", gun: "AK-47", price: "10M", type: "Selling", image: assetBase + "guns/recovered/killuminati-custom.webp", notes: "Rare AK listing." },
+          { custom: "REALBLEEDA CUSTOM", model: "DRUM", gun: "Glock 18 Drum", price: "4M", type: "Taking offers", image: assetBase + "guns/recovered/realbleeda-custom.webp", notes: "Taking serious offers." }
+        ]
+      }
+    ];
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function cleanUrl(value, fallback) {
+      const url = String(value || "").trim();
+      if (!url) return fallback;
+      if (/^(https?:|data:image\/|\.{0,2}\/|assets\/)/i.test(url)) return url.replace(/["'<>]/g, "");
+      return fallback;
+    }
+
+    function marketImageUrl(value, fallback) {
+      const url = String(value || "").trim().replace(/["'<>]/g, "");
+      if (!url) return fallback;
+      if (/^(https?:|data:image\/|\.{1,2}\/)/i.test(url)) return url;
+      if (/^assets\//i.test(url)) return `../${url}`;
+      return fallback;
+    }
+
+    function normalizeDiscordHandle(value) {
+      return String(value || "").trim().replace(/^@+/, "");
+    }
+
+    function displayDiscordHandle(value) {
+      const clean = normalizeDiscordHandle(value);
+      return clean ? `@${clean}` : "";
+    }
+
+    function normalizeSoldOut(value) {
+      return value === true || /^(true|yes|sold out|sold)$/i.test(String(value || "").trim());
+    }
+
+    function normalizeSellers(raw) {
+      const input = Array.isArray(raw) && raw.length ? raw : clone(defaultSellers);
+      return input.map((seller, index) => ({
+        user: String(seller.user || `seller-${index + 1}`).trim(),
+        discord: normalizeDiscordHandle(seller.discord || seller.discordHandle || seller.discordUser || ""),
+        pfp: cleanUrl(seller.pfp, fallbackLogo),
+        tag: String(seller.tag || "Player Market").trim(),
+        status: String(seller.status || "Open").trim(),
+        listings: Array.isArray(seller.listings) ? seller.listings.map(item => ({
+          custom: String(item.custom || "Untitled Custom").trim(),
+          model: String(item.model || "N/A").trim(),
+          gun: String(item.gun || "Gun Model").trim(),
+          price: String(item.price || "Offers").trim(),
+          type: String(item.type || "Selling").trim(),
+          stock: String(item.stock || item.quantity || "1").trim(),
+          soldOut: normalizeSoldOut(item.soldOut || item.availability || item.status),
+          image: marketImageUrl(item.image, fallbackGun),
+          notes: String(item.notes || "").trim()
+        })) : []
+      }));
+    }
+
+    function normalizeCategories(raw, sellerList) {
+      const source = Array.isArray(raw) ? raw : [];
+      const byName = new Map();
+      const addCategory = (category) => {
+        const name = String(category?.name || category || "").trim();
+        if (!name) return;
+        const existing = byName.get(name) || {};
+        byName.set(name, {
+          name,
+          type: String(category?.type || existing.type || "Market").trim(),
+          visibility: String(category?.visibility || existing.visibility || "Visible").trim(),
+          status: String(category?.status || existing.status || "Active").trim()
+        });
+      };
+      if (source.length) {
+        source.forEach(addCategory);
+      } else {
+        defaultCategories.forEach(addCategory);
+      }
+      sellerList.forEach(seller => addCategory({ name: seller.tag || "Player Market" }));
+      return [...byName.values()];
+    }
+
+    function normalizeMarketPayload(raw) {
+      const sellerSource = Array.isArray(raw) ? raw : raw?.sellers;
+      const sellerList = normalizeSellers(sellerSource);
+      return {
+        categories: normalizeCategories(Array.isArray(raw) ? null : raw?.categories, sellerList),
+        sellers: sellerList
+      };
+    }
+
+    function loadMarketData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return normalizeMarketPayload(saved ? JSON.parse(saved) : { sellers: defaultSellers, categories: defaultCategories });
+      } catch (error) {
+        console.warn("Market data could not load, using defaults.", error);
+        return normalizeMarketPayload({ sellers: defaultSellers, categories: defaultCategories });
+      }
+    }
+
+    const marketData = loadMarketData();
+    let sellers = marketData.sellers;
+    let categories = marketData.categories;
+    let activeCategory = "All";
+    const sellerGrid = document.querySelector("#sellerGrid");
+    const marketView = document.querySelector("#marketView");
+    const search = document.querySelector("#marketSearch");
+    const sort = document.querySelector("#marketSort");
+    const marketCategories = document.querySelector("#marketCategories");
+    const buyMarketModal = document.querySelector("#buyMarketModal");
+    const openBuyMarketButton = document.querySelector("#openBuyMarket");
+    const closeBuyMarketButton = document.querySelector("#closeBuyMarket");
+    const marketPlanGrid = document.querySelector("#marketPlanGrid");
+    const listingDetailModal = document.querySelector("#listingDetailModal");
+    const closeListingDetailButton = document.querySelector("#closeListingDetail");
+
+    function totalValue(seller) {
+      return seller.listings.reduce((total, listing) => {
+        const firstValue = String(listing.price).split("-")[0];
+        const value = parseFloat(firstValue.replace(/[^0-9.]/g, "")) || 0;
+        const upper = String(listing.price).toUpperCase();
+        if (upper.includes("M")) return total + value * 1000000;
+        if (upper.includes("K")) return total + value * 1000;
+        return total + value;
+      }, 0);
+    }
+
+    function shortValue(value) {
+      if (value >= 1000000) return `${(value / 1000000).toFixed(value >= 10000000 ? 0 : 1)}M`;
+      if (value >= 1000) return `${Math.round(value / 1000)}K`;
+      return String(value || "0");
+    }
+
+    function formatCash(value) {
+      const amount = Number(value) || 0;
+      if (!amount) return "N/A";
+      if (amount >= 1000) return `$${Math.round(amount / 1000)}K`;
+      return `$${amount.toLocaleString("en-US")}`;
+    }
+
+    function publicCategories() {
+      return categories.filter(category => {
+        const visibility = category.visibility.toLowerCase();
+        const status = category.status.toLowerCase();
+        return visibility === "visible" && status !== "disabled";
+      });
+    }
+
+    function categoryIsPublic(name) {
+      return publicCategories().some(category => category.name === name);
+    }
+
+    function renderCategories() {
+      const visible = publicCategories();
+      if (activeCategory !== "All" && !visible.some(category => category.name === activeCategory)) activeCategory = "All";
+      const categorySellerCount = name => sellers.filter(seller => seller.tag === name && categoryIsPublic(seller.tag)).length;
+      const categoryListingCount = name => sellers
+        .filter(seller => seller.tag === name && categoryIsPublic(seller.tag))
+        .reduce((total, seller) => total + seller.listings.length, 0);
+      const allSellerCount = sellers.filter(seller => categoryIsPublic(seller.tag)).length;
+      const allListingCount = sellers
+        .filter(seller => categoryIsPublic(seller.tag))
+        .reduce((total, seller) => total + seller.listings.length, 0);
+      marketCategories.innerHTML = [
+        `<button class="market-category ${activeCategory === "All" ? "active" : ""}" type="button" data-market-category="All">
+          <span class="market-category-main">
+            <span class="market-category-name">All Markets</span>
+            <span class="market-category-meta">${allListingCount} listings</span>
+          </span>
+          <span class="market-category-count">${allSellerCount}</span>
+        </button>`,
+        ...visible.map(category => {
+          const sellersInside = categorySellerCount(category.name);
+          const listingsInside = categoryListingCount(category.name);
+          return `
+          <button class="market-category ${activeCategory === category.name ? "active" : ""}" type="button" data-market-category="${escapeHTML(category.name)}">
+            <span class="market-category-main">
+              <span class="market-category-name">${escapeHTML(category.name)}</span>
+              <span class="market-category-meta">${listingsInside} listings ${category.status === "Coming Soon" ? `<span class="market-category-badge">Soon</span>` : ""}</span>
+            </span>
+            <span class="market-category-count">${sellersInside}</span>
+          </button>
+        `;})
+      ].join("");
+    }
+
+    function renderSellers() {
+      const q = search.value.trim().toLowerCase();
+      let list = sellers.map((seller, sellerIndex) => ({ seller, sellerIndex })).filter(({ seller }) => {
+        if (activeCategory !== "All" && seller.tag !== activeCategory) return false;
+        if (activeCategory === "All" && !categoryIsPublic(seller.tag)) return false;
+        const haystack = [
+          seller.user,
+          seller.discord,
+          seller.tag,
+          seller.status,
+          ...seller.listings.flatMap(item => [item.custom, item.model, item.gun, item.price, item.type, item.stock, item.soldOut ? "sold out" : "", item.notes])
+        ].join(" ").toLowerCase();
+        return haystack.includes(q);
+      });
+
+      if (sort.value === "priceHigh") list.sort((a, b) => totalValue(b.seller) - totalValue(a.seller));
+      if (sort.value === "listings") list.sort((a, b) => b.seller.listings.length - a.seller.listings.length);
+      if (sort.value === "az") list.sort((a, b) => a.seller.user.localeCompare(b.seller.user));
+
+      renderCategories();
+      sellerGrid.innerHTML = list.map(({ seller, sellerIndex }, index) => {
+        const user = escapeHTML(seller.user);
+        const pfp = cleanUrl(seller.pfp, fallbackLogo);
+        const discord = displayDiscordHandle(seller.discord);
+        const marketType = escapeHTML(String(seller.tag || "Player Market").replace(/\s+Market$/i, ""));
+        return `
+          <article class="seller-card" style="--avatar:url('${pfp}')" tabindex="0" data-index="${sellerIndex}">
+            <div class="seller-inner">
+              <div>
+                <span class="seller-tag">${escapeHTML(seller.tag)}</span>
+                <div class="seller-row" style="margin-top:18px">
+                  <img class="avatar" src="${pfp}" alt="${user} profile picture" loading="lazy" />
+                  <div>
+                    <div class="seller-name">${user}</div>
+                    ${discord ? `<div class="seller-handle">Discord ${escapeHTML(discord)}</div>` : ""}
+                    <div class="seller-status">${escapeHTML(seller.status)}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="seller-meta">
+                <div class="mini"><b>${seller.listings.length}</b><span>Listings</span></div>
+                <div class="mini"><b>${shortValue(totalValue(seller))}</b><span>Ask Value</span></div>
+                <div class="mini"><b class="market-type">${marketType}</b><span>Market Type</span></div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("") || `<div class="empty"><h2>No markets found</h2><p>Try a different seller, custom, or model name.</p></div>`;
+    }
+
+    function renderMarketPlans() {
+      marketPlanGrid.innerHTML = [...marketPlans]
+        .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0))
+        .map(plan => `
+          <article class="package-card plan-${escapeHTML(plan.id)}" data-plan-id="${escapeHTML(plan.id)}" aria-label="${escapeHTML(plan.name)} coming soon">
+            <h3>${escapeHTML(plan.name)}</h3>
+            <p class="plan-subtitle">${escapeHTML(plan.subtitle || "Market tier")}</p>
+            <p class="plan-desc">${escapeHTML(plan.description)}</p>
+            <ul>${(plan.features || []).map(feature => `<li>${escapeHTML(feature)}</li>`).join("")}</ul>
+            <div class="package-price">${formatCash(plan.priceCash)}</div>
+          </article>
+        `).join("");
+    }
+
+    function showBuyStep(stepName) {
+      document.querySelectorAll(".modal-step").forEach(step => {
+        step.classList.toggle("active", step.dataset.step === stepName);
+      });
+      if (stepName === "packages") renderMarketPlans();
+    }
+
+    function openBuyMarket() {
+      buyMarketModal.classList.add("open");
+      buyMarketModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      showBuyStep("intro");
+      setTimeout(() => closeBuyMarketButton.focus(), 0);
+    }
+
+    function closeBuyMarket() {
+      buyMarketModal.classList.remove("open");
+      buyMarketModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      openBuyMarketButton.focus();
+    }
+
+    function openListingDetail(sellerIndex, listingIndex) {
+      const seller = sellers[Number(sellerIndex)];
+      const item = seller?.listings?.[Number(listingIndex)];
+      if (!seller || !item) return;
+
+      const image = document.querySelector("#listingDetailImage");
+      image.src = cleanUrl(item.image, fallbackGun);
+      image.alt = `${item.custom} listing image`;
+      document.querySelector("#listingDetailModel").textContent = item.model;
+      document.querySelector("#listingDetailName").textContent = item.custom;
+      document.querySelector("#listingDetailGun").textContent = item.gun;
+      const detailStock = document.querySelector("#listingDetailStock");
+      detailStock.textContent = item.soldOut ? "Sold Out" : `${item.stock} in stock`;
+      detailStock.classList.toggle("sold-out-pill", Boolean(item.soldOut));
+      document.querySelector("#listingDetailPrice").textContent = item.price;
+      document.querySelector("#listingDetailType").textContent = item.type;
+      document.querySelector("#listingDetailNotes").textContent = item.notes || `Listed by ${seller.user}. Pay in-game before the listing is completed.`;
+
+      listingDetailModal.classList.add("open");
+      listingDetailModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => closeListingDetailButton.focus(), 0);
+    }
+
+    function closeListingDetail() {
+      listingDetailModal.classList.remove("open");
+      listingDetailModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function openMarket(index) {
+      const seller = sellers[Number(index)];
+      if (!seller) return;
+      const pfp = cleanUrl(seller.pfp, fallbackLogo);
+      const discord = displayDiscordHandle(seller.discord);
+      const listings = seller.listings.length ? seller.listings.map((item, listingIndex) => `
+        <article class="listing-card ${item.soldOut ? "sold-out" : ""}" tabindex="0" role="button" data-seller-index="${Number(index)}" data-listing-index="${listingIndex}" aria-label="View ${escapeHTML(item.custom)} listing details">
+          ${item.soldOut ? `<div class="soldout-ribbon">Sold Out</div>` : ""}
+          <div class="listing-image-frame">
+            <img src="${cleanUrl(item.image, fallbackGun)}" alt="${escapeHTML(item.custom)}" loading="lazy" />
+          </div>
+          <div class="model">${escapeHTML(item.model)}</div>
+          <h3>${escapeHTML(item.custom)}</h3>
+          <div class="stock-pill ${item.soldOut ? "sold-out-pill" : ""}">${item.soldOut ? "Sold Out" : `${escapeHTML(item.stock)} in stock`}</div>
+          <div class="gun-name">${escapeHTML(item.gun)}</div>
+          <div class="price-row">
+            <div><span>Asking Price</span><b>${escapeHTML(item.price)}</b></div>
+            <div><span>Type</span><b class="want">${escapeHTML(item.type)}</b></div>
+          </div>
+        </article>
+      `).join("") : `<div class="empty"><h2>No listings yet</h2><p>Add listings for this seller in the editor.</p></div>`;
+
+      marketView.innerHTML = `
+        <div class="market-panel">
+          <div class="market-head">
+            <div class="market-title">
+              <img class="avatar" src="${pfp}" alt="${escapeHTML(seller.user)} profile picture" />
+              <div>
+                <p class="eyebrow">${escapeHTML(seller.tag)}</p>
+                <h2>${escapeHTML(seller.user)}'s Market</h2>
+                ${discord ? `<div class="seller-handle market-handle">Discord ${escapeHTML(discord)}</div>` : ""}
+              </div>
+            </div>
+            <button class="back" id="closeMarket" type="button">Back to all markets</button>
+          </div>
+          <div class="listings">${listings}</div>
+        </div>
+      `;
+      marketView.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.querySelector("#closeMarket").addEventListener("click", () => {
+        marketView.innerHTML = "";
+        document.querySelector("#markets").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    marketView.addEventListener("click", event => {
+      const listing = event.target.closest(".listing-card");
+      if (!listing) return;
+      openListingDetail(listing.dataset.sellerIndex, listing.dataset.listingIndex);
+    });
+
+    marketView.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const listing = event.target.closest(".listing-card");
+      if (!listing) return;
+      event.preventDefault();
+      openListingDetail(listing.dataset.sellerIndex, listing.dataset.listingIndex);
+    });
+
+    closeListingDetailButton.addEventListener("click", closeListingDetail);
+    listingDetailModal.addEventListener("click", event => {
+      if (event.target === listingDetailModal) closeListingDetail();
+    });
+
+    sellerGrid.addEventListener("click", event => {
+      const card = event.target.closest(".seller-card");
+      if (card) openMarket(card.dataset.index);
+    });
+
+    sellerGrid.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".seller-card");
+      if (!card) return;
+      event.preventDefault();
+      openMarket(card.dataset.index);
+    });
+
+    search.addEventListener("input", renderSellers);
+    sort.addEventListener("change", renderSellers);
+    marketCategories.addEventListener("click", event => {
+      const button = event.target.closest("[data-market-category]");
+      if (!button) return;
+      activeCategory = button.dataset.marketCategory;
+      marketView.innerHTML = "";
+      renderSellers();
+    });
+    openBuyMarketButton.addEventListener("click", openBuyMarket);
+    closeBuyMarketButton.addEventListener("click", closeBuyMarket);
+    buyMarketModal.addEventListener("click", event => {
+      if (event.target === buyMarketModal || event.target.closest("[data-close-buy-market]")) {
+        closeBuyMarket();
+        return;
+      }
+      const stepButton = event.target.closest("[data-buy-step]");
+      if (stepButton) {
+        showBuyStep(stepButton.dataset.buyStep);
+        return;
+      }
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && buyMarketModal.classList.contains("open")) closeBuyMarket();
+      if (event.key === "Escape" && listingDetailModal.classList.contains("open")) closeListingDetail();
+    });
+    renderMarketPlans();
+    renderSellers();
+  </script>
 </body>
 </html>
+

@@ -1995,7 +1995,17 @@
       };
     }
 
-    function loadMarketData() {
+    async function loadMarketData() {
+      const dataUrls = ["chicblocko-market-data.json", "../chicblocko-market-data.json"];
+      for (const url of dataUrls) {
+        try {
+          const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
+          if (response.ok) return normalizeMarketPayload(await response.json());
+        } catch (error) {
+          console.warn(`Market data file could not load from ${url}.`, error);
+        }
+      }
+
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         return normalizeMarketPayload(saved ? JSON.parse(saved) : { sellers: defaultSellers, categories: defaultCategories });
@@ -2005,9 +2015,8 @@
       }
     }
 
-    const marketData = loadMarketData();
-    let sellers = marketData.sellers;
-    let categories = marketData.categories;
+    let sellers = [];
+    let categories = [];
     let activeCategory = "All";
     const sellerGrid = document.querySelector("#sellerGrid");
     const marketView = document.querySelector("#marketView");
@@ -2310,8 +2319,15 @@
       if (event.key === "Escape" && buyMarketModal.classList.contains("open")) closeBuyMarket();
       if (event.key === "Escape" && listingDetailModal.classList.contains("open")) closeListingDetail();
     });
-    renderMarketPlans();
-    renderSellers();
+    async function initMarket() {
+      const marketData = await loadMarketData();
+      sellers = marketData.sellers;
+      categories = marketData.categories;
+      renderMarketPlans();
+      renderSellers();
+    }
+
+    initMarket();
   </script>
 </body>
 </html>

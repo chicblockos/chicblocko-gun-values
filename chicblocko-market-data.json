@@ -315,7 +315,20 @@
       "pfp": "data:image/webp;base64,UklGRt4EAABXRUJQVlA4INIEAACwGgCdASpkAGQAPm0wlUakIyIhKncKqIANiWkA1uxDD+n9qP9n5Ub2dzhX2Y/UcKO8R/mH+Z3pTLnepalPePWkqAH50/2XpZfTHnQ+iv+17hf8v/rX/H6837a+yJ+rp3euBNfW1+UAqw2VGXzsZttyiANrUqIw189M/IQF1d0c4kSfjX0aHjzFUMxvyaRfcocSvoFuB1BDTKBG4+5K+5130ezBL7wi6WGuBXpkchQ8eHp23OYL2XE0T9UHF7v6BhzR4MXWLM84nPFlGXAa3Hmamgyd+4v+8WN8T08yAwAA/vyRxMbNxl0JDzXpoG+QE9w6x8YvfasjMkJ/y8nDGkdq9axdLu3+z8UPPeG1XeH12wJ8+8OX7q3Y0PVEfM2tcfNAvevY8coVmKIM0AMmWHL7mpBk9UoeZusmeO9lNaI2dR5bzevNMGfz5S7F9ff82HTn1jOh2ZLWhtcyI+Y63z0YBziOrOtPyWbLuJxe4SeE/2odVJP/QWtJPrIjutyM1+RksdZulXI5/gS76SWX8BIYUbm86t7aNVSIYAO/+xEtT+2DJd6+rYo++Ryfx8gFdEn3rK2WwHIowjm6pPEHV3FxUSqktamSspGw8zR92mZ8+u8t3bFM+oqAzQeZjxf7Z9JJ+9Q969oD+KXssqiavj0e2515Nxem34JV16s5vr9IpyB6n0xWgm0SHJrKwiDzC1+QkhgTan6kHIs5QB9HrmsWS1OtBzQxXNo+210L/uk/SEvgSMjAu70LpZg3hK8nl9++QY2u+d4Sp+Qzk0TtADTy+cy+oj2LgrgU8Dcc56G8racQRJ9/z7TgCS8Ox+9D3T/1oA2SZHNSrAYwc13QqWm13Sldde5Lhk6yNf/CFr9Rdq6bPPBUh7k8cbnl4wTBr7iTyTPRC1jlqonn+cyqD682m6xB0fDRSkvJmr1yy7gW0N0YuwiPvyLM/sWE/+OU3zHXr+1+AP8D22f8RZcAASlM1AHEF6u7QN+JwR7hud3gpdKZJNB2arV2hacMytsoy5yOI+ZnsJTqS1eY5S85DqlXmHoLv7HaN//BP1Dt/tnWEVxHNuT02nLsmZrP18yWvAj18d6J64aGvMY23QwYDBnkpd7bz9sdlLU+bQq6//GKZiw/LDcwoOctGfnW5FQi4TrK3ik6poFvP4K5T3EfjMU29USbDLNXX0jB5YUDpFec3RBrXK42CAwtHSQhil3TwcNJUV6Nyhl06cQH7rnvzwfjx/xYQiirW5D80jaiAXpAtHR6BucGWAmLFhEIFhHztR61zKDOU+lAE7l7h/iFtC1wMRwGjYraOT8H3lGcTyBsWQ9jVRzP8dkRLXPPeK+0s+C1cFc7lD6rGdgeUSLBllMxk4FFFJ05LK7+AtKTxURrULpQ2mza5MQ6i+RdgpHLvAJO9haZTHi5nz2YVxpiU/Sfbh+TJFui14gqaMz0fY3Ep1dHDxhW4dK+SytO2Zp7AIgpiHxAdN2yS6i9blyZOqyNjvKbUZArjsfpBCGC1JvJQT5JJ0+1sVAUQ+gjLjvRoyJYYTHer+LKJxFTa27tZSTAvZnXE1HFUbgWjnDZWvs2jEaZXvMZvk+jTno39gMiUIvW35JL9qlW236s5IrG14YBXTQzBiO5ueG7c6i+IIQEQAAA",
       "tag": "Premium Market",
       "status": "ONLINE",
-      "listings": []
+      "listings": [
+        {
+          "sourceId": "glock18drum-025",
+          "custom": "TEC Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "2.3M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-025.webp",
+          "notes": "Value index demand: LOW."
+        }
+      ]
     }
   ]
 }

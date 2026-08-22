@@ -1933,18 +1933,15 @@
       })[char]);
     }
 
-    function cleanUrl(value, fallback) {
-      const url = String(value || "").trim();
+    function mediaUrl(value, fallback) {
+      const url = String(value || "").trim().replace(/["'<>]/g, "").replace(/\\/g, "/");
       if (!url) return fallback;
-      if (/^(https?:|data:image\/|\.{0,2}\/|assets\/)/i.test(url)) return url.replace(/["'<>]/g, "");
-      return fallback;
-    }
+      if (/^(https?:|data:image\/|blob:)/i.test(url)) return url;
 
-    function marketImageUrl(value, fallback) {
-      const url = String(value || "").trim().replace(/["'<>]/g, "");
-      if (!url) return fallback;
-      if (/^(https?:|data:image\/|\.{1,2}\/)/i.test(url)) return url;
-      if (/^assets\//i.test(url)) return `../${url}`;
+      const valueAssetMatch = url.match(/(?:^|\/)(?:chicblocko-gun-values-with-nav-restored-zip\/)?assets\/(.+)$/i);
+      if (valueAssetMatch) return assetBase + valueAssetMatch[1];
+
+      if (/^(?:\.{1,2}\/)/.test(url)) return url;
       return fallback;
     }
 
@@ -1966,7 +1963,7 @@
       return input.map((seller, index) => ({
         user: String(seller.user || `seller-${index + 1}`).trim(),
         discord: normalizeDiscordHandle(seller.discord || seller.discordHandle || seller.discordUser || ""),
-        pfp: cleanUrl(seller.pfp, fallbackLogo),
+        pfp: mediaUrl(seller.pfp, fallbackLogo),
         tag: String(seller.tag || "Player Market").trim(),
         status: String(seller.status || "Open").trim(),
         listings: Array.isArray(seller.listings) ? seller.listings.map(item => ({
@@ -1977,7 +1974,7 @@
           type: String(item.type || "Selling").trim(),
           stock: String(item.stock || item.quantity || "1").trim(),
           soldOut: normalizeSoldOut(item.soldOut || item.availability || item.status),
-          image: marketImageUrl(item.image, fallbackGun),
+          image: mediaUrl(item.image, fallbackGun),
           notes: String(item.notes || "").trim()
         })) : []
       }));
@@ -2142,7 +2139,7 @@
       renderCategories();
       sellerGrid.innerHTML = list.map(({ seller, sellerIndex }, index) => {
         const user = escapeHTML(seller.user);
-        const pfp = cleanUrl(seller.pfp, fallbackLogo);
+        const pfp = mediaUrl(seller.pfp, fallbackLogo);
         const discord = displayDiscordHandle(seller.discord);
         const marketType = escapeHTML(String(seller.tag || "Player Market").replace(/\s+Market$/i, ""));
         return `
@@ -2212,7 +2209,7 @@
       if (!seller || !item) return;
 
       const image = document.querySelector("#listingDetailImage");
-      image.src = cleanUrl(item.image, fallbackGun);
+      image.src = mediaUrl(item.image, fallbackGun);
       image.alt = `${item.custom} listing image`;
       document.querySelector("#listingDetailModel").textContent = item.model;
       document.querySelector("#listingDetailName").textContent = item.custom;
@@ -2239,13 +2236,13 @@
     function openMarket(index) {
       const seller = sellers[Number(index)];
       if (!seller) return;
-      const pfp = cleanUrl(seller.pfp, fallbackLogo);
+      const pfp = mediaUrl(seller.pfp, fallbackLogo);
       const discord = displayDiscordHandle(seller.discord);
       const listings = seller.listings.length ? seller.listings.map((item, listingIndex) => `
         <article class="listing-card ${item.soldOut ? "sold-out" : ""}" tabindex="0" role="button" data-seller-index="${Number(index)}" data-listing-index="${listingIndex}" aria-label="View ${escapeHTML(item.custom)} listing details">
           ${item.soldOut ? `<div class="soldout-ribbon">Sold Out</div>` : ""}
           <div class="listing-image-frame">
-            <img src="${cleanUrl(item.image, fallbackGun)}" alt="${escapeHTML(item.custom)}" loading="lazy" />
+            <img src="${mediaUrl(item.image, fallbackGun)}" alt="${escapeHTML(item.custom)}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackGun}';" />
           </div>
           <div class="model">${escapeHTML(item.model)}</div>
           <h3>${escapeHTML(item.custom)}</h3>
@@ -2262,7 +2259,7 @@
         <div class="market-panel">
           <div class="market-head">
             <div class="market-title">
-              <img class="avatar" src="${pfp}" alt="${escapeHTML(seller.user)} profile picture" />
+              <img class="avatar" src="${pfp}" alt="${escapeHTML(seller.user)} profile picture" onerror="this.onerror=null;this.src='${fallbackLogo}';" />
               <div>
                 <p class="eyebrow">${escapeHTML(seller.tag)}</p>
                 <h2>${escapeHTML(seller.user)}'s Market</h2>

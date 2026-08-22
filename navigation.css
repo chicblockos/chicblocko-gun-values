@@ -82,6 +82,26 @@
   position: relative;
 }
 
+.site-header > nav a.market-tab::before {
+  content: "NEW";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 2px);
+  transform: translateX(-50%);
+  padding: 3px 10px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  background: #070707;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 body::after {
   content: "";
   position: fixed;
@@ -163,6 +183,12 @@ body[data-slide-direction="back"].page-leaving main {
   .site-header > nav a {
     padding-inline: 4px !important;
     font-size: 0.5rem !important;
+  }
+
+  .site-header > nav a.market-tab::before {
+    bottom: calc(100% + 1px);
+    padding: 2px 8px 3px;
+    font-size: 8px;
   }
 
 }

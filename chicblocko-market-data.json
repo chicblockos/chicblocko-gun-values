@@ -298,6 +298,30 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-045.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-018",
+          "custom": "PHOENIX Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "1.6M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-018.webp",
+          "notes": "Value index demand: HIGH."
+        },
+        {
+          "sourceId": "glock18drum-024",
+          "custom": "Skyee Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "1.2N",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-024.webp",
+          "notes": "Value index demand: MEDIUM."
         }
       ]
     },

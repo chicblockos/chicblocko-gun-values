@@ -374,6 +374,107 @@
           "notes": "Value index demand: HIGH."
         }
       ]
+    },
+    {
+      "user": "Torqid Sellz",
+      "discord": "torqidx",
+      "pfp": "https://media.discordapp.net/attachments/1402443487927865474/1540874755328974973/IMG_2853.png?ex=6a8b8af1&is=6a8a3971&hm=c1862ff41aba7bc2dba5e4e98c897df21cd23ed6623beb0ce71bcf9dd3d78b4e&=&format=webp&quality=lossless",
+      "tag": "Premium Market",
+      "status": "LOOKING FOR OFFERS",
+      "listings": [
+        {
+          "sourceId": "glock18drum-017",
+          "custom": "Demon x D3cisiv Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "220K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-017.webp",
+          "notes": "Value index demand: HIGH."
+        },
+        {
+          "sourceId": "draco-027",
+          "custom": "RUTH Custom",
+          "model": "Draco",
+          "gun": "Draco Custom",
+          "price": "350K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18ext-051",
+          "custom": "Drizzy Custom",
+          "model": "EXT",
+          "gun": "Glock 18 Extended",
+          "price": "1.1M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-051.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18ext-068",
+          "custom": "DZK Custom",
+          "model": "EXT",
+          "gun": "Glock 18 Extended",
+          "price": "1.3M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-068.webp",
+          "notes": "Value index demand: LOW."
+        },
+        {
+          "sourceId": "draco-028",
+          "custom": "JJ Custom",
+          "model": "Draco",
+          "gun": "Draco Custom",
+          "price": "1M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-028.webp",
+          "notes": "Value index demand: LOW."
+        },
+        {
+          "sourceId": "glock18ext-071",
+          "custom": "THOR x DBD Custom",
+          "model": "EXT",
+          "gun": "Glock 18 Extended",
+          "price": "1.5M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-071.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-046",
+          "custom": "WATTZ Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "1.2M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-046.webp",
+          "notes": "Value index demand: MEDIUM."
+        }
+      ]
+    },
+    {
+      "user": "knight",
+      "discord": "knightfv.",
+      "pfp": "data:image/webp;base64,UklGRkADAABXRUJQVlA4IDQDAAAwEwCdASpkAGQAPm02lEekIyalJzXZ4NANiWdsIVwoYzy29OQ0SHh+yAe8Uvao9voO4CDFshkEQtOGHkbRZWClGu/9dlMBKzyhB7q32SR8lMxa8eQsjVegEn37Xj9PCiUX5QyHFOyF55ZTCz3J8SggS1SkhbGMd08nqPvlm80ou0TV0T6im+WgSvx7CQUT5Nqvd5i9g5QPb56L3f3qfMaX1gAA/vxu04anjQx/i3cUA7zXEKhZ4wSMWMf3ARpnHMy/+VsDFmEuugjShXMgTP55Z62hvvd/eHNMbgeriV9y4zAorS0P+oMXomCQAZcMwSJ1cNq8Kf26E6H4x1yRyaNTTXip4o+Da0jw46qAeBPqyfgFyCp6wFILxRHu0DU1Vzk67XUeDcvfQ+xK9fJfxHAbKyzKACC8EPINay48VU12upqJ1jOr3N10aCvh+FCv0dHmuZgSBImKykdd7N44PRsQHOW0cDUM776IxbQo+ay/idzjVefpy/uaorD96oAl80Q6HgHC6YP4z9X9o486Jmdvb54NTSwDxXBHPIbJbhMmQWthYJO9Y6TRT7fJmNHSRjNbuj3i+DQSygSbyZP+HU5GcaEQENYnVbCfXqBMW8+kZQwXLwECQ1kop0cvITJEGKxBD60FQVwHVWPGioLrjHP9x5cRzvARo/7kN8p9BgFAO57LhVj6fHhDXN4jdtcyqG8Hp2X1il17YlcA4BkawDUT6eu2J+WRsEaNvywx2cD/6R7AYdfmUFUzvQ3bVkkfq7Km6kWHSTpY2gHgnjOHTwmZiZbcV+BzULVTx0qIkoiFFvCkJ8frnAfUxk9qwIB+7WWpLPyJAKJv87XYef10XAulSQt1zedV9OGp+OM0Ky2S0qOHag3MKyXl/LplPcsX+T6SR0K0sHeeuCx/6zv4GSnAy6oSLI3Y4Ue1+Tp4YVrzFNczzj5ITgodB/0QU+9SM/nNTRaexg4JEP+ThEyk8dSh+GBB+TezuO77c297pedzj8+zRVpbJDLWxuDhyFvhI6N4z+hw4myQx6VtwPXoOuoCXA3c1PiPT7rtNgJhBvjDLPSkvyMwS5BpecAtSy4DHwYcAAAA",
+      "tag": "Player Market",
+      "status": "ONLINE",
+      "listings": []
     }
   ]
 }

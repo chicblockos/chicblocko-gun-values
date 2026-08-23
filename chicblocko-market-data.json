@@ -343,7 +343,32 @@
       "pfp": "data:image/webp;base64,UklGRuYCAABXRUJQVlA4INoCAADwEwCdASpkAGQAPm0ykUakIyGhLHa7MIANiWUA0Tx/hJGgAEJbeNcYMVVPe0MIO/fsQxEGjySlfTeS9LgPgD8YSdIpB0zgOP4RRblCJTNBUh5kwQUsXgXj06W/VFHRnSbX1cq23Aps89Y5f3QuYJNHPjNeZLsfmdtdWkovDScw4prmS3xAAjIc0rDZ8OnvLwA6BzJ40FKoDgIndGgUrNHXT3nDkav/2AAA/v1X+TQrOigIbvvsfOhvEaSQokLdV+1zkZAZ7LfctzAhyvOQV6WqO9gKg4uVyOlDU14vM/a5meH0jp6XCSSt7WwwCS7ZNe3AuI73AWLVTaA6EDR26Y4FXjkFGlXmp7okQmi5uwvjcJOO/RlkXuPxIE1fSwCC4UlxDLttci2sSdgqNlrCr02NW8g0yVHN83zkLleBG8S2df996uOjRShoypm9T2Gx61RiZQWZhZYMg4eUbMV8RtNm1BegMIo4OhhK4AAe14N2k3jK6ftMDVLPB2LfmUcdEX841oicRE9z81sUY6e2itODQOhWuW91rIto2O3Xqi9BKlevsK+eZgSoQAV7nVCdnWJWYlKwLNwz06iNo2wIl2tHNsTUYWy9wz36Gh9W6HiR+mpDMkFZrnd3VV9LmBrFEpNnfl6ZKK18gM5cpWLsSkrlszvALmJnhrtM6n+jWiHsNm1BJUIx0CPpSMoeArOGgQIep2BV9r0vZR86gF35vOfnGceOfYS+I5S+kSsk7IAzC7VnwsNJjCMDID3ZrSbdS5LpsB4OhbeE4oCxgmhN4HKSjPnvxG6H7ml9W0QAfi6bg3ESKquFspcE4BHACRF0Q1j7hspGTMK9jlHx+b/oZvBMe7kaAn9U3mP5cab6WRxkRs70RFXAoJWmjnrXINB4dBAI3vXm2VBLsbjOVZcz8U4huR3iIKSo1YBunF2O38i3e0F8+dpOnrQrtYczP/R3KjCt6zlA1ssfQAAA",
       "tag": "Premium Market",
       "status": "ONLINE",
-      "listings": []
+      "listings": [
+        {
+          "sourceId": "draco-030",
+          "custom": "RAMBO Custom",
+          "model": "Draco",
+          "gun": "Draco Custom",
+          "price": "450K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-030.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-017",
+          "custom": "Demon x D3cisiv Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "350K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-017.webp",
+          "notes": "Value index demand: HIGH."
+        }
+      ]
     },
     {
       "user": "Mase",

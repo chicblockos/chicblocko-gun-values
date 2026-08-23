@@ -322,6 +322,18 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-024.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "draco-027",
+          "custom": "RUTH Custom",
+          "model": "Draco",
+          "gun": "Draco Custom",
+          "price": "350k",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
+          "notes": "Value index demand: MEDIUM."
         }
       ]
     },
@@ -402,7 +414,7 @@
           "price": "350K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": true,
+          "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -472,7 +484,7 @@
       "user": "knight",
       "discord": "knightfv.",
       "pfp": "data:image/webp;base64,UklGRkADAABXRUJQVlA4IDQDAAAwEwCdASpkAGQAPm02lEekIyalJzXZ4NANiWdsIVwoYzy29OQ0SHh+yAe8Uvao9voO4CDFshkEQtOGHkbRZWClGu/9dlMBKzyhB7q32SR8lMxa8eQsjVegEn37Xj9PCiUX5QyHFOyF55ZTCz3J8SggS1SkhbGMd08nqPvlm80ou0TV0T6im+WgSvx7CQUT5Nqvd5i9g5QPb56L3f3qfMaX1gAA/vxu04anjQx/i3cUA7zXEKhZ4wSMWMf3ARpnHMy/+VsDFmEuugjShXMgTP55Z62hvvd/eHNMbgeriV9y4zAorS0P+oMXomCQAZcMwSJ1cNq8Kf26E6H4x1yRyaNTTXip4o+Da0jw46qAeBPqyfgFyCp6wFILxRHu0DU1Vzk67XUeDcvfQ+xK9fJfxHAbKyzKACC8EPINay48VU12upqJ1jOr3N10aCvh+FCv0dHmuZgSBImKykdd7N44PRsQHOW0cDUM776IxbQo+ay/idzjVefpy/uaorD96oAl80Q6HgHC6YP4z9X9o486Jmdvb54NTSwDxXBHPIbJbhMmQWthYJO9Y6TRT7fJmNHSRjNbuj3i+DQSygSbyZP+HU5GcaEQENYnVbCfXqBMW8+kZQwXLwECQ1kop0cvITJEGKxBD60FQVwHVWPGioLrjHP9x5cRzvARo/7kN8p9BgFAO57LhVj6fHhDXN4jdtcyqG8Hp2X1il17YlcA4BkawDUT6eu2J+WRsEaNvywx2cD/6R7AYdfmUFUzvQ3bVkkfq7Km6kWHSTpY2gHgnjOHTwmZiZbcV+BzULVTx0qIkoiFFvCkJ8frnAfUxk9qwIB+7WWpLPyJAKJv87XYef10XAulSQt1zedV9OGp+OM0Ky2S0qOHag3MKyXl/LplPcsX+T6SR0K0sHeeuCx/6zv4GSnAy6oSLI3Y4Ue1+Tp4YVrzFNczzj5ITgodB/0QU+9SM/nNTRaexg4JEP+ThEyk8dSh+GBB+TezuO77c297pedzj8+zRVpbJDLWxuDhyFvhI6N4z+hw4myQx6VtwPXoOuoCXA3c1PiPT7rtNgJhBvjDLPSkvyMwS5BpecAtSy4DHwYcAAAA",
-      "tag": "Premium Market",
+      "tag": "Player Market",
       "status": "ONLINE",
       "listings": []
     }

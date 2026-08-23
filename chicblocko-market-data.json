@@ -402,7 +402,7 @@
           "price": "350K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
           "notes": "Value index demand: MEDIUM."
         },

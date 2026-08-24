@@ -307,7 +307,7 @@
           "price": "1.6M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-018.webp",
           "notes": "Value index demand: HIGH."
         },
@@ -333,6 +333,42 @@
           "stock": "1",
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-008",
+          "custom": "MIK3 Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "1.25M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-008.webp",
+          "notes": "Value index demand: HIGH."
+        },
+        {
+          "sourceId": "glock18ext-048",
+          "custom": "NHC Custom",
+          "model": "EXT",
+          "gun": "Glock 18 Extended",
+          "price": "700K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-048.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-067",
+          "custom": "Kayz Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "3M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-067.webp",
           "notes": "Value index demand: MEDIUM."
         }
       ]
@@ -376,7 +412,7 @@
           "price": "800K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-048.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -388,7 +424,7 @@
           "price": "1.1M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-008.webp",
           "notes": "Value index demand: HIGH."
         }
@@ -439,7 +475,7 @@
     {
       "user": "Torqid Sellz",
       "discord": "7ztrq",
-      "pfp": "https://media.discordapp.net/attachments/1402443487927865474/1540874755328974973/IMG_2853.png?ex=6a8b8af1&is=6a8a3971&hm=c1862ff41aba7bc2dba5e4e98c897df21cd23ed6623beb0ce71bcf9dd3d78b4e&=&format=webp&quality=lossless",
+      "pfp": "https://media.discordapp.net/attachments/1402443487927865474/1540874755328974973/IMG_2853.png?ex=6a8d8531&is=6a8c33b1&hm=9dbfbb9354c2754216e155bae57ed45ffafba604bb5fd2ee6194dc503894ac20&=&format=webp&quality=lossless&width=974&height=1280",
       "tag": "Premium Market",
       "status": "LOOKING FOR OFFERS",
       "listings": [
@@ -451,7 +487,7 @@
           "price": "220K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-017.webp",
           "notes": "Value index demand: HIGH."
         },
@@ -463,7 +499,7 @@
           "price": "350K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -475,7 +511,7 @@
           "price": "1.1M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-051.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -487,7 +523,7 @@
           "price": "1.3M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-068.webp",
           "notes": "Value index demand: LOW."
         },
@@ -499,7 +535,7 @@
           "price": "1M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-028.webp",
           "notes": "Value index demand: LOW."
         },
@@ -511,7 +547,7 @@
           "price": "1.5M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-071.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -523,7 +559,7 @@
           "price": "1.2M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-046.webp",
           "notes": "Value index demand: MEDIUM."
         }

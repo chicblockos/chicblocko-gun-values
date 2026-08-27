@@ -633,6 +633,18 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-024.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "",
+          "custom": "THOR x DBD Custom | EXT | 1.5M",
+          "model": "",
+          "gun": "",
+          "price": "1.5M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "",
+          "notes": ""
         }
       ]
     }

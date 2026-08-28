@@ -606,7 +606,7 @@
           "price": "200K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-035.webp",
           "notes": "Value index demand: MEDIUM."
         },
@@ -618,7 +618,7 @@
           "price": "150K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp",
           "notes": "Value index demand: HIGH."
         },
@@ -645,6 +645,30 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-071.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "custom-1781193136020",
+          "custom": "Killuminati Custom",
+          "model": "AK47",
+          "gun": "AK-47 Custom",
+          "price": "13.5M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/recovered/killuminati-custom.webp",
+          "notes": "Value index demand: HIGH."
+        },
+        {
+          "sourceId": "glock18drum-029",
+          "custom": "Killu Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "5M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-029.webp",
+          "notes": "Value index demand: HIGH."
         }
       ]
     },
@@ -678,7 +702,7 @@
       ]
     },
     {
-      "user": "TNQR’s MARKET",
+      "user": "TNQR",
       "discord": "yooo1385.",
       "pfp": "data:image/webp;base64,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",
       "tag": "Featured Market",
@@ -695,6 +719,51 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-025.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-029",
+          "custom": "Killu Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "1.25M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-029.webp",
+          "notes": "Value index demand: HIGH."
+        }
+      ]
+    },
+    {
+      "user": "Drippy",
+      "discord": "",
+      "pfp": "data:image/webp;base64,UklGRsIFAABXRUJQVlA4ILYFAAAwHQCdASpkAGQAPm0ulEgkIiIjppGtGIANiWUAxiW27nefD0v7ea7nZB+1bri//HxqeLP9E6JTwCuhGOlZ/C0P5d9Zf/7qPQmg5ZkGd2ZYlLuH8kcBBNt+l3g6Fa+yKTfqlTuwoupb2879qaO0syjfH4nJqebVny1Lu6QBRjs+ddmfZk73/akG6uqEQKBkqzMfUDEHQSC7PA0O6np2J+ghJgsDLStbMnhlEXKOpUmSiq7cO2ftOW8Gbfx/LkW4VGinyU4aUnED3yUnfxuFeDWKLLXYO/wlh5CAMHI2v34dqdWwbgDHuH13sCG3PJYYmRtgkAD+4l5zf1oMfVTEHZ3uIC/KQa7fr7yh6QWPvdHQPkxmaglM4LNh/zWrk67Skcj/zT7cDju7KD9V947op08Q/kGwzMsBP/zk221Rt4R+uEvAJC/xZtwvWbQNYGs2IghdtjInCbRUg+aOK0Lgjt7eX6pbmfiyy80Em/ybe31IfTXNMvocM6xtzjSJGdN3uk3RTI5wsWDOwI1UGrb/mPaby9HGsHbjDJj9/Zq0FlrGpIMPAiF03uTyVE397wJc/LKf9txSCxvLYLxrEVjdhq2eJpgmXipDBari4Uc4a/dZdt61xeH1/bADqwIL6Q74hGQBsq1CIxIaf0q57VVGyoKaws4CePyq8n3NxMh+iZv1CpjSKacn8wWXLS6Y9Wt/GI23mjedsKL3iDu6ZqKCxOu1k567APzrCinsw4KSCsiJ6qtZdnJs5huJ8oilQr8qPg/jl+4AjTjXN8x2WfjlngGBMrTcr7YqApRS9YyNvBxVF23K0a91Wvdb9dhibqZJm/9YP75XkuPU1NM83ekr6+UZMqlMUn/pqUi+dF5Y54xwXdyr9SYF4rVR0UpgGW9HoKUqYQgc/3Ek9xVZ/kZOecq+7kwVdxrdq4gNYQgHMsZ9L7VDwd+ZKPKnCCiAkkc3Wzcy6/oKz+zi3bvGTiKEDnLlQUmmdq51V4WOiO+YMEkylQIdjnnIGccVHEyIj4aqAMwhOvPM6Rv48FLOiN2GL60nWXKl4Mid97e8rq/94ruf0v10dorV2p7PseylGLJHOwWVwCPurOfoHXScjFMwzY3QVLUaTMamKbW9rC5OSLGYG0zEyqT4d8lM00lWhLwWN271XtjXv6exP1onrQe/nTtS0k0Z2yEsUvGNR9hkJwZqma+kMPOHc7JAgcntk0I6M8ApsaohX/AbZ7Kl/7Ps7M8QKNS9pELS70sMNzAPiNzi41EN2LNb+G1veY4nSXSTtLprbWvDNKimZb0PopnrSMU0Ea+OHbKfOWXfRMmtOaCfwLq/SddIJJiauqaodRRnxuS6sumdRvhXY848ilw+E1WcXZejN90bU2PofNIVL/95NtHIWayRbc5DJSv/ZvLCA4fgTqTZfb2G5bwVL8iySMs/coS6gzlgZB1/k24qAcg2/Ko3z3n/qh9M7/6BIJMRQUStlDdwi1wBn3JmhyhdtzpBRrQxWJObjWrm53AtQPWZ0tNGclnVDV8vdF9yuQVuA3SzAmLBBEdEhvIExAcUyNLbPsCeMWKHTT6tz5RxNSva+7X5CBtMYkw6eu/66Pva8LqD8XFnoRmuKMeop/Fbkf+jdVi8JUS+ya3D+2iJDxz4AQXapKW5BZCp84KdIAPOkTmzOwWBB8mSUHWkA3FkDDAqDUeavMrlal70z9gsy4r/rCjVS2+ynlxOHGySwRcat7uwCYfBmcGceGInQvwVykixSpPFT5JVPWxCduYKyULWoQEdoZ5r1NNeTFILau8DdgBiPhj6QzUxqvYXkGqL7izqX36UQ7nIT6KRYjTVlZwd5HLzPTZN2PUWhm+j1GBE8GGhAOL/7Fd3t68RJxJCDoPKYX6mAKu/AZYq78EjmaHPH+vwYRRIHekxX/kFP7j3zqRK5x1Ato53aeIjVmx7ds1R6Ags8AAA",
+      "tag": "Player Market",
+      "status": "SELLING",
+      "listings": [
+        {
+          "sourceId": "draco-021",
+          "custom": "TIMAR Custom",
+          "model": "Draco",
+          "gun": "Draco Custom",
+          "price": "6M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-021.webp",
+          "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "glock18drum-049",
+          "custom": "SOSA | OPIUM Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "6M",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-049.webp",
+          "notes": "Value index demand: HIGH."
         }
       ]
     }

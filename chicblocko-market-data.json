@@ -676,6 +676,27 @@
           "notes": "Value index demand: HIGH."
         }
       ]
+    },
+    {
+      "user": "TNQR’s MARKET",
+      "discord": "yooo1385.",
+      "pfp": "data:image/webp;base64,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",
+      "tag": "Featured Market",
+      "status": "ONLINE",
+      "listings": [
+        {
+          "sourceId": "glock18drum-025",
+          "custom": "TEC Custom",
+          "model": "Drum",
+          "gun": "Glock 18 Drum",
+          "price": "900K",
+          "type": "Selling",
+          "stock": "2",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-025.webp",
+          "notes": "Value index demand: MEDIUM."
+        }
+      ]
     }
   ]
 }

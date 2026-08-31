@@ -344,6 +344,18 @@
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-071.webp",
           "notes": "Value index demand: MEDIUM."
+        },
+        {
+          "sourceId": "ar-15-014",
+          "custom": "Clumsy Custom",
+          "model": "AR-15",
+          "gun": "AR-15 Custom",
+          "price": "135K",
+          "type": "Selling",
+          "stock": "1",
+          "soldOut": false,
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp",
+          "notes": "Value index demand: HIGH."
         }
       ]
     },

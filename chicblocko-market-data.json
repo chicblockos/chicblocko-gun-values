@@ -319,7 +319,7 @@
           "price": "1.2M",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-012.webp",
           "notes": "Value index demand: MEDIUM."
         }

@@ -412,7 +412,7 @@ window.CHICBLOCKO_MARKET_DATA = {
           "gun": "AR-15 Custom",
           "price": "135K",
           "type": "Selling",
-          "stock": "1",
+          "stock": "0",
           "soldOut": false,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp",
           "notes": "Value index demand: HIGH.",

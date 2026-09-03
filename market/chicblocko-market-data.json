@@ -451,45 +451,6 @@
       ],
       "id": "tnqr",
       "notes": ""
-    },
-    {
-      "user": "Drippy",
-      "discord": "",
-      "pfp": "data:image/webp;base64,UklGRsIFAABXRUJQVlA4ILYFAAAwHQCdASpkAGQAPm0ulEgkIiIjppGtGIANiWUAxiW27nefD0v7ea7nZB+1bri//HxqeLP9E6JTwCuhGOlZ/C0P5d9Zf/7qPQmg5ZkGd2ZYlLuH8kcBBNt+l3g6Fa+yKTfqlTuwoupb2879qaO0syjfH4nJqebVny1Lu6QBRjs+ddmfZk73/akG6uqEQKBkqzMfUDEHQSC7PA0O6np2J+ghJgsDLStbMnhlEXKOpUmSiq7cO2ftOW8Gbfx/LkW4VGinyU4aUnED3yUnfxuFeDWKLLXYO/wlh5CAMHI2v34dqdWwbgDHuH13sCG3PJYYmRtgkAD+4l5zf1oMfVTEHZ3uIC/KQa7fr7yh6QWPvdHQPkxmaglM4LNh/zWrk67Skcj/zT7cDju7KD9V947op08Q/kGwzMsBP/zk221Rt4R+uEvAJC/xZtwvWbQNYGs2IghdtjInCbRUg+aOK0Lgjt7eX6pbmfiyy80Em/ybe31IfTXNMvocM6xtzjSJGdN3uk3RTI5wsWDOwI1UGrb/mPaby9HGsHbjDJj9/Zq0FlrGpIMPAiF03uTyVE397wJc/LKf9txSCxvLYLxrEVjdhq2eJpgmXipDBari4Uc4a/dZdt61xeH1/bADqwIL6Q74hGQBsq1CIxIaf0q57VVGyoKaws4CePyq8n3NxMh+iZv1CpjSKacn8wWXLS6Y9Wt/GI23mjedsKL3iDu6ZqKCxOu1k567APzrCinsw4KSCsiJ6qtZdnJs5huJ8oilQr8qPg/jl+4AjTjXN8x2WfjlngGBMrTcr7YqApRS9YyNvBxVF23K0a91Wvdb9dhibqZJm/9YP75XkuPU1NM83ekr6+UZMqlMUn/pqUi+dF5Y54xwXdyr9SYF4rVR0UpgGW9HoKUqYQgc/3Ek9xVZ/kZOecq+7kwVdxrdq4gNYQgHMsZ9L7VDwd+ZKPKnCCiAkkc3Wzcy6/oKz+zi3bvGTiKEDnLlQUmmdq51V4WOiO+YMEkylQIdjnnIGccVHEyIj4aqAMwhOvPM6Rv48FLOiN2GL60nWXKl4Mid97e8rq/94ruf0v10dorV2p7PseylGLJHOwWVwCPurOfoHXScjFMwzY3QVLUaTMamKbW9rC5OSLGYG0zEyqT4d8lM00lWhLwWN271XtjXv6exP1onrQe/nTtS0k0Z2yEsUvGNR9hkJwZqma+kMPOHc7JAgcntk0I6M8ApsaohX/AbZ7Kl/7Ps7M8QKNS9pELS70sMNzAPiNzi41EN2LNb+G1veY4nSXSTtLprbWvDNKimZb0PopnrSMU0Ea+OHbKfOWXfRMmtOaCfwLq/SddIJJiauqaodRRnxuS6sumdRvhXY848ilw+E1WcXZejN90bU2PofNIVL/95NtHIWayRbc5DJSv/ZvLCA4fgTqTZfb2G5bwVL8iySMs/coS6gzlgZB1/k24qAcg2/Ko3z3n/qh9M7/6BIJMRQUStlDdwi1wBn3JmhyhdtzpBRrQxWJObjWrm53AtQPWZ0tNGclnVDV8vdF9yuQVuA3SzAmLBBEdEhvIExAcUyNLbPsCeMWKHTT6tz5RxNSva+7X5CBtMYkw6eu/66Pva8LqD8XFnoRmuKMeop/Fbkf+jdVi8JUS+ya3D+2iJDxz4AQXapKW5BZCp84KdIAPOkTmzOwWBB8mSUHWkA3FkDDAqDUeavMrlal70z9gsy4r/rCjVS2+ynlxOHGySwRcat7uwCYfBmcGceGInQvwVykixSpPFT5JVPWxCduYKyULWoQEdoZ5r1NNeTFILau8DdgBiPhj6QzUxqvYXkGqL7izqX36UQ7nIT6KRYjTVlZwd5HLzPTZN2PUWhm+j1GBE8GGhAOL/7Fd3t68RJxJCDoPKYX6mAKu/AZYq78EjmaHPH+vwYRRIHekxX/kFP7j3zqRK5x1Ato53aeIjVmx7ds1R6Ags8AAA",
-      "tag": "Player Market",
-      "status": "SELLING",
-      "listings": [
-        {
-          "sourceId": "draco-021",
-          "custom": "TIMAR Custom",
-          "model": "Draco",
-          "gun": "Draco Custom",
-          "price": "6M",
-          "type": "Selling",
-          "stock": "1",
-          "soldOut": false,
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-021.webp",
-          "notes": "Value index demand: MEDIUM.",
-          "id": "draco-021",
-          "status": "Available"
-        },
-        {
-          "sourceId": "glock18drum-049",
-          "custom": "SOSA | OPIUM Custom",
-          "model": "Drum",
-          "gun": "Glock 18 Drum",
-          "price": "6M",
-          "type": "Selling",
-          "stock": "1",
-          "soldOut": false,
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-049.webp",
-          "notes": "Value index demand: HIGH.",
-          "id": "glock18drum-049",
-          "status": "Available"
-        }
-      ],
-      "id": "drippy",
-      "notes": ""
     }
   ]
 }

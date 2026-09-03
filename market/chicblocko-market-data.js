@@ -319,20 +319,6 @@ window.CHICBLOCKO_MARKET_DATA = {
       "status": "ONLINE",
       "listings": [
         {
-          "id": "evb-general-custom-20260903-135934",
-          "sourceId": "draco-022",
-          "custom": "EVB General Custom",
-          "model": "Draco Custom",
-          "gun": "Draco",
-          "price": "3M",
-          "stock": "1",
-          "type": "Selling",
-          "soldOut": false,
-          "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp",
-          "notes": ""
-        },
-        {
           "id": "steppa-custom-20260903-140004",
           "sourceId": "glock18ext-031",
           "custom": "Steppa Custom",

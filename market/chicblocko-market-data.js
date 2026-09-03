@@ -413,11 +413,11 @@ window.CHICBLOCKO_MARKET_DATA = {
           "price": "135K",
           "type": "Selling",
           "stock": "0",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp",
           "notes": "Value index demand: HIGH.",
           "id": "ar-15-014",
-          "status": "Available"
+          "status": "Sold Out"
         }
       ],
       "id": "zoon",

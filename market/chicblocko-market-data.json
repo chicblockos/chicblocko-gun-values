@@ -317,7 +317,21 @@
       "pfp": "data:image/webp;base64,UklGRswCAABXRUJQVlA4IMACAAAwEwCdASpkAGQAPm02lkgkIyyjpVIJ8ZANiUB5Ca2Fc7/HuTcW/L2iA/Yb1/+j/6gDeafKAJoofJwpwjVOQEQ0awXln/fX3NHefXA5M+yvCKzR9EyJpkf7rA8cE3HXsA3jsjchgPRgcJSR5zRY6OqZMDk61x/0zxyHoXjyoNRN6I5CY1Ua5tOtWvE2DCf95aNuxLTnVPik/CoHLKRJuhtahqIA/vv+7oZXhh5cEzC1bsuqBNcOQmRou9n+/b6Livvhdpj+A4U8qzAAFWjJNF4HcuHblv9T9kces22/xZrGHgXFj9eTv8CJfz5cc5dlBQXWUuPj8tvNpe9xacO45WcgPiqtgHOaljxNbzdzmIusJ6xC8KOXKyT1p5yXdgqhudi1ndVbfT2QavWTrFypxcY539+/XulZMI+KZp5mbyfKvVi6nUADMuSzBFZ1ycNngU2+oDkkduiT0fnXMQHoaRVXPMZ/+CvkNQ00mdsErc7ojJITEh6FGFWAqziW/wunrmwNmFzZhK0WBV+TDJGsmUmNdEwvqGnYBrWUIQwq+TBQsUe6hK+07yGPeLfl/GmawDWFN/16WXSiXhkK1wQTGruxJRrx16k4H7sq4hQPO369Gs2dix4xQnt8XOhmUnqcUf5H522NtKkiE69910E2f5xkin8mogUSfjkFO+TEpqsYG7RRGShd3tWWfbwVax5DX0ABElCes7XoXc2+eHAlwbiq89DRhNf1y1kSJk4UuCzL2Dna1tJ2vdYrUBg1P/tDAPx3Fovu+07B58wT0iR5ggzw4gaQj73fxiOSeKBfViWiPBUxELLxzPhm97shzpeZFIB+e3eJseVo1giGVOEfvjZda5RQsn/A7Fesn/8AnMigqGOBREA82nXu/rSR/GuKhtRFC+YlvV+XVb4DniJ4rhzRuAY9lIEXn7TRMXq7aAAAAA==",
       "tag": "Premium Market",
       "status": "ONLINE",
-      "listings": [],
+      "listings": [
+        {
+          "id": "evb-general-custom-20260903-133953",
+          "sourceId": "draco-022",
+          "custom": "EVB General Custom",
+          "model": "Draco Custom",
+          "gun": "Draco",
+          "price": "3M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp"
+        }
+      ],
       "id": "wolf-gs",
       "notes": ""
     },

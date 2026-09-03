@@ -40,7 +40,7 @@ window.CHICBLOCKO_MARKET_DATA = {
     {
       "user": "Junzzy",
       "discord": "junzzyquit",
-      "pfp": "data:image/webp;base64,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",
+      "pfp": "https://cdn.discordapp.com/avatars/1517892263705968878/eebdf02c5d4b6fc7aad88c5d3c807593.webp?size=3072",
       "tag": "Contributors Market",
       "status": "Online",
       "listings": [],
@@ -343,7 +343,8 @@ window.CHICBLOCKO_MARKET_DATA = {
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp",
+          "notes": ""
         }
       ],
       "id": "wolf-gs",

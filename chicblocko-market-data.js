@@ -1,4 +1,4 @@
-{
+window.CHICBLOCKO_MARKET_DATA = {
   "version": 2,
   "categories": [
     {
@@ -503,3 +503,4 @@
     }
   ]
 }
+;

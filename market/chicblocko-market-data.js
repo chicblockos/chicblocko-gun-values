@@ -329,6 +329,20 @@ window.CHICBLOCKO_MARKET_DATA = {
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp",
+          "notes": ""
+        },
+        {
+          "id": "evb-general-custom-20260903-133959",
+          "sourceId": "draco-022",
+          "custom": "EVB General Custom",
+          "model": "Draco Custom",
+          "gun": "Draco",
+          "price": "3M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-022.webp"
         }
       ],

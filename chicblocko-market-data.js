@@ -190,7 +190,21 @@ window.CHICBLOCKO_MARKET_DATA = {
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp",
+          "notes": ""
+        },
+        {
+          "id": "spiderman-custom-20260905-151159",
+          "sourceId": "glock18ext-052",
+          "custom": "SpiderMan Custom",
+          "model": "Glock 18 Extended",
+          "gun": "EXT",
+          "price": "200K",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-052.webp"
         }
       ],
       "id": "nadz",

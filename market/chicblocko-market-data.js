@@ -248,7 +248,7 @@ window.CHICBLOCKO_MARKET_DATA = {
           "custom": "TEC Custom",
           "model": "Drum",
           "gun": "Glock 18 Drum",
-          "price": "1.8M",
+          "price": "900K",
           "type": "Selling",
           "stock": "1",
           "soldOut": false,

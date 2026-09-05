@@ -218,7 +218,21 @@
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-059.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-059.webp",
+          "notes": ""
+        },
+        {
+          "id": "clumsy-custom-20260905-151309",
+          "sourceId": "ar-15-014",
+          "custom": "Clumsy Custom",
+          "model": "AR-15 Custom",
+          "gun": "AR-15",
+          "price": "200K",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp"
         }
       ],
       "id": "nadz",

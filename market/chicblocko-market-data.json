@@ -204,7 +204,21 @@
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-052.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-052.webp",
+          "notes": ""
+        },
+        {
+          "id": "brysin-custom-20260905-151248",
+          "sourceId": "glock18drum-059",
+          "custom": "BRYSIN Custom",
+          "model": "Glock 18 Drum",
+          "gun": "Drum",
+          "price": "300K",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-059.webp"
         }
       ],
       "id": "nadz",

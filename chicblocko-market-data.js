@@ -164,6 +164,19 @@ window.CHICBLOCKO_MARKET_DATA = {
           "notes": "Value index demand: HIGH.",
           "id": "glock18drum-029",
           "status": "Sold Out"
+        },
+        {
+          "id": "tidal-custom-20260905-151003",
+          "sourceId": "glock18drum-021",
+          "custom": "TIDAL Custom",
+          "model": "Glock 18 Drum",
+          "gun": "Drum",
+          "price": "1.4M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-021.webp"
         }
       ],
       "id": "nadz",

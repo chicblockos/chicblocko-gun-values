@@ -176,7 +176,21 @@ window.CHICBLOCKO_MARKET_DATA = {
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-021.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-021.webp",
+          "notes": ""
+        },
+        {
+          "id": "ruth-custom-20260905-151051",
+          "sourceId": "draco-027",
+          "custom": "RUTH Custom",
+          "model": "Draco Custom",
+          "gun": "Draco",
+          "price": "300K",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-027.webp"
         }
       ],
       "id": "nadz",

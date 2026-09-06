@@ -230,8 +230,8 @@ window.CHICBLOCKO_MARKET_DATA = {
           "price": "200K",
           "stock": "1",
           "type": "Selling",
-          "soldOut": false,
-          "status": "Available",
+          "soldOut": true,
+          "status": "Sold Out",
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/ar-15-014.webp",
           "notes": ""
         },

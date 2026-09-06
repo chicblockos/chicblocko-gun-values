@@ -43,7 +43,21 @@ window.CHICBLOCKO_MARKET_DATA = {
       "pfp": "https://cdn.discordapp.com/avatars/1517892263705968878/eebdf02c5d4b6fc7aad88c5d3c807593.webp?size=3072",
       "tag": "Contributors Market",
       "status": "Online",
-      "listings": [],
+      "listings": [
+        {
+          "id": "drizzy-custom-20260906-132652",
+          "sourceId": "glock18ext-051",
+          "custom": "Drizzy Custom",
+          "model": "Glock 18 Extended",
+          "gun": "EXT",
+          "price": "1.1M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-051.webp"
+        }
+      ],
       "id": "junzzy",
       "notes": ""
     },

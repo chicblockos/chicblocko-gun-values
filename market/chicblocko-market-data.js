@@ -216,8 +216,8 @@ window.CHICBLOCKO_MARKET_DATA = {
           "price": "300K",
           "stock": "1",
           "type": "Selling",
-          "soldOut": false,
-          "status": "Available",
+          "soldOut": true,
+          "status": "Sold Out",
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-059.webp",
           "notes": ""
         },

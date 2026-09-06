@@ -202,8 +202,8 @@
           "price": "200K",
           "stock": "1",
           "type": "Selling",
-          "soldOut": false,
-          "status": "Available",
+          "soldOut": true,
+          "status": "Sold Out",
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-052.webp",
           "notes": ""
         },

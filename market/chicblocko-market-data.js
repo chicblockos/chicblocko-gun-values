@@ -289,7 +289,21 @@ window.CHICBLOCKO_MARKET_DATA = {
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-031.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18ext-031.webp",
+          "notes": ""
+        },
+        {
+          "id": "adg-custom-20260907-002646",
+          "sourceId": "draco-001",
+          "custom": "ADG Custom",
+          "model": "Draco Custom",
+          "gun": "Draco",
+          "price": "500K",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-001.webp"
         }
       ],
       "id": "nadz",

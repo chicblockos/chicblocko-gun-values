@@ -301,9 +301,10 @@ window.CHICBLOCKO_MARKET_DATA = {
           "price": "500K",
           "stock": "1",
           "type": "Selling",
-          "soldOut": false,
-          "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-001.webp"
+          "soldOut": true,
+          "status": "Sold Out",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/draco-001.webp",
+          "notes": ""
         }
       ],
       "id": "nadz",

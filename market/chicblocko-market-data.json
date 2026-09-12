@@ -636,7 +636,21 @@
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-067.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-067.webp",
+          "notes": ""
+        },
+        {
+          "id": "killu-custom-20260912-124939",
+          "sourceId": "glock18drum-029",
+          "custom": "Killu Custom",
+          "model": "Glock 18 Drum",
+          "gun": "Drum",
+          "price": "2M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-029.webp"
         }
       ],
       "user": "Spidey10242",

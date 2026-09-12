@@ -645,12 +645,13 @@ window.CHICBLOCKO_MARKET_DATA = {
           "custom": "Killu Custom",
           "model": "Glock 18 Drum",
           "gun": "Drum",
-          "price": "2M",
+          "price": "1.5M",
           "stock": "1",
           "type": "Selling",
           "soldOut": false,
           "status": "Available",
-          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-029.webp"
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-029.webp",
+          "notes": ""
         }
       ],
       "user": "Spidey10242",

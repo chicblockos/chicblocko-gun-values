@@ -621,6 +621,16 @@ window.CHICBLOCKO_MARKET_DATA = {
       ],
       "id": "tnqr",
       "notes": ""
+    },
+    {
+      "id": "spidey10242-20260912-124831",
+      "listings": [],
+      "user": "Spidey10242",
+      "discord": "username._op",
+      "pfp": "https://cdn.discordapp.com/avatars/1423630733712425020/177eff653975b88df3c9f9d3fd1b4234.webp?size=1280",
+      "tag": "Premium Market",
+      "status": "Online",
+      "notes": ""
     }
   ]
 }

@@ -624,7 +624,21 @@ window.CHICBLOCKO_MARKET_DATA = {
     },
     {
       "id": "spidey10242-20260912-124831",
-      "listings": [],
+      "listings": [
+        {
+          "id": "kayz-custom-20260912-124913",
+          "sourceId": "glock18drum-067",
+          "custom": "Kayz Custom",
+          "model": "Glock 18 Drum",
+          "gun": "Drum",
+          "price": "2M",
+          "stock": "1",
+          "type": "Selling",
+          "soldOut": false,
+          "status": "Available",
+          "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-067.webp"
+        }
+      ],
       "user": "Spidey10242",
       "discord": "username._op",
       "pfp": "https://cdn.discordapp.com/avatars/1423630733712425020/177eff653975b88df3c9f9d3fd1b4234.webp?size=1280",

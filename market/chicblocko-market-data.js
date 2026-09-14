@@ -392,11 +392,11 @@ window.CHICBLOCKO_MARKET_DATA = {
           "price": "900K",
           "type": "Selling",
           "stock": "1",
-          "soldOut": false,
+          "soldOut": true,
           "image": "../chicblocko-gun-values-with-nav-restored-zip/assets/guns/glock18drum-025.webp",
           "notes": "Value index demand: LOW.",
           "id": "glock18drum-025",
-          "status": "Available"
+          "status": "Sold Out"
         }
       ],
       "id": "mase",
